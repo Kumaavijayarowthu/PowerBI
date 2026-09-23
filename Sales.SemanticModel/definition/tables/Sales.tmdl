@@ -1,0 +1,94 @@
+table Sales
+	lineageTag: 5b00dded-811f-4fdf-9f3a-370aceaaf41f
+
+	measure Total_sales = ```
+			SUM(Sales[SALES]) 
+			```
+		formatString: 0
+		lineageTag: ad102f33-83ac-49a7-acef-5e616fd124c3
+
+	column CATEGORY
+		dataType: string
+		lineageTag: 96e575d2-7de9-4157-82c8-b689be19a484
+		summarizeBy: none
+		sourceColumn: CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUB-CATEGORY
+		dataType: string
+		lineageTag: e973df1c-289b-4ad0-9481-8188137580d3
+		summarizeBy: none
+		sourceColumn: SUB-CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES
+		dataType: int64
+		formatString: 0
+		lineageTag: fb8f36e6-49d8-4b95-b915-12b604687814
+		summarizeBy: sum
+		sourceColumn: SALES
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT
+		dataType: int64
+		formatString: 0
+		lineageTag: fcc55d93-2b6c-4603-b957-027af25397f6
+		summarizeBy: sum
+		sourceColumn: PROFIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column QTY
+		dataType: int64
+		formatString: 0
+		lineageTag: b7081757-14c2-4df0-9714-d9092f50501d
+		summarizeBy: sum
+		sourceColumn: QTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_Key
+		dataType: string
+		lineageTag: 036a1895-a0da-4940-95d3-117123d64cc0
+		summarizeBy: none
+		sourceColumn: Product_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_Key
+		dataType: string
+		lineageTag: 1ae553d9-7ca0-4f6a-b563-19d9b9fe6eee
+		summarizeBy: none
+		sourceColumn: Location_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country_Key
+		dataType: string
+		lineageTag: 689f37af-3b42-4b0a-9185-0196310a88e8
+		summarizeBy: none
+		sourceColumn: Country_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("D:\ALL\POWERBI\DAX\Data For Dax\OTHER FUNCTIONS.xlsx"), null, true),
+				    #"Measures  in slicer_Sheet" = Source{[Item="Measures  in slicer",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Measures  in slicer_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CATEGORY", type text}, {"SUB-CATEGORY", type text}, {"SALES", Int64.Type}, {"PROFIT", Int64.Type}, {"QTY", Int64.Type}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Product_Key", each 1),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Location_Key", each 2),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Country_Key", each 3)
+				in
+				    #"Added Custom2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
