@@ -43,10 +43,13 @@ table Sales
 
 	column QTY
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: b7081757-14c2-4df0-9714-d9092f50501d
 		summarizeBy: sum
 		sourceColumn: QTY
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
