@@ -2,52 +2,8 @@ cultureInfo en-US
 
 	linguisticMetadata =
 			{
-			  "Version": "2.0.0",
-			  "Language": "en-US",
-			  "Entities": {
-			    "sales.category": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "Sales",
-			          "ConceptualProperty": "CATEGORY"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Category": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
-			    },
-			    "sales.subcategory": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "Sales",
-			          "ConceptualProperty": "SUB-CATEGORY"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "Sub Category": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
-			    }
-			  }
+			  "Version": "1.0.0",
+			  "Language": "en-US"
 			}
 		contentType: json
 

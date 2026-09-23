@@ -1,15 +1,9 @@
 table Sales
-	lineageTag: 5b00dded-811f-4fdf-9f3a-370aceaaf41f
-
-	measure Total_sales = ```
-			SUM(Sales[SALES]) 
-			```
-		formatString: 0
-		lineageTag: ad102f33-83ac-49a7-acef-5e616fd124c3
+	lineageTag: 8c6b0ea3-d68d-4e0f-8aba-9f1dfb3dead9
 
 	column CATEGORY
 		dataType: string
-		lineageTag: 96e575d2-7de9-4157-82c8-b689be19a484
+		lineageTag: 365e2dba-0399-43c7-97f0-3560229e6508
 		summarizeBy: none
 		sourceColumn: CATEGORY
 
@@ -17,7 +11,7 @@ table Sales
 
 	column SUB-CATEGORY
 		dataType: string
-		lineageTag: e973df1c-289b-4ad0-9481-8188137580d3
+		lineageTag: 2c4764b1-116e-4faa-9927-e99865368f4a
 		summarizeBy: none
 		sourceColumn: SUB-CATEGORY
 
@@ -26,7 +20,7 @@ table Sales
 	column SALES
 		dataType: int64
 		formatString: 0
-		lineageTag: fb8f36e6-49d8-4b95-b915-12b604687814
+		lineageTag: d702fc98-73a3-42d9-a32f-e2a782c5b630
 		summarizeBy: sum
 		sourceColumn: SALES
 
@@ -35,7 +29,7 @@ table Sales
 	column PROFIT
 		dataType: int64
 		formatString: 0
-		lineageTag: fcc55d93-2b6c-4603-b957-027af25397f6
+		lineageTag: aef25775-8593-4e13-8c99-517f2f666651
 		summarizeBy: sum
 		sourceColumn: PROFIT
 
@@ -43,37 +37,43 @@ table Sales
 
 	column QTY
 		dataType: int64
-		isHidden
 		formatString: 0
-		lineageTag: b7081757-14c2-4df0-9714-d9092f50501d
+		lineageTag: 94996b71-a0af-415a-bc58-3a69dec5c8a0
 		summarizeBy: sum
 		sourceColumn: QTY
-
-		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column Product_Key
-		dataType: string
-		lineageTag: 036a1895-a0da-4940-95d3-117123d64cc0
-		summarizeBy: none
+		dataType: int64
+		formatString: 0
+		lineageTag: d9654708-14ad-4e03-8e5d-af72e961a545
+		summarizeBy: count
 		sourceColumn: Product_Key
 
 		annotation SummarizationSetBy = Automatic
 
 	column Location_Key
-		dataType: string
-		lineageTag: 1ae553d9-7ca0-4f6a-b563-19d9b9fe6eee
-		summarizeBy: none
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 45ef0213-6e4b-4656-9739-c5ccbcb4eda0
+		summarizeBy: count
 		sourceColumn: Location_Key
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
 	column Country_Key
-		dataType: string
-		lineageTag: 689f37af-3b42-4b0a-9185-0196310a88e8
-		summarizeBy: none
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8ce7314a-15e7-4251-b98b-bc99adf8cafb
+		summarizeBy: count
 		sourceColumn: Country_Key
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -81,17 +81,12 @@ table Sales
 		mode: import
 		source =
 				let
-				    Source = Excel.Workbook(File.Contents("D:\ALL\POWERBI\DAX\Data For Dax\OTHER FUNCTIONS.xlsx"), null, true),
-				    #"Measures  in slicer_Sheet" = Source{[Item="Measures  in slicer",Kind="Sheet"]}[Data],
-				    #"Promoted Headers" = Table.PromoteHeaders(#"Measures  in slicer_Sheet", [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CATEGORY", type text}, {"SUB-CATEGORY", type text}, {"SALES", Int64.Type}, {"PROFIT", Int64.Type}, {"QTY", Int64.Type}}),
-				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Product_Key", each 1),
-				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Location_Key", each 2),
-				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Country_Key", each 3)
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jZLPDoIwDIdfxXDmAMj4c6zLgEVclw0Ohvj+r+HWmghRkQOlDXz5fSssS9LNzuhpdipJufeDNr0PU55lWbgVVPMiljiG65w80i15QbxK8MozEImSabHLTXAZCTozJKhW+5AcQDvPEfT6ryTsOi3Vyc/Wjppi/IQOesVJkarZNT/AQuzASBpKNm3YujqAW7DKxefipUvxzRHpd1us4S9rmpQcDI7Y32PigGYt+2LLfQpkOKFHx4GVWK1YfNpuUIlWK/oyNWM1eZZ/PG8gwz9HcS1zbUPLrbfc4wk=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [CATEGORY = _t, #"SUB-CATEGORY" = _t, SALES = _t, PROFIT = _t, QTY = _t, Product_Key = _t, Location_Key = _t, Country_Key = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"CATEGORY", type text}, {"SUB-CATEGORY", type text}, {"SALES", Int64.Type}, {"PROFIT", Int64.Type}, {"QTY", Int64.Type}, {"Product_Key", Int64.Type}, {"Location_Key", Int64.Type}, {"Country_Key", Int64.Type}})
 				in
-				    #"Added Custom2"
-
-	annotation PBI_ResultType = Table
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
 
