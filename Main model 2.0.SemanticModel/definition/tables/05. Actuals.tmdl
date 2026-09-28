@@ -1,0 +1,51 @@
+table '05. Actuals'
+	lineageTag: 2da574e3-0c8f-4dea-aac8-489ca5f46ec7
+
+	measure 'LY Actuals' = CALCULATE([Actuals],SAMEPERIODLASTYEAR('00. DateTable'[Date]))
+		formatString: #,0
+		lineageTag: 4cd5f670-ff56-4ade-b448-ef265fc370c6
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'MTD Actuals' = TOTALMTD([Actuals],'00. DateTable'[Date])
+		formatString: #,0
+		lineageTag: 0d19337f-2a93-49fe-9b45-af52c683f99d
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'LY MTD Actuals' = TOTALMTD([LY Actuals],'00. DateTable'[Date])
+		formatString: #,0
+		lineageTag: e7854a65-d908-41a7-8784-c04555dab886
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'YTD Actuals' = TOTALYTD([Actuals],'00. DateTable'[Date])
+		formatString: #,0
+		lineageTag: f5188cdd-cd98-4892-a4da-f54b6ace0dd5
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'LY YTD Actuals' = TOTALYTD([LY Actuals],'00. DateTable'[Date])
+		formatString: #,0
+		lineageTag: c2eb7639-19f1-4ebf-9b2e-463c8e433284
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 54081a26-e1a0-4ac0-b556-f811fa001adf
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '05. Actuals' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 1d1cbc2bc8884032a5d881f6629af87c
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

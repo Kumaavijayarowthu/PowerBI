@@ -1,0 +1,98 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Datasphere
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup Salesforce
+
+	annotation PBI_QueryGroupOrder = 2
+
+annotation PBI_QueryOrder = ["MAIN","BUDGET_FORECAST","ASSET","OPPORTUNITY","OPPORTUNITY LI","QUOTE","QUOTE LI","SF_TIMESHEET","OPPORTUNITIES_QUOTES","GL_ACCOUNTS","GL_ACCOUNTS_P&L","PROFIT_CENTERS","COST_CENTERS","REGIONS","country_as_customer","REGIONS_lev2","REGIONS_lev1","GL_ACCOUNTS Sorting","Z_INS_HIER_KOSTL_V_H","P&L_Calculated","P&L Builder","CUSTOMERS","SHIP-TO","dsn","PC Short names","Last Refresh","PROJECTS","COMPANY","Z_INS_T179T_S4_V_T","MATERIALS","Opportunities wo quote","Opportunities wo sap quote","Synced quotes w sap quote","Quotes data","Opportunity data","Record Type mapping","ACCOUNTS_PAYABLE","SALES_ORDERS"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","WebModelingEdit"]
+
+ref table GL_ACCOUNTS
+ref table PROFIT_CENTERS
+ref table REGIONS
+ref table GL_ACCOUNTS_P&L
+ref table '01. Key Figures'
+ref table 'P&L Builder'
+ref table 'Z. COGS Selector'
+ref table BUDGET_FORECAST
+ref table 'Z. Rounding Selector'
+ref table SF_TIMESHEET
+ref table 'Z. Allocations Selector'
+ref table CUSTOMERS
+ref table '10. Key Figures P&L'
+ref table 'Z. Figure Selector'
+ref table 'Z. Region hierarchy'
+ref table 'Z. Segment hierarchy'
+ref table QUOTE
+ref table '03. Other Figures'
+ref table '04. Report Figures'
+ref table 'Z. Measures Table'
+ref table '05. Actuals'
+ref table '06. Budget'
+ref table '07. Forecast'
+ref table 'Z. Colors TOPSOE'
+ref table P&L_Calculated
+ref table 'Z. Ship-To hierarchy'
+ref table OPPORTUNITY
+ref table COST_CENTERS
+ref table MAIN
+ref table '00. DateTable'
+ref table PROJECTS
+ref table COMPANY
+ref table 'Last Refresh'
+ref table SHIP-TO
+ref table 'OPPORTUNITY LI'
+ref table 'QUOTE LI'
+ref table '02. SFDC Key Figures'
+ref table MATERIALS
+ref table OPPORTUNITIES_QUOTES
+ref table 'Z. Forecast Selector'
+ref table 'Z. Product Hierarchy'
+ref table ACCOUNTS_PAYABLE
+ref table SALES_ORDERS
+ref table DateTableTemplate_d7a2bcb0-030c-462c-bac3-7952187c2f0f
+ref table LocalDateTable_b56ce335-2536-4575-8d4f-7b605014f6e4
+ref table LocalDateTable_07c9221f-8244-4ed2-a76c-e04af265032d
+ref table LocalDateTable_f4cd4a3c-142e-422b-8fd3-f71ae456203e
+ref table LocalDateTable_7346b757-508a-4fee-a137-3859ebdf92f2
+ref table LocalDateTable_1f701ee2-5b16-4938-a209-9082cc332c10
+ref table LocalDateTable_08a28fb6-158b-4179-a2e7-754fc66fbfcf
+ref table LocalDateTable_7789592e-9112-4fe6-aacd-072797f12669
+ref table LocalDateTable_0e4eb141-91df-40eb-9b99-fe8f95b7611d
+ref table LocalDateTable_04b30ff7-19f1-4c79-9d4a-03afb352259c
+ref table LocalDateTable_6cb174d1-49dc-4b35-9208-def2cfb43d72
+ref table LocalDateTable_a4e27fac-5044-4e9d-8054-4740c21a6c71
+ref table LocalDateTable_6509b973-0658-4db3-81e8-ceaf76389183
+ref table LocalDateTable_3b0b0cd6-701c-4e41-b5f6-ddaea8f330a0
+ref table LocalDateTable_39dd5250-760d-440d-82df-46a6102846d9
+ref table LocalDateTable_8071f24c-7a6a-48f7-b47f-c1fd1955ad96
+ref table LocalDateTable_2ce8afa2-3b64-4f60-8335-5c31b1263223
+ref table LocalDateTable_7e5cb3b9-933c-45fd-b971-ffe6b4e4fd97
+ref table LocalDateTable_d0ca12cc-879f-49ee-874e-01fe2f3ff18f
+ref table LocalDateTable_e46b33ab-4d86-4f23-9545-1d69c13d712b
+ref table LocalDateTable_fb752534-241d-48bf-806a-e1ff965143cc
+ref table LocalDateTable_8754b438-12a4-4e83-80ae-8b514ed5fcc1
+ref table LocalDateTable_d6607fa8-af53-4683-a83e-4a06de0ffbdf
+ref table LocalDateTable_a683f932-521f-4691-beae-98266863c2d9
+ref table LocalDateTable_2061b52a-36d3-4f85-a5a0-52260dae6005
+ref table LocalDateTable_fd79b252-8aaf-40cd-bf20-643ee61a48ed
+
+ref cultureInfo en-US
+

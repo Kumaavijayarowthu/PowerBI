@@ -1,0 +1,31 @@
+table '04. Report Figures'
+	lineageTag: abbc8a15-430e-43e4-a1ef-587fc5524aae
+
+	measure %Of_Total = DIVIDE(CALCULATE([Actuals],CUSTOMERS[Customer Classification] <> BLANK()),CALCULATE([Actuals],ALL(CUSTOMERS[Customer Classification]),CUSTOMERS[Customer Classification] <> BLANK()))
+		lineageTag: 83de7b50-e002-492e-9d2e-f9b58a3499f0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Leakage %' =
+			DIVIDE(
+			    CALCULATE([Actuals],'GL_ACCOUNTS_P&L'[LEVEL2] = "0209100"||'GL_ACCOUNTS_P&L'[LEVEL2] = "0208000"||'GL_ACCOUNTS_P&L'[LEVEL2] = "0207000"||'GL_ACCOUNTS_P&L'[LEVEL2] = "0209000"||'GL_ACCOUNTS_P&L'[LEVEL2] = "0205000"||'GL_ACCOUNTS_P&L'[LEVEL2] = "093"||'GL_ACCOUNTS_P&L'[LEVEL2] = "0201030"||'GL_ACCOUNTS_P&L'[LEVEL2] = "0206000"),
+			    (CALCULATE([Actuals],'GL_ACCOUNTS_P&L'[LEVEL2] = "0101000"||'GL_ACCOUNTS_P&L'[LEVEL2] = "0102000")))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 80f635b3-172a-41c3-8b22-2ec2201ed352
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 7fba2f53-a1d5-4f21-ab18-4ca636ad4403
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '04. Report Figures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 64cf2d7bc67c4cf9b5381f886f9be787
+

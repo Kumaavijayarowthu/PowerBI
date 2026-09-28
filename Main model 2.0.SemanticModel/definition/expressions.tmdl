@@ -1,0 +1,267 @@
+expression dsn = "dsn=DSP-P" meta [IsParameterQuery=true, List={"dsn=DSP-D", "dsn=DSP-P"}, DefaultValue="dsn=DSP-D", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 7a3ba558-3609-48ec-8a34-7338ddab2395
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression Z_INS_HIER_KOSTL_V_H =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_HIER_KOSTL_V_H_View = INS_Schema{[Name="Z_INS_HIER_KOSTL_V_H",Kind="View"]}[Data]
+		in
+		    Z_INS_HIER_KOSTL_V_H_View
+	lineageTag: 145c713f-892b-4b0f-9221-18f57c867beb
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'GL_ACCOUNTS Sorting' =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_HIER_GL_ACCNT_V_H_View = INS_Schema{[Name="Z_INS_HIER_GL_ACCNT_V_H",Kind="View"]}[Data],
+		    #"Grouped Rows" = Table.Group(Z_INS_HIER_GL_ACCNT_V_H_View, {"LEVEL2_TEXT"}, {{"Account", each List.Min([SAKNR]), type nullable text}}),
+		    #"Sorted Rows" = Table.Buffer(Table.Sort(#"Grouped Rows",{{"Account", Order.Ascending}})),
+		    #"Added Index" = Table.AddIndexColumn(#"Sorted Rows", "Index", 1, 1, Int64.Type)
+		in
+		    #"Added Index"
+	lineageTag: 88df80c0-2789-4e25-9d3f-f979108ea9ed
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression Z_INS_T179T_S4_V_T =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_T179T_S4_V_T_View = INS_Schema{[Name="Z_INS_T179T_S4_V_T",Kind="View"]}[Data]
+		in
+		    Z_INS_T179T_S4_V_T_View
+	lineageTag: 409b3725-e3ea-4cd9-bcb1-e7afbc7cd6b4
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Opportunities wo quote' =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_SFDC_Opportunity_F_V_View = INS_Schema{[Name="Z_INS_SFDC_Opportunity_F_V",Kind="View"]}[Data],
+		    #"Filtered Rows" = Table.SelectRows(Z_INS_SFDC_Opportunity_F_V_View, each [SyncedQuoteId] = null),
+		    #"Added Date" = Table.AddColumn(#"Filtered Rows", "Date", each if [Expected_Delivery_Date__c] is null then [CloseDate] else [Expected_Delivery_Date__c]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Date",{{"Probability", Int64.Type}, {"Close_date_updated__c", type date}, {"CreatedDate", type date}, {"Date", type date}}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"CloseDate", "Expected_Delivery_Date__c", "Date", "Name", "Probability", "S_number__c", "StageName", "Id", "AccountNumber_10", "Amount_DKK", "Profit_Center", "Ship_to_AccountNumber_10", "SyncedQuoteId", "RecordTypeId"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"AccountNumber_10", "Customer Number"}, {"S_number__c", "S Number"}, {"Ship_to_AccountNumber_10", "Ship To Customer Number"}, {"StageName", "Status"}, {"Id", "Opportunity ID"}, {"Profit_Center", "Profit Center"}, {"Expected_Delivery_Date__c", "Expected Delivery Date"}, {"SyncedQuoteId", "Quote ID"}, {"CloseDate", "Close Date"}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Opportunity ID"}, #"Opportunity data", {"OpportunityId"}, "Opportunity data", JoinKind.LeftOuter),
+		    #"Expanded Opportunity data" = Table.ExpandTableColumn(#"Merged Queries", "Opportunity data", {"COGS_DKK"}, {"COGS_DKK"}),
+		    #"Reordered Columns" = Table.ReorderColumns(#"Expanded Opportunity data",{"Opportunity ID", "Quote ID", "Name", "Customer Number", "Ship To Customer Number", "S Number", "Profit Center", "Expected Delivery Date", "Close Date", "Date", "Probability", "Status", "RecordTypeId", "Amount_DKK", "COGS_DKK"}),
+		    #"Added Type" = Table.AddColumn(#"Reordered Columns", "Type", each "Opportunity")
+		in
+		    #"Added Type"
+	lineageTag: 40421218-7ae9-487a-9396-da321180a5c6
+	queryGroup: Salesforce
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Synced quotes w sap quote' =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_SFDC_Opportunity_F_V_View = INS_Schema{[Name="Z_INS_SFDC_Opportunity_F_V",Kind="View"]}[Data],
+		    #"Synced quotes" = Table.SelectRows(Z_INS_SFDC_Opportunity_F_V_View, each [SyncedQuoteId] <> null),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Synced quotes",{"Id", "SyncedQuoteId", "AccountNumber_10", "Ship_to_AccountNumber_10", "RecordTypeId"}),
+		    #"Merged QUOTES" = Table.NestedJoin(#"Removed Other Columns", {"SyncedQuoteId"}, QUOTE, {"Quote ID"}, "QUOTE", JoinKind.LeftOuter),
+		    #"Expanded QUOTE" = Table.ExpandTableColumn(#"Merged QUOTES", "QUOTE", {"Name", "Status", "Expected Delivery Date", "Probability", "SFDC Quote ID", "S Number"}, {"Name", "Status", "Expected Delivery Date", "Probability", "SFDC Quote ID", "S Number"}),
+		    #"With a sap quote" = Table.SelectRows(#"Expanded QUOTE", each ([SFDC Quote ID] <> null)),
+		    #"Removed Columns" = Table.RemoveColumns(#"With a sap quote",{"SFDC Quote ID"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Id", "Opportunity ID"}, {"SyncedQuoteId", "Quote ID"}, {"AccountNumber_10", "Customer Number"}, {"Ship_to_AccountNumber_10", "Ship To Customer Number"}}),
+		    #"Merged Quotes data" = Table.NestedJoin(#"Renamed Columns", {"Quote ID"}, #"Quotes data", {"Quote ID"}, "Quotes data", JoinKind.LeftOuter),
+		    #"Expanded Quotes data" = Table.ExpandTableColumn(#"Merged Quotes data", "Quotes data", {"Profit Center", "Amount_DKK", "COGS_DKK"}, {"Profit Center", "Amount_DKK", "COGS_DKK"}),
+		    #"Added Date" = Table.AddColumn(#"Expanded Quotes data", "Date", each [Expected Delivery Date]),
+		    #"Reordered Columns" = Table.ReorderColumns(#"Added Date",{"Opportunity ID", "Quote ID", "Name", "Customer Number", "Ship To Customer Number", "S Number", "Profit Center", "Expected Delivery Date", "Date", "Probability", "Status", "RecordTypeId", "Amount_DKK", "COGS_DKK"}),
+		    #"Added Type" = Table.AddColumn(#"Reordered Columns", "Type", each "Quote"),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Type",{{"Date", type date}, {"Type", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: 9f0b327c-1edd-4939-a54b-b660a469fb7a
+	queryGroup: Salesforce
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Quotes data' =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_SFDC_QuoteLineItem_F_V_View = INS_Schema{[Name="Z_INS_SFDC_QuoteLineItem_F_V",Kind="View"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(Z_INS_SFDC_QuoteLineItem_F_V_View,{"QuoteId", "TotalPrice_DKK", "Profit_Center", "Performance_COGS_DKK"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"Profit_Center", "Profit Center"}, {"QuoteId", "Quote ID"}}),
+		    #"Grouped Rows" = Table.Group(#"Renamed Columns", {"Quote ID", "Profit Center"}, {{"Amount_DKK", each List.Sum([TotalPrice_DKK]), type nullable number}, {"COGS_DKK", each List.Sum([Performance_COGS_DKK]), type nullable number}})
+		in
+		    #"Grouped Rows"
+	lineageTag: 1abca97e-c359-4ae9-89e2-236ef8777734
+	queryGroup: Salesforce
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Opportunity data' =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_SFDC_OpportunityLineItem_F_V_View = INS_Schema{[Name="Z_INS_SFDC_OpportunityLineItem_F_V",Kind="View"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(Z_INS_SFDC_OpportunityLineItem_F_V_View,{"OpportunityId", "Performance_COGS_DKK"}),
+		    #"Grouped Rows" = Table.Group(#"Removed Other Columns", {"OpportunityId"}, {{"COGS_DKK", each List.Sum([Performance_COGS_DKK]), type nullable number}}),
+		    #"Filtered Rows" = Table.SelectRows(#"Grouped Rows", each ([COGS_DKK] <> null))
+		in
+		    #"Filtered Rows"
+	lineageTag: d40b7a56-d342-4019-bbe2-ece5cd45d14f
+	queryGroup: Salesforce
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Opportunities wo sap quote' =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_SFDC_Opportunity_F_V_View = INS_Schema{[Name="Z_INS_SFDC_Opportunity_F_V",Kind="View"]}[Data],
+		    #"Opportunities w quote" = Table.SelectRows(Z_INS_SFDC_Opportunity_F_V_View, each [SyncedQuoteId] <> null),
+		    #"Added Date" = Table.AddColumn(#"Opportunities w quote", "Date", each if [Expected_Delivery_Date__c] is null then [CloseDate] else [Expected_Delivery_Date__c]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Date",{{"Date", type date}}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Expected_Delivery_Date__c", "CloseDate", "Date", "Name", "Probability", "S_number__c", "StageName", "Id", "AccountNumber_10", "Amount_DKK", "Profit_Center", "Ship_to_AccountNumber_10", "SyncedQuoteId", "RecordTypeId"}),
+		    #"Merged QUOTES" = Table.NestedJoin(#"Removed Other Columns", {"SyncedQuoteId"}, QUOTE, {"Quote ID"}, "QUOTE", JoinKind.LeftOuter),
+		    #"Expanded QUOTE" = Table.ExpandTableColumn(#"Merged QUOTES", "QUOTE", {"SFDC Quote ID"}, {"SFDC Quote ID"}),
+		    #"But not sap quote" = Table.SelectRows(#"Expanded QUOTE", each ([SFDC Quote ID] = null)),
+		    #"Removed Columns" = Table.RemoveColumns(#"But not sap quote",{"SFDC Quote ID"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"AccountNumber_10", "Customer Number"}, {"S_number__c", "S Number"}, {"Ship_to_AccountNumber_10", "Ship To Customer Number"}, {"StageName", "Status"}, {"Id", "Opportunity ID"}, {"Profit_Center", "Profit Center"}, {"Expected_Delivery_Date__c", "Expected Delivery Date"}, {"SyncedQuoteId", "Quote ID"}, {"CloseDate", "Close Date"}}),
+		    #"Merged Opportunity data" = Table.NestedJoin(#"Renamed Columns", {"Opportunity ID"}, #"Opportunity data", {"OpportunityId"}, "Opportunity data", JoinKind.LeftOuter),
+		    #"Expanded Opportunity data" = Table.ExpandTableColumn(#"Merged Opportunity data", "Opportunity data", {"COGS_DKK"}, {"COGS_DKK"}),
+		    #"Reordered Columns" = Table.ReorderColumns(#"Expanded Opportunity data",{"Opportunity ID", "Quote ID", "Name", "Customer Number", "Ship To Customer Number", "S Number", "Profit Center", "Expected Delivery Date", "Close Date", "Date", "Probability", "Status", "RecordTypeId", "Amount_DKK", "COGS_DKK"}),
+		    #"Added Type" = Table.AddColumn(#"Reordered Columns", "Type", each "Opportunity")
+		in
+		    #"Added Type"
+	lineageTag: 26e2cd55-5761-4812-9b86-d618826e0fff
+	queryGroup: Salesforce
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression ASSET =
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_SFDC_Asset_F_V_View = INS_Schema{[Name="Z_INS_SFDC_Asset_F_V",Kind="View"]}[Data],
+		    #"Removed Other Columns" = Table.SelectColumns(Z_INS_SFDC_Asset_F_V_View,{"AccountId", "AssetLevel", "Asset_Hier_Level__c", "Asset_Number__c", "Competitor_Account_Lic__c", "Id", "IsCompetitorProduct", "Name", "OwnerId", "ParentId", "Parent_Asset_Name__c", "Parent_Parent_ID__c", "RecordTypeId", "RootAssetId", "Root_Asset_Number__c", "Status", "Status_Unit__c", "Unit_Type__c", "Unit_Type_root_asset__c"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"AccountId", "Account ID"}, {"Asset_Number__c", "Asset Number"}, {"Competitor_Account_Lic__c", "Competitor Account ID"}, {"OwnerId", "Owner ID"}, {"ParentId", "Parent Asset ID"}, {"Parent_Parent_ID__c", "Parent Asset Parent ID"}, {"RecordTypeId", "Asset Type ID"}, {"RootAssetId", "Root Asset ID"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: f49281de-31b9-456f-bc61-b5c1eb5d9956
+	queryGroup: Salesforce
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'PC Short names' =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("Xc7LCsIwEAXQXwlZd5HXD5RIEUS6aNFF6SLUYAp5QBsX+Xs7QWVwe+7M3JkmyhRjQnBGG6pNNr7smfTZ2Y3OzTcVNXU2rIvxOwokBOfTiIlX0ogUTN0uP5GSi0NGu7i/KikFrLchpLgazLBwtdmZmDx2CW3lsaWnjcjrF0OJpHtZ9PERwCHdEShHrGD+PrQfn98=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [LEVEL4 = _t, #"Segment lev.4 short" = _t]),
+		    #"Renamed Columns" = Table.RenameColumns(Source,{{"Segment lev.4 short", "Segment lev. 4 short"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: c3f1fa1d-b4c1-4bf6-8a29-b7dd6c3daccb
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Record Type mapping' =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMjA0MvAzAAPfHL/UQEdvJR2lgKL8rNTkEoXgxJzUYqVYHXRlaXBlKaV4lKVjVRYLAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [RecordTypeId = _t, #"Record Type" = _t]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"RecordTypeId", type text}, {"Record Type", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: ba5788db-8b51-453d-8ea4-ac88a2396780
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression country_as_customer =
+		let
+		    Source = REGIONS,
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Country code"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+		    #"Added Custom" = Table.AddColumn(#"Removed Duplicates", "Customer Number", each [Country code]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Customer Number", type text}})
+		in
+		    #"Changed Type"
+	lineageTag: 54b81c62-dbf9-48a6-82be-908edf739699
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REGIONS_lev2 = ```
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_TKCHW_V_H_View = INS_Schema{[Name="Z_INS_TKCHW_V_H",Kind="View"]}[Data],
+		    #"Renamed Columns" = Table.RenameColumns(Z_INS_TKCHW_V_H_View,{{"TXT40_L1", "Region"}, {"TXT40_L2", "Region lev. 2"}, {"LANDX50", "Country"}, {"WERT1_L3", "Country code"}}),
+		    // Middle east Country codes come from WERT1_L4 instead of WERT1_L3 
+		    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","510",each [WERT1_L4],Replacer.ReplaceText,{"Country code"}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Replaced Value",{"Country", "Country code", "Region lev. 2", "Region"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"Country code"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each ([Country code] <> null)),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows",{"Region lev. 2", "Region"}),
+		    #"Removed Duplicates1" = Table.Distinct(#"Removed Other Columns1"),
+		    #"Added Custom" = Table.AddColumn(#"Removed Duplicates1", "Country code", each [Region lev. 2]),
+		    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Country", each "Not assigned"),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"Country code", type text}, {"Country", type text}})
+		in
+		    #"Changed Type"
+		```
+	lineageTag: 4ce6103b-9325-4834-b797-306142888f24
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REGIONS_lev1 = ```
+		let
+		    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+		    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+		    Z_INS_TKCHW_V_H_View = INS_Schema{[Name="Z_INS_TKCHW_V_H",Kind="View"]}[Data],
+		    #"Renamed Columns" = Table.RenameColumns(Z_INS_TKCHW_V_H_View,{{"TXT40_L1", "Region"}, {"TXT40_L2", "Region lev. 2"}, {"LANDX50", "Country"}, {"WERT1_L3", "Country code"}}),
+		    // Middle east Country codes come from WERT1_L4 instead of WERT1_L3 
+		    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","510",each [WERT1_L4],Replacer.ReplaceText,{"Country code"}),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Replaced Value",{"Country", "Country code", "Region lev. 2", "Region"}),
+		    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"Country code"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each ([Country code] <> null)),
+		    #"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows",{"Region"}),
+		    #"Removed Duplicates1" = Table.Distinct(#"Removed Other Columns1"),
+		    #"Added Custom" = Table.AddColumn(#"Removed Duplicates1", "Country code", each [Region]),
+		    #"Added Custom2" = Table.AddColumn(#"Added Custom", "Region lev. 2", each "Not assigned"),
+		    #"Added Custom1" = Table.AddColumn(#"Added Custom2", "Country", each "Not assigned"),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"Country code", type text}, {"Country", type text}, {"Region lev. 2", type text}})
+		in
+		    #"Changed Type"
+		```
+	lineageTag: 4e4bdcda-9f25-405c-961c-1b7988bc7879
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

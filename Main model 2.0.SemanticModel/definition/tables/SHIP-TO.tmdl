@@ -1,0 +1,75 @@
+table SHIP-TO
+	lineageTag: 7b05b883-897e-4baf-89c8-494cf4101b9b
+
+	column 'Parent Account Number'
+		dataType: string
+		lineageTag: ff4b6b4f-ccac-43fa-9c1f-0727f371c666
+		summarizeBy: none
+		sourceColumn: Parent Account Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parent Name'
+		dataType: string
+		lineageTag: ffe9d187-d5e0-48c8-bc88-a043ba4c7b6e
+		summarizeBy: none
+		sourceColumn: Parent Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Classification'
+		dataType: string
+		lineageTag: 73fb8dc3-b882-43c3-b517-581b8925e2e5
+		summarizeBy: none
+		sourceColumn: Customer Classification
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: 69689787-7f36-4c7b-9664-24d3637a915b
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Number'
+		dataType: string
+		lineageTag: 0e176204-943d-42e3-9269-4e1e70c28a43
+		summarizeBy: none
+		sourceColumn: Customer Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country code'
+		dataType: string
+		lineageTag: ab6c52ce-6998-4c0d-b1c8-943f0eba279e
+		summarizeBy: none
+		sourceColumn: Country code
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Ship-To Hierarchy'
+		lineageTag: 386d6cb1-bf7b-43f4-97e0-f58e089aad79
+
+		level 'Parent Name'
+			lineageTag: da2afdfb-c64f-411e-83a4-e8ff3e19b0ae
+			column: 'Parent Name'
+
+		level 'Customer Name'
+			lineageTag: 4c3ddd63-823c-41e7-b80f-998962c84f52
+			column: 'Customer Name'
+
+	partition SHIP-TO = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = CUSTOMERS
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "e243aec0a203bc2061ea",
+  "position": {
+    "x": 442.08000000000004,
+    "y": 162.72,
+    "z": 0,
+    "height": 280,
+    "width": 280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "MAIN"
+                        }
+                      },
+                      "Property": "Account Number"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "MAIN.Account Number",
+              "nativeQueryRef": "Count of Account Number"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

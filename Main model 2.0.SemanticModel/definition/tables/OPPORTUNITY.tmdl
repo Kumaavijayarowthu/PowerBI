@@ -1,0 +1,206 @@
+table OPPORTUNITY
+	isHidden
+	lineageTag: aecb3a9e-e0b9-4aff-8337-98e1017271c3
+
+	column CloseDate
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 8219818a-9ec8-489c-a6d6-88d0d3cd43cc
+		summarizeBy: none
+		sourceColumn: CloseDate
+
+		variation Variation
+			isDefault
+			relationship: 85277e51-5145-48cc-8530-2d5ebcd1f974
+			defaultHierarchy: LocalDateTable_7789592e-9112-4fe6-aacd-072797f12669.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CreatedDate
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 923b6470-5e8b-4746-a058-f1b04c97f4eb
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		variation Variation
+			isDefault
+			relationship: bbab0c5c-77a3-4581-affe-7e093fa17731
+			defaultHierarchy: LocalDateTable_0e4eb141-91df-40eb-9b99-fe8f95b7611d.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Name
+		dataType: string
+		isHidden
+		lineageTag: e17cd564-a255-4c35-a54a-1e851889d6c7
+		summarizeBy: none
+		sourceColumn: Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'S number'
+		dataType: string
+		isHidden
+		lineageTag: e281ddbd-54fe-4c00-bc8e-1eaeacea5ade
+		summarizeBy: none
+		sourceColumn: S number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stage
+		dataType: string
+		isHidden
+		lineageTag: ecf04d49-cb32-46d0-a4f2-618c852b0aa0
+		summarizeBy: none
+		sourceColumn: Stage
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: 01c2c292-cd3e-4785-867b-2542b353e70d
+		summarizeBy: none
+		sourceColumn: Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Number'
+		dataType: string
+		isHidden
+		lineageTag: f8d9844c-c611-4f29-bb30-61f1be2c582e
+		summarizeBy: none
+		sourceColumn: Customer Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profit Center'
+		dataType: string
+		isHidden
+		lineageTag: 7aacad82-6fd6-4f8e-ac13-5c9538142319
+		summarizeBy: none
+		sourceColumn: Profit Center
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount_DKK
+		dataType: double
+		isHidden
+		lineageTag: 160ad7ee-01f2-4a9c-ac31-70d246326ec2
+		summarizeBy: sum
+		sourceColumn: Amount_DKK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Ship To Customer Number'
+		dataType: string
+		isHidden
+		lineageTag: 0796006f-4e08-494a-8f04-8f84bb3a67d7
+		summarizeBy: none
+		sourceColumn: Ship To Customer Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Probability
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f976a54d-3f37-4c1e-864e-452e6dbaf5bd
+		summarizeBy: sum
+		sourceColumn: Probability
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expected Delivery Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: b92219f1-aa96-46c1-9f0c-5f37597b7c1d
+		summarizeBy: none
+		sourceColumn: Expected Delivery Date
+
+		variation Variation
+			isDefault
+			relationship: 8d9f688c-bc28-4976-abd5-e4db6b39ab78
+			defaultHierarchy: LocalDateTable_04b30ff7-19f1-4c79-9d4a-03afb352259c.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SyncedQuoteId
+		dataType: string
+		isHidden
+		lineageTag: 77912584-97b2-423a-b840-8dbb64ca41c9
+		summarizeBy: none
+		sourceColumn: SyncedQuoteId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecordTypeId
+		dataType: string
+		isHidden
+		lineageTag: 1cae9ea9-308e-4e23-9959-7eea571fcb1c
+		summarizeBy: none
+		sourceColumn: RecordTypeId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition OPPORTUNITY = m
+		mode: import
+		queryGroup: Salesforce
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_SFDC_Opportunity_F_V_View = INS_Schema{[Name="Z_INS_SFDC_Opportunity_F_V",Kind="View"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Z_INS_SFDC_Opportunity_F_V_View,{{"Probability", Int64.Type}, {"Close_date_updated__c", type date}, {"CreatedDate", type date}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"CloseDate", "CreatedDate", "Expected_Delivery_Date__c", "Name", "Probability", "S_number__c", "StageName", "Id", "AccountNumber_10", "Amount_DKK", "Profit_Center", "Ship_to_AccountNumber_10", "SyncedQuoteId", "RecordTypeId"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"AccountNumber_10", "Customer Number"}, {"S_number__c", "S number"}, {"Ship_to_AccountNumber_10", "Ship To Customer Number"}, {"StageName", "Stage"}, {"Id", "Opportunity ID"}, {"Profit_Center", "Profit Center"}, {"Expected_Delivery_Date__c", "Expected Delivery Date"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"Opportunity ID", "Name", "Customer Number", "Ship To Customer Number", "S number", "Profit Center", "Expected Delivery Date", "CreatedDate", "Stage", "CloseDate", "Amount_DKK"})
+				in
+				    #"Reordered Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

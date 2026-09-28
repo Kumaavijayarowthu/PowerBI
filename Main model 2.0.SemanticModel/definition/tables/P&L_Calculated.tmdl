@@ -1,0 +1,136 @@
+table P&L_Calculated
+	lineageTag: 81689e18-7e3d-404f-ad9e-3a3cc7357556
+
+	column 'G/L Account Number'
+		dataType: string
+		lineageTag: b88fa3c4-b7f1-4edf-afd7-cdba72e1bff1
+		summarizeBy: none
+		sourceColumn: G/L Account Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Posting Month'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 91637a15-9974-4c32-a3b0-a54a7593e0cb
+		summarizeBy: none
+		sourceColumn: Posting Month
+
+		variation Variation
+			isDefault
+			relationship: 5b0582ef-3bbd-4d83-9ec1-3b1d9d09a812
+			defaultHierarchy: LocalDateTable_08a28fb6-158b-4179-a2e7-754fc66fbfcf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Company Code'
+		dataType: string
+		lineageTag: 754403a8-ff07-4a61-b5a4-6664e4109d44
+		summarizeBy: none
+		sourceColumn: Company Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL2_PC
+		dataType: string
+		lineageTag: 12567ce1-66b1-4d16-9007-3e304b37cd51
+		summarizeBy: none
+		sourceColumn: LEVEL2_PC
+
+		annotation SummarizationSetBy = Automatic
+
+	column RACCT
+		dataType: string
+		lineageTag: e8955fb5-fe8a-4b90-a550-da31f64b3b27
+		summarizeBy: none
+		sourceColumn: RACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Amount _ Global Currency'
+		dataType: double
+		lineageTag: 1f0113cd-6e13-454c-8eda-94f167afeee3
+		summarizeBy: sum
+		sourceColumn: Amount _ Global Currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Performance_COGS_GC
+		dataType: double
+		lineageTag: f875cb86-b687-4770-9663-309c0edd82a9
+		summarizeBy: sum
+		sourceColumn: Performance_COGS_GC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '_Perf. COGS'
+		dataType: double
+		lineageTag: 6d398477-e850-4882-8f70-3d6273e43efc
+		summarizeBy: sum
+		sourceColumn: _Perf. COGS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DKKx
+		dataType: double
+		lineageTag: 164adfdc-0273-4ece-9427-99a017bd52f8
+		summarizeBy: sum
+		sourceColumn: DKKx
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Group
+		dataType: string
+		lineageTag: 9bfdfce0-c800-4baf-a848-8381310c18a5
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	partition P&L_Calculated = m
+		mode: import
+		source = ```
+				let
+				    Source =
+				        Odbc.Query(
+				            dsn,
+				            "SELECT #(lf)
+				                SAKNR     AS ""G/L Account Number"",#(lf)
+				                LAST_DAY(CAST(BUDAT AS DATE)) AS ""Posting Month"",#(lf)
+				                RBUKRS    AS ""Company Code"",#(lf)
+				                LEVEL2_PC AS ""LEVEL2_PC"",#(lf)
+				                RACCT     AS ""RACCT"",#(lf)
+				                SUM(KSL)  AS ""Amount _ Global Currency"",#(lf)
+				                SUM(""Performance_COGS_GC"") AS ""Performance_COGS_GC""#(lf)
+				             FROM INS.Z_INS_ACDOCA_MAIN_PERSIST#(lf)
+				             WHERE LEVEL2_TEXT NOT IN ('ASSETS', 'LIABILITIES')#(lf)
+				             GROUP BY #(lf)
+				                SAKNR,#(lf)
+				                LAST_DAY(CAST(BUDAT AS DATE)),#(lf)
+				                RBUKRS,#(lf)
+				                LEVEL2_PC,#(lf)
+				                RACCT"
+				        ),
+				    #"Multiplied Columns" = Table.TransformColumns(Source, {{"Amount _ Global Currency", each _ * -1, type number},{"Performance_COGS_GC", each _ * -1, type number}}),    
+				    #"Added _Perf.COGS" = Table.AddColumn(#"Multiplied Columns", "_Perf. COGS", each if Text.Contains([RACCT], "13010001") then [Performance_COGS_GC] else if Text.Contains([RACCT], "13010002") then [Performance_COGS_GC] else if Text.Contains([RACCT], "17010001") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000001") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000004") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000005") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000006") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000007") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000008") then [Performance_COGS_GC] else [Amount _ Global Currency]),
+				    #"Added DKKx" = Table.AddColumn(#"Added _Perf.COGS", "DKKx", each if [LEVEL2_PC] = "0400040" then [_Perf. COGS] else [Amount _ Global Currency]),
+				    #"Added Group" = Table.AddColumn(#"Added DKKx", "Group", each if [Company Code] = "0500" then "No" else if [Company Code] = "0501" then "No" else if [Company Code] = "0560" then "No" else if [Company Code] = "9005" then "No" else if [Company Code] = "9006" then "No" else "Yes"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Group",{{"_Perf. COGS", type number}, {"DKKx", type number}})
+				in
+				    #"Changed Type"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,96 @@
+table 'OPPORTUNITY LI'
+	isHidden
+	lineageTag: 74c05e1b-07b6-499a-8ed2-7edf53dac3b7
+
+	column 'Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: 264bb984-9bb5-49fa-b63c-9a98db14b9c1
+		summarizeBy: none
+		sourceColumn: Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Base UOM'
+		dataType: string
+		isHidden
+		lineageTag: 528f786b-6a76-402c-92c5-9536796b9f88
+		summarizeBy: none
+		sourceColumn: Base UOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalPrice_DKK
+		dataType: double
+		isHidden
+		lineageTag: 95409098-f337-4fd4-b0d4-f65520631f53
+		summarizeBy: sum
+		sourceColumn: TotalPrice_DKK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: double
+		isHidden
+		lineageTag: ce4269fd-e405-4f85-a84b-3f3b5f3dd27d
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Material Number'
+		dataType: string
+		isHidden
+		lineageTag: eddbaf64-bc51-469e-816e-e77ba02e30ad
+		summarizeBy: none
+		sourceColumn: Material Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Performance_COGS_DKK
+		dataType: double
+		isHidden
+		lineageTag: d8b606b3-d982-4bb1-b6d3-02160d3d6cdc
+		summarizeBy: sum
+		sourceColumn: Performance_COGS_DKK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'OPPORTUNITY LI' = m
+		mode: import
+		queryGroup: Salesforce
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_SFDC_OpportunityLineItem_F_V_View = INS_Schema{[Name="Z_INS_SFDC_OpportunityLineItem_F_V",Kind="View"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(Z_INS_SFDC_OpportunityLineItem_F_V_View,{"OpportunityId", "Quantity_Measure_UOM__c", "TotalPrice_DKK", "Quantity_BaseUoM", "SAP_Material_ID_18", "Performance_COGS_DKK"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Removed Other Columns",{"OpportunityId", "SAP_Material_ID_18", "Quantity_BaseUoM", "Quantity_Measure_UOM__c", "Performance_COGS_DKK", "TotalPrice_DKK"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"OpportunityId", "Opportunity ID"}, {"SAP_Material_ID_18", "Material Number"}, {"Quantity_BaseUoM", "Quantity"}, {"Quantity_Measure_UOM__c", "Base UOM"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

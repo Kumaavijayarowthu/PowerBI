@@ -1,0 +1,33 @@
+table 'Z. Rounding Selector'
+	lineageTag: a11723ac-02d3-4145-813c-73698eceb3b6
+
+	measure 'Rounding Value' = ```
+			
+			VAR SelectedMetric = SELECTEDVALUE('Z. Rounding Selector'[Rounding])
+			RETURN
+			    SWITCH(
+			        SelectedMetric,
+			        "DKK", 1,
+			        "DKK'000",1000, 
+			        "MDKK",1000000,
+			        1
+			        ) 
+			    
+			```
+		formatString: 0
+		lineageTag: a075a0d5-a15d-4ffb-883a-9373d7afd2ce
+
+	column Rounding
+		lineageTag: 4ab57837-2eec-4140-bb30-73c2b7445ead
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Rounding]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Rounding Selector' = calculated
+		mode: import
+		source = DATATABLE("Rounding", STRING, {{"DKK"}, {"DKK'000"}, {"MDKK"}})
+
+	annotation PBI_Id = 0c37eb7a0db5414eb432f7680df11a3e
+

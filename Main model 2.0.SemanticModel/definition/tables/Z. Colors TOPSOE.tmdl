@@ -1,0 +1,96 @@
+table 'Z. Colors TOPSOE'
+	lineageTag: 0bcd0718-ad93-4670-bdb0-b3c605e5e809
+
+	measure Black =
+			"#000000"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 36231d74-fa49-4c3b-9234-c92a3a6270a7
+
+	measure White =
+			"#ffffff"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 0c65d52c-465f-4b18-bf3b-36e2eab386ab
+
+	measure Lilac =
+			"#d7aaff"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 218669c3-e29e-4fd1-9709-905b36d3874d
+
+	measure Green =
+			"#7d9b9b"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 445fd064-8bc3-4eb9-805b-3129caff0587
+
+	measure Blue =
+			"#b4e1ff"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 79d8911f-3471-4f18-939c-51815a479c7d
+
+	measure 'Bright Green' =
+			"#cdff19"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 00c66035-e2e7-4e61-ad1c-dd3e878564d6
+
+	measure Orange =
+			"#ff4b00"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 29ec1c69-a0f9-43b0-a599-10eeb41ad855
+
+	measure 'Mid Blue' =
+			"#699bff"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: ab9519d9-fc4d-42aa-a347-5374df73f9ef
+
+	measure 'Bright Blue' =
+			"#374bfa"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 81a5d158-48ae-4f3f-8409-93218d356056
+
+	measure 'Mid Purple' =
+			"#af5aff"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 2d29e8b0-1fce-45be-9435-cae768cce99e
+
+	measure 'Bright Purple' =
+			"#6400c8"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: 3eadd0c2-043e-4700-94c3-2d13bc7be141
+
+	measure Peach =
+			"#ff968c"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: ce5dd73a-89cc-46cd-ad16-6010d0205d07
+
+	measure 'Deep Red' =
+			"#73141e"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: b7232208-0590-4120-8fee-e9fa689457f0
+
+	measure 'Off White' =
+			"#f0f0f0"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: b170a84f-9eaa-4f00-b343-d22ab257dfd9
+
+	measure 'Dark Grey' =
+			"#5a6e78"
+			// https://brandportal.topsoe.com/document/14#/visual-identity/color
+		lineageTag: e8cd0e07-da62-4e30-9680-a03a15d43843
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: aece7917-b6b7-407e-bde2-647006295264
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Colors TOPSOE' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 3d6d18ae255a41349f297893868bd49f
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

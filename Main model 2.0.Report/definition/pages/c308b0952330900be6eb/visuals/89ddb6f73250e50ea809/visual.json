@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "89ddb6f73250e50ea809",
+  "position": {
+    "x": 0,
+    "y": 88.048310049571882,
+    "z": 4000,
+    "height": 68.943488057683638,
+    "width": 206.83046417305093,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OPPORTUNITIES_QUOTES"
+                    }
+                  },
+                  "Property": "Type"
+                }
+              },
+              "queryRef": "OPPORTUNITIES_QUOTES.Type",
+              "nativeQueryRef": "Type",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OPPORTUNITIES_QUOTES"
+                    }
+                  },
+                  "Property": "Status"
+                }
+              },
+              "queryRef": "OPPORTUNITIES_QUOTES.Status",
+              "nativeQueryRef": "Status",
+              "active": false
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

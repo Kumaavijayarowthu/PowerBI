@@ -1,0 +1,154 @@
+table 'Z. Figure Selector'
+	lineageTag: 62c42c5e-b8ff-48a7-a023-bf46c997004d
+
+	measure 'Revenue dynamic' = ```
+			
+			VAR ParameterValue = 
+			SELECTCOLUMNS(
+			    SUMMARIZE('Z. Figure Selector','Z. Figure Selector'[Figure selection],'Z. Figure Selector'[Figure selection Fields])
+			    ,'Z. Figure Selector'[Figure selection]
+			)
+			VAR revenue_value = 
+			SWITCH(
+			    TRUE()
+			    ,ParameterValue = "Last Year", [Revenue LY]
+			    ,ParameterValue = "Budget", [Revenue Budget]
+			    ,ParameterValue = "Forecast", [Revenue Forecast]
+			)
+			RETURN revenue_value
+			```
+		formatString: #,0
+		lineageTag: 170e47e1-9b6a-4843-b284-00f9f9d1fd39
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Profit dynamic' = ```
+			
+			VAR ParameterValue = 
+			SELECTCOLUMNS(
+			    SUMMARIZE('Z. Figure Selector','Z. Figure Selector'[Figure selection],'Z. Figure Selector'[Figure selection Fields])
+			    ,'Z. Figure Selector'[Figure selection]
+			)
+			VAR gp_value = 
+			SWITCH(
+			    TRUE()
+			    ,ParameterValue = "Last Year", [Gross Profit LY]
+			    ,ParameterValue = "Budget", [Gross Profit Budget]
+			    ,ParameterValue = "Forecast", [Gross Profit Forecast]
+			)
+			RETURN gp_value
+			```
+		formatString: #,0
+		lineageTag: 1ebbf689-017c-4493-87d2-391c04c6e2a3
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Margin dynamic' = ```
+			
+			VAR ParameterValue = 
+			SELECTCOLUMNS(
+			    SUMMARIZE('Z. Figure Selector','Z. Figure Selector'[Figure selection],'Z. Figure Selector'[Figure selection Fields])
+			    ,'Z. Figure Selector'[Figure selection]
+			)
+			VAR gm_value = 
+			SWITCH(
+			    TRUE()
+			    ,ParameterValue = "Last Year", [Gross Margin LY]
+			    ,ParameterValue = "Budget", [Gross Margin Budget]
+			    ,ParameterValue = "Forecast", [Gross Margin Forecast]
+			)
+			RETURN gm_value
+			```
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: f3d8df05-c7ac-4d88-b7e6-8813b265a918
+
+	measure 'Figure dynamic' = ```
+			
+			VAR ParameterValue = 
+			SELECTCOLUMNS(
+			    SUMMARIZE('Z. Figure Selector','Z. Figure Selector'[Figure selection],'Z. Figure Selector'[Figure selection Fields])
+			    ,'Z. Figure Selector'[Figure selection]
+			)
+			VAR figure_value = 
+			SWITCH(
+			    TRUE()
+			    ,ParameterValue = "Last Year", [LY Actuals]
+			    ,ParameterValue = "Budget", [Budget]
+			    ,ParameterValue = "Forecast", [Forecast]
+			)
+			RETURN figure_value
+			```
+		formatString: #,0
+		lineageTag: ec9c0174-59a3-4259-9526-464dfbe7c753
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Figure value' = SELECTEDVALUE('Z. Figure Selector'[Figure selection Fields])
+		lineageTag: 096f797c-7d3a-42f0-a02d-62612e945a6f
+
+	measure 'Figure YTD dynamic' = ```
+			
+			VAR ParameterValue = 
+			SELECTCOLUMNS(
+			    SUMMARIZE('Z. Figure Selector','Z. Figure Selector'[Figure selection],'Z. Figure Selector'[Figure selection Fields])
+			    ,'Z. Figure Selector'[Figure selection]
+			)
+			VAR figure_value = 
+			SWITCH(
+			    TRUE()
+			    ,ParameterValue = "Last Year", [LY YTD Actuals]
+			    ,ParameterValue = "Budget", [YTD Budget]
+			    ,ParameterValue = "Forecast", [YTD Forecast]
+			)
+			RETURN figure_value
+			```
+		lineageTag: 1a1a8ff9-06f9-4deb-8ce9-c133f88bad5a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Figure selection'
+		lineageTag: 686d6dac-b761-449b-b939-37273f177253
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Figure selection Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Figure selection Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Figure selection Fields'
+		isHidden
+		lineageTag: 29e18924-d4d6-4dff-8759-bc9533d465a4
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Figure selection Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Figure selection Order'
+		isHidden
+		formatString: 0
+		lineageTag: 0c746cd2-6557-425f-8726-c2ded033dbfd
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Figure Selector' = calculated
+		mode: import
+		source =
+				{
+				    ("Last Year", "Last Year", 0),
+				    ("Budget", "Budget", 1),
+				    ("Forecast", "Forecast", 2)
+				}
+
+	annotation PBI_Id = bd099f3294dd41bb87a08226032e940e
+

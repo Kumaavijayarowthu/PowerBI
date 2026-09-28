@@ -1,0 +1,49 @@
+table 'Z. Ship-To hierarchy'
+	lineageTag: 8a91c543-2de3-4de2-90de-ce8a73b822c0
+
+	column 'Z. Customer hierarchy'
+		lineageTag: a13a2cba-0495-426a-b6be-4b9fdae4bb08
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Z. Customer hierarchy Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Z. Customer hierarchy Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Z. Customer hierarchy Fields'
+		isHidden
+		lineageTag: 02c453b1-7f55-4272-ad3c-b7a0cde21a72
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Z. Customer hierarchy Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Z. Customer hierarchy Order'
+		isHidden
+		formatString: 0
+		lineageTag: 4192729b-c0ee-419b-932f-e510573cd24f
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Ship-To hierarchy' = calculated
+		mode: import
+		source =
+				{
+				    ("Customer Classification", NAMEOF('SHIP-TO'[Customer Classification]), 0),
+				    ("Parent Name", NAMEOF('SHIP-TO'[Parent Name]), 1),
+				    ("Customer Name", NAMEOF('SHIP-TO'[Customer Name]), 2)
+				}
+
+	annotation PBI_Id = 8d0287b6ac394d6a92e494597e7b2e96
+

@@ -1,0 +1,245 @@
+table '03. Other Figures'
+	lineageTag: 4f937bd4-0c26-430f-831c-69694d2a6515
+
+	measure 'Diff Gross Profit Budget' = [Gross Profit Budget] - [Gross Profit]
+		formatString: #,0
+		lineageTag: 5d25ecee-c2ef-4727-bf54-0832af6cd8ee
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% Diff Gross Profit Budget' = DIVIDE([Diff Gross Profit Budget],[Gross Profit Budget])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 7418df53-ab0e-4e97-b55f-0c9b07f6b39d
+
+		changedProperty = Name
+
+	measure 'Diff Gross Profit Forecast' = [Gross Profit Forecast] - [Gross Profit]
+		formatString: #,0
+		lineageTag: f6f82524-089d-4fe7-a0ef-d3ff04228113
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% Diff Gross Profit Forecast' = DIVIDE([Diff Gross Profit Forecast],[Gross Profit Forecast])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 760ce9e9-4f9f-4ca5-988d-9fc6975f075f
+
+		changedProperty = Name
+
+	measure 'Diff Gross Profit LY' = [Gross Profit LY] - [Gross Profit]
+		formatString: #,0
+		lineageTag: a98256b0-e0a7-4113-b55a-7a733f43e11c
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% Diff Gross Profit LY' = DIVIDE([Diff Gross Profit LY],[Gross Profit LY])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: a8525329-4980-4ba5-a1ce-57b5fd744fb4
+
+		changedProperty = Name
+
+	measure 'Diff Revenue Budget' = [Revenue Budget] - [Revenue]
+		formatString: #,0
+		lineageTag: a050f597-c2ef-4de4-ae16-3beb539fbe5d
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% Diff Revenue Budget' = DIVIDE([Diff Revenue Budget],[Revenue Budget])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 90591f6d-2ed3-40e1-8ce9-967cffaadf55
+
+		changedProperty = Name
+
+	measure 'Diff Revenue Forecast' = [Revenue Forecast] - [Revenue]
+		formatString: #,0
+		lineageTag: 765efa89-2164-49b4-9ee1-e01e3bb974b7
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% Diff Revenue Forecast' = DIVIDE([Diff Revenue Forecast],[Revenue Forecast])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: a124e1d2-1b87-4e3f-917d-145c13054d9b
+
+		changedProperty = Name
+
+	measure 'Diff Revenue LY' = [Revenue LY] - [Revenue]
+		formatString: #,0
+		lineageTag: 88baa7ce-4875-476b-be74-3de8f8628780
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% Diff Revenue LY' = DIVIDE([Diff Revenue LY],[Revenue LY])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: a2ec8af9-6b2f-49ed-92b2-603752c2f4bc
+
+		changedProperty = Name
+
+	measure '% Diff Revenue dynamic' = DIVIDE([Revenue] - [Revenue dynamic],[Revenue dynamic])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 0fbd6749-51d7-4bc7-8bfe-753c84ef6958
+
+	measure '% Diff Gross Profit dynamic' = DIVIDE([Gross Profit] - [Gross Profit dynamic],[Gross Profit dynamic])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: ae949138-4fc2-4114-9636-24d8c8b6274e
+
+	measure 'Diff Actuals dynamic' =
+			
+			SWITCH(
+			    TRUE(),
+			    MAX('00. DateTable'[Date]) > TODAY(), BLANK(),
+			    [Actuals] - 'Z. Figure Selector'[Figure dynamic])
+		formatString: #,0
+		lineageTag: 7baa690b-f3dd-45f5-b74a-f18317c2fecb
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% Diff Actuals dynamic' =
+			
+			SWITCH(
+			    TRUE(),
+			    MAX('00. DateTable'[Date]) > TODAY(), BLANK(),
+			    DIVIDE([Actuals] - 'Z. Figure Selector'[Figure dynamic],[Actuals]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: a710ab9c-f814-4141-8e69-6d663fcbdc4a
+
+	measure 'Actuals & Future' =
+			
+			CALCULATE(
+			    SWITCH(
+			        TRUE(),
+			        MAX('00. DateTable'[Date]) > TODAY(), 'Z. Figure Selector'[Figure dynamic],
+			        [Actuals]
+			    ),
+			    VALUES('00. DateTable'[Date])
+			)
+		formatString: #,0
+		lineageTag: da208612-3f57-446a-be9d-7c37b6094200
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Index (YoY)' = DIVIDE([Actuals],[LY Actuals])*100
+		formatString: #,0
+		lineageTag: 08da96e9-b0fd-47f1-9377-d536c09f45f8
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Diff Actuals LY Actuals' = [LY Actuals] - [Actuals]
+		lineageTag: 9f8e42fb-b090-4566-b7ec-55a37619ac77
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Diff MTD Actuals LY MTD Actuals' = [LY MTD Actuals] - [MTD Actuals]
+		lineageTag: 73530554-2712-4086-b53f-3f9bdc73cf27
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Diff YTD Actuals LY YTD Actuals' = [LY YTD Actuals] - [YTD Actuals]
+		lineageTag: 0bfd11c8-e488-4bf8-83b8-7a9532486711
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Diff Actuals LY Actuals' = DIVIDE([Diff Actuals LY Actuals],[LY Actuals])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: a042fc14-8d71-4550-be20-58fd6b5da71e
+
+	measure '% Diff MTD Actuals LY MTD Actuals' = DIVIDE([Diff MTD Actuals LY MTD Actuals],[MTD Actuals])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 7dcdcb06-a6e6-4922-8032-5bef1af6c4a2
+
+	measure '% Diff YTD Actuals LY YTD Actuals' = DIVIDE([Diff YTD Actuals LY YTD Actuals], [LY YTD Actuals])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: b4c2a160-9d0e-4e4d-a9f7-09557c2297af
+
+	measure 'Diff Actuals Budget' = [Budget] - [Actuals]
+		lineageTag: 6e990113-fe14-4431-887d-00791ef9ab54
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Diff Actuals Budget' = DIVIDE([Diff Actuals Budget], [Budget])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 616aba56-fb3d-4e8f-b11d-3968afd9b80b
+
+	measure 'Diff MTD Actuals MTD Budget' = [MTD Budget] - [MTD Actuals]
+		lineageTag: 4d01ac3c-ca5e-4cab-89ed-6f370ffa2edf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Diff MTD Actuals MTD Budget' = DIVIDE([Diff MTD Actuals MTD Budget], [MTD Budget])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: cba170b2-7af7-43ab-bf02-2c299c17cf8e
+
+	measure 'Diff YTD Actuals YTD Budget' = [YTD Budget] - [YTD Actuals]
+		lineageTag: c0b34b20-13c0-4a38-ad1e-aa5f3a5d2e25
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Diff YTD Actuals YTD Budget' = DIVIDE([Diff YTD Actuals YTD Budget], [YTD Budget])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 1d92c91d-cb81-4eac-b681-59c9c2ac0322
+
+	measure 'Diff Actuals Forecast' = [Forecast] - [Actuals]
+		lineageTag: 627a05d1-35a1-424c-9a4a-135d39ef3aef
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Diff Actuals Forecast' = DIVIDE([Diff Actuals Forecast], [Forecast])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 31b8c35f-37b3-4d9f-9bee-bcdca890cb6d
+
+	measure 'Diff MTD Actuals MTD Forecast' = [MTD Forecast] - [MTD Actuals]
+		lineageTag: 225cf524-c0d1-4133-a01d-d81778ee3fb6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Diff MTD Actuals MTD Forecast' = DIVIDE([Diff MTD Actuals MTD Forecast], [MTD Forecast])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 21f5791f-8f08-4836-b2a3-55ebfebcfdad
+
+	measure 'Diff YTD Actuals YTD Forecast' = [YTD Forecast] - [YTD Actuals]
+		lineageTag: f2335fda-6005-4fe3-b7b6-4fd299402b4e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Diff YTD Actuals YTD Forecast' = DIVIDE([Diff YTD Actuals YTD Forecast], [YTD Forecast])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 34f0c7dc-1842-4907-88ea-749a8fc1fe07
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 2654691b-ae64-4794-9451-bb25eebf3929
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '03. Other Figures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = f81c24abe6414cb98f525c76df9b5486
+

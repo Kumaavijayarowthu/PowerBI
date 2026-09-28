@@ -1,0 +1,129 @@
+table 'QUOTE LI'
+	isHidden
+	lineageTag: a0b54e16-206d-4439-a3ad-38e17a244c28
+
+	column 'Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: 86218ab3-06c6-4614-85b6-eaf8fbaaa75f
+		summarizeBy: none
+		sourceColumn: Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Material Number'
+		dataType: string
+		isHidden
+		lineageTag: 8672558a-e0ed-44b4-a06f-e44870ab9a40
+		summarizeBy: none
+		sourceColumn: Material Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Account ID'
+		dataType: string
+		isHidden
+		lineageTag: 8f5a56c0-3f89-4d11-939e-325a54ae4ab2
+		summarizeBy: none
+		sourceColumn: Ship To Account ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profit Center'
+		dataType: string
+		isHidden
+		lineageTag: d46f01bd-7d0e-47ad-be02-4fa5fcc1c24a
+		summarizeBy: none
+		sourceColumn: Profit Center
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Performance_COGS_DKK
+		dataType: double
+		isHidden
+		lineageTag: 04db4582-dd6a-48a1-8b9f-1acddbc7a995
+		summarizeBy: sum
+		sourceColumn: Performance_COGS_DKK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: double
+		isHidden
+		lineageTag: c51a8ae6-ed2e-493e-9013-9376a859fd6e
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Base UOM'
+		dataType: string
+		isHidden
+		lineageTag: d4521182-c6ef-4938-a341-05168f285fc9
+		summarizeBy: none
+		sourceColumn: Base UOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quote ID'
+		dataType: string
+		isHidden
+		lineageTag: 43ef7330-be38-4878-a8ec-ad0cf9162b2b
+		summarizeBy: none
+		sourceColumn: Quote ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalPrice_DKK
+		dataType: double
+		isHidden
+		lineageTag: 8d377cc7-d7fe-4eac-8cac-e5d8395e7983
+		summarizeBy: sum
+		sourceColumn: TotalPrice_DKK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'QUOTE LI' = m
+		mode: import
+		queryGroup: Salesforce
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_SFDC_QuoteLineItem_F_V_View = INS_Schema{[Name="Z_INS_SFDC_QuoteLineItem_F_V",Kind="View"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(Z_INS_SFDC_QuoteLineItem_F_V_View,{"Quantity_Measure_UOM__c", "QuoteId", "TotalPrice_DKK", "OpportunityId", "Profit_Center", "SAP_Material_ID_18", "Ship_to__c", "Quantity_BaseUoM", "Performance_COGS_DKK"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"OpportunityId", "Opportunity ID"}, {"Profit_Center", "Profit Center"}, {"Quantity_BaseUoM", "Quantity"}, {"Quantity_Measure_UOM__c", "Base UOM"}, {"QuoteId", "Quote ID"}, {"SAP_Material_ID_18", "Material Number"}, {"Ship_to__c", "Ship To Account ID"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"Quote ID", "Opportunity ID", "Ship To Account ID", "Profit Center", "Material Number", "Base UOM", "Quantity", "TotalPrice_DKK", "Performance_COGS_DKK"})
+				in
+				    #"Reordered Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

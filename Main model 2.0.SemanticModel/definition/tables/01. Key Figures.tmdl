@@ -1,0 +1,163 @@
+table '01. Key Figures'
+	lineageTag: b3f89a5a-88d9-400b-8ea1-2272448fac70
+
+	measure 'Oper. Profit.' = CALCULATE([Actuals],'GL_ACCOUNTS'[Operating Profit] = TRUE())
+		formatString: #,0
+		lineageTag: 2f87c8e7-2d8d-4d11-b11d-7b68d9360cd3
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Profit' = CALCULATE([Actuals],'GL_ACCOUNTS'[LEVEL2] = "0101000" ||'GL_ACCOUNTS'[LEVEL2] = "0102000"||'GL_ACCOUNTS'[LEVEL2] = "0203000"||'GL_ACCOUNTS'[LEVEL2] = "0204000")
+		formatString: #,0
+		lineageTag: bfc5657c-4fdb-45c6-b37c-7d8885543d39
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Actuals = DIVIDE([Selected Value COGS],[Rounding Value])+[Allocations]
+		formatString: #,0
+		lineageTag: 966a612e-50e8-4d3a-9aeb-d562ac7cb479
+
+	measure 'Gross Margin' =
+			
+			IF(
+			    OR(
+			        DIVIDE([Gross Profit],[Revenue])<-10,
+			        DIVIDE([Gross Profit],[Revenue])>10),
+			    "n/a", // If GM too big or small then n/a
+			    DIVIDE([Gross Profit],[Revenue]))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 661171a9-8788-40c2-bfbe-16eb14bb6e47
+
+	measure Budget = CALCULATE(DIVIDE(SUM('BUDGET_FORECAST'[Value]),[Rounding Value]),'BUDGET_FORECAST'[Version] = "BUDGET")
+		formatString: #,0
+		lineageTag: 1139f96c-3ea5-4df7-b30e-13c3bd329686
+
+	measure Forecast = ```
+			
+			VAR SelectedMetric = SELECTEDVALUE('Z. Forecast Selector'[Forecast Version])
+			RETURN
+			    SWITCH(
+			        SelectedMetric,
+			        "Forecast 1", CALCULATE(DIVIDE(SUM('BUDGET_FORECAST'[Value]),[Rounding Value]),'BUDGET_FORECAST'[Version] = "FORECAST_1"),
+			        "Forecast 2", CALCULATE(DIVIDE(SUM('BUDGET_FORECAST'[Value]),[Rounding Value]),'BUDGET_FORECAST'[Version] = "FORECAST_2"), 
+			        CALCULATE(DIVIDE(SUM('BUDGET_FORECAST'[Value]),[Rounding Value]),'BUDGET_FORECAST'[Version] = "FORECAST_2") // Defaults to FC2
+			        )
+			```
+		formatString: #,0
+		lineageTag: c86badf1-a0cc-4e7b-ac03-61b4b8d1a0ec
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Operating Margin' = DIVIDE([Oper. Profit.],[Revenue])
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 97f0b712-8ac9-43be-beec-0a56c45bac1a
+
+	measure 'Operating Margin LY' = CALCULATE([Operating Margin],SAMEPERIODLASTYEAR('00. DateTable'[Date]))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 1d67c2e0-d803-455d-9a1a-69a167eabb39
+
+	measure '% YoY Oper. Profit' = DIVIDE([Oper. Profit.]-[Oper. Profit. LY] ,[Oper. Profit. LY])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 363ae44f-7de4-482d-bc27-a51d3ce399e8
+
+	measure 'Oper. Profit B. Special Items' = CALCULATE([Actuals],'GL_ACCOUNTS'[LEVEL1] = "01010"||'GL_ACCOUNTS'[LEVEL1] = "04010" ,'GL_ACCOUNTS'[LEVEL2] <> "0201030" )
+		formatString: #,0
+		lineageTag: 70ba6ea8-6261-49be-9dc5-7ef8c5e8add6
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Revenue = CALCULATE([Actuals],'GL_ACCOUNTS'[LEVEL2] = "0101000")
+		formatString: #,0
+		lineageTag: 3d76b146-aa4f-4bcb-87d6-f0ddb5a5fb53
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Allocations = -DIVIDE((SUM('SF_TIMESHEET'[Total_Cost])*[Allocations Value]),[Rounding Value])
+		formatString: #,0
+		lineageTag: e9164cd5-1c29-4e9d-af7c-aac99ba26b21
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Oper. Profit. LY' = CALCULATE([Oper. Profit.],SAMEPERIODLASTYEAR('00. DateTable'[Date]))
+		lineageTag: 4ea5541b-e57d-42ca-b9b5-6b1afcb3d211
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue Budget' = CALCULATE([Budget],'GL_ACCOUNTS'[LEVEL2] = "0101000"||'GL_ACCOUNTS'[LEVEL2] = "0102000")
+		formatString: #,0
+		lineageTag: 298088f3-9bf2-4f6a-b7bf-98251e3ad83d
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Revenue Forecast' = CALCULATE([Forecast],'GL_ACCOUNTS'[LEVEL2] = "0101000"||'GL_ACCOUNTS'[LEVEL2] = "0102000")
+		formatString: #,0
+		lineageTag: 6bebff5b-0315-4d4c-9217-0e37410fc23d
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Profit LY' = CALCULATE([Gross Profit],SAMEPERIODLASTYEAR('00. DateTable'[Date]))
+		formatString: #,0
+		lineageTag: 3370c712-7441-4079-852e-5793c137a42c
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Margin LY' = CALCULATE([Gross Margin],SAMEPERIODLASTYEAR('00. DateTable'[Date]))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: a34f592c-a557-4d0a-912b-b95ab31c3a95
+
+	measure 'Revenue LY' = CALCULATE([Revenue],SAMEPERIODLASTYEAR('00. DateTable'[Date]))
+		formatString: #,0
+		lineageTag: e2d6013e-3f90-466c-85a2-4702280909e8
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Profit Budget' = CALCULATE([Budget],'GL_ACCOUNTS'[LEVEL2] = "0101000" ||'GL_ACCOUNTS'[LEVEL2] = "0102000"||'GL_ACCOUNTS'[LEVEL2] = "0203000"||'GL_ACCOUNTS'[LEVEL2] = "0204000")
+		formatString: #,0
+		lineageTag: 92aa902c-966d-44d4-8ac7-32641514c193
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Margin Budget' =
+			
+			IF(
+			    OR(
+			        DIVIDE([Gross Profit Budget],[Revenue Budget])<-10,
+			        DIVIDE([Gross Profit Budget],[Revenue Budget])>10),
+			    "n/a", // If GM too big or small then n/a
+			    DIVIDE([Gross Profit Budget],[Revenue Budget]))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 7b8d9745-74b7-4ddd-8a93-fa1efb039d84
+
+	measure 'Gross Profit Forecast' = CALCULATE([Forecast],'GL_ACCOUNTS'[LEVEL2] = "0101000" ||'GL_ACCOUNTS'[LEVEL2] = "0102000"||'GL_ACCOUNTS'[LEVEL2] = "0203000"||'GL_ACCOUNTS'[LEVEL2] = "0204000")
+		formatString: #,0
+		lineageTag: 9868b7cb-10d2-4ac1-9a3f-9a3ffc0149e1
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Gross Margin Forecast' =
+			
+			IF(
+			    OR(
+			        DIVIDE([Gross Profit Forecast],[Revenue Forecast])<-10,
+			        DIVIDE([Gross Profit Forecast],[Revenue Forecast])>10),
+			    "n/a", // If GM too big or small then n/a
+			    DIVIDE([Gross Profit Forecast],[Revenue Forecast]))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 4ff9926a-e0a1-4df2-a84a-c5e8e081368e
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 0783379a-96f4-4531-85a8-8745a1918546
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '01. Key Figures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 0ced7249726244d3ace413595f3faacb
+

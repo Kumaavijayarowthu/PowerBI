@@ -1,0 +1,149 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "fe47a4f73320b2c99a00",
+  "position": {
+    "x": 229.25786390265884,
+    "y": 118.78215412347905,
+    "z": 3000,
+    "height": 274.94330779630462,
+    "width": 1006.7410545290671,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OPPORTUNITIES_QUOTES"
+                    }
+                  },
+                  "Property": "Opportunity ID"
+                }
+              },
+              "queryRef": "OPPORTUNITIES_QUOTES.Opportunity ID",
+              "nativeQueryRef": "Opportunity ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OPPORTUNITIES_QUOTES"
+                    }
+                  },
+                  "Property": "Quote ID"
+                }
+              },
+              "queryRef": "OPPORTUNITIES_QUOTES.Quote ID",
+              "nativeQueryRef": "Quote ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OPPORTUNITIES_QUOTES"
+                    }
+                  },
+                  "Property": "Expected Delivery Date"
+                }
+              },
+              "queryRef": "OPPORTUNITIES_QUOTES.Expected Delivery Date",
+              "nativeQueryRef": "Expected Delivery Date"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "OPPORTUNITIES_QUOTES"
+                        }
+                      },
+                      "Property": "Amount_DKK"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(OPPORTUNITIES_QUOTES.Amount_DKK)",
+              "nativeQueryRef": "Sum of Amount_DKK"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "02. SFDC Key Figures"
+                    }
+                  },
+                  "Property": "Opp & Quotes"
+                }
+              },
+              "queryRef": "02. SFDC Key Figures.Opp & Quotes",
+              "nativeQueryRef": "Opp & Quotes"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "OPPORTUNITIES_QUOTES"
+                        }
+                      },
+                      "Property": "COGS_DKK"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(OPPORTUNITIES_QUOTES.COGS_DKK)",
+              "nativeQueryRef": "Sum of COGS_DKK"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "02. SFDC Key Figures"
+                    }
+                  },
+                  "Property": "Opp & Quotes COGS"
+                }
+              },
+              "queryRef": "02. SFDC Key Figures.Opp & Quotes COGS",
+              "nativeQueryRef": "Opp & Quotes COGS"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "OPPORTUNITIES_QUOTES"
+                  }
+                },
+                "Property": "Expected Delivery Date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

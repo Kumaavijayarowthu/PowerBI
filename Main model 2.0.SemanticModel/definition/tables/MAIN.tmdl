@@ -1,0 +1,251 @@
+table MAIN
+	lineageTag: 463d3ab8-4655-46a6-90d7-6d58cfd05fbe
+
+	column 'Account Number'
+		dataType: string
+		lineageTag: e2682cec-f09e-4e1c-89ca-de2906af141b
+		summarizeBy: none
+		sourceColumn: Account Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Number'
+		dataType: string
+		lineageTag: 62a3fb12-6dbb-4102-867a-661923e3246f
+		summarizeBy: none
+		sourceColumn: Customer Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profit Center'
+		dataType: string
+		lineageTag: 6bd517de-2677-4546-a6e2-effc14f40505
+		summarizeBy: none
+		sourceColumn: Profit Center
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profit Center (Cost Center)'
+		dataType: string
+		isHidden
+		lineageTag: f5f8b35b-b175-48e5-9875-26406dac98f6
+		summarizeBy: none
+		sourceColumn: Profit Center (Cost Center)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost Center'
+		dataType: string
+		isHidden
+		lineageTag: 667121c3-a2cb-488b-acba-72ac7056d1ac
+		summarizeBy: none
+		sourceColumn: Cost Center
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Posting Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a48c5b6f-77ae-4dc6-a855-5787b63aac63
+		summarizeBy: none
+		sourceColumn: Posting Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Performance_COGS_GC
+		dataType: double
+		lineageTag: cfa02536-de53-44af-9a90-b7241410ca77
+		summarizeBy: sum
+		sourceColumn: Performance_COGS_GC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Amount in Global Currency'
+		dataType: double
+		lineageTag: 50e1cd28-588b-4ea1-9436-142910a53475
+		summarizeBy: sum
+		sourceColumn: Amount in Global Currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'G/L Account Number'
+		dataType: string
+		lineageTag: dbc72461-868e-4d0c-913a-633c073c4cc2
+		summarizeBy: none
+		sourceColumn: G/L Account Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column '_Perf. COGS'
+		dataType: double
+		lineageTag: 89687c9e-a65f-4ea4-8450-8eeef5383b79
+		summarizeBy: sum
+		sourceColumn: _Perf. COGS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DKKx
+		dataType: double
+		lineageTag: f25091d7-5d12-4c6c-8302-a825263ca11d
+		summarizeBy: sum
+		sourceColumn: DKKx
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Group
+		dataType: string
+		lineageTag: 65becb46-889d-450f-add5-adb8443f3852
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Network WBS'
+		dataType: string
+		lineageTag: 1485dc3d-4856-4e2c-b916-e829c78a936b
+		summarizeBy: none
+		sourceColumn: Network WBS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Company key'
+		dataType: string
+		isHidden
+		lineageTag: 5c846dc6-a754-4816-bb3b-986fade8b59a
+		summarizeBy: none
+		sourceColumn: Company key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Material Number'
+		dataType: string
+		lineageTag: c338f09a-c721-4177-b3f7-602a1c79d063
+		summarizeBy: none
+		sourceColumn: Material Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Base Unit'
+		dataType: string
+		lineageTag: 0276b08e-89ef-4981-90a4-fb05815ea227
+		summarizeBy: none
+		sourceColumn: Base Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: double
+		lineageTag: 44982fe9-62d2-43ef-a0de-f13fd183b308
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Quantity Converted'
+		dataType: double
+		lineageTag: f51f81d5-d4a8-48db-9ab4-2c14a21e1b81
+		summarizeBy: sum
+		sourceColumn: Quantity Converted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Trading Partner'
+		dataType: string
+		lineageTag: 54b9fded-7623-448a-a693-d0e7764dc2db
+		summarizeBy: none
+		sourceColumn: Trading Partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Document Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 25a2db74-b2df-479d-b887-d5cee4abcbaa
+		summarizeBy: none
+		sourceColumn: Document Date
+
+		variation Variation
+			isDefault
+			relationship: a42ca4bb-e762-4a18-822b-91a3f218f3cc
+			defaultHierarchy: LocalDateTable_6cb174d1-49dc-4b35-9208-def2cfb43d72.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ledger
+		dataType: string
+		lineageTag: 465b955c-22a0-477d-8338-798d704d48aa
+		summarizeBy: none
+		sourceColumn: Ledger
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Document Number'
+		dataType: string
+		lineageTag: 219e25ba-f81d-48bd-add8-9f129ac40c60
+		summarizeBy: none
+		sourceColumn: Document Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Customer Number'
+		dataType: string
+		lineageTag: 2238efaf-d9ee-4a31-a4f9-d31efdd053ac
+		summarizeBy: none
+		sourceColumn: Ship To Customer Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column GJAHR
+		dataType: string
+		lineageTag: 63c27b54-af36-49d7-bad2-7f18d67159de
+		summarizeBy: none
+		sourceColumn: GJAHR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MAIN = m
+		mode: import
+		queryGroup: Datasphere
+		source = ```
+				let
+				    Source = Odbc.Query(dsn, "SELECT SAKNR, RACCT, KUNNR_CUST, KUNWE, PRCTR, PRCTR_CC, RCNTR, BUDAT, NETWORK_WBS, SUM(""Performance_COGS_GC"") AS ""Performance_COGS_GC"", SUM(KSL) AS KSL, LEVEL2_PC, RBUKRS, RCOMP, MATNR, RUNIT, SUM(MSL) AS MSL, SUM(""Quantity_Converted"") AS ""Quantity_Converted"", NAME1, BLDAT, RLDNR, BELNR, GJAHR#(lf)FROM INS.Z_INS_ACDOCA_MAIN_PERSIST #(lf)WHERE LEVEL2_TEXT NOT IN ('ASSETS', 'LIABILITIES') AND (GJAHR >= YEAR(CURRENT_DATE)-2) GROUP BY 
+				     SAKNR, RACCT, KUNNR_CUST, KUNWE, PRCTR, PRCTR_CC, RCNTR, BUDAT, NETWORK_WBS, LEVEL2_PC, RBUKRS, RCOMP, MATNR, RUNIT, NAME1, BLDAT, RLDNR, BELNR, GJAHR"),
+				    #"Added _Perf.COGS" = Table.AddColumn(Source, "_Perf. COGS", each if Text.Contains([RACCT], "13010001") then [Performance_COGS_GC] else if Text.Contains([RACCT], "13010002") then [Performance_COGS_GC] else if Text.Contains([RACCT], "17010001") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000001") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000004") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000005") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000006") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000007") then [Performance_COGS_GC] else if Text.Contains([RACCT], "23000008") then [Performance_COGS_GC] else [KSL]),
+				    #"Added DKKx" = Table.AddColumn(#"Added _Perf.COGS", "DKKx", each if [LEVEL2_PC] = "0400040" then [_Perf. COGS] else [KSL]),
+				    #"Added Group" = Table.AddColumn(#"Added DKKx", "Group", each if [RBUKRS] = "0500" then "No" else if [RBUKRS] = "0501" then "No" else if [RBUKRS] = "0560" then "No" else if [RBUKRS] = "9005" then "No" else if [RBUKRS] = "9006" then "No" else "Yes"),
+				    #"Replaced null company" = Table.ReplaceValue(#"Added Group",null,"",Replacer.ReplaceValue,{"RCOMP"}),
+				    #"Added company key" = Table.AddColumn(#"Replaced null company", "Company key", each [RBUKRS] & [RCOMP]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added company key",{{"BUDAT", type date}, {"_Perf. COGS", type number}, {"DKKx", type number}, {"Group", type text}, {"Company key", type text}, {"RBUKRS", Int64.Type}, {"BLDAT", type date}}),
+				    #"Filtered company code" = Table.SelectRows(#"Changed Type", each [RBUKRS] >= 1000 and [RBUKRS] <> 9005 and [RBUKRS] <> 9006),
+				    #"Renamed Columns" = Table.RenameColumns(#"Filtered company code",{{"NETWORK_WBS", "Network WBS"}, {"SAKNR", "G/L Account Number"}, {"PRCTR_CC", "Profit Center (Cost Center)"}, {"PRCTR", "Profit Center"}, {"BUDAT", "Posting Date"}, {"RACCT", "Account Number"}, {"KSL", "Amount in Global Currency"}, {"KUNNR_CUST", "Customer Number"}, {"RCNTR", "Cost Center"}, {"KUNWE", "Ship To Customer Number"}, {"MATNR", "Material Number"}, {"RUNIT", "Base Unit"}, {"MSL", "Quantity"}, {"Quantity_Converted", "Quantity Converted"}, {"NAME1", "Trading Partner"}, {"BLDAT", "Document Date"}, {"RLDNR", "Ledger"}, {"BELNR", "Document Number"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"LEVEL2_PC", "RCOMP", "RBUKRS"})
+				in
+				    #"Removed Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

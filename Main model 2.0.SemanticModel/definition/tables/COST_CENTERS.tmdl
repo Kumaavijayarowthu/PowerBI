@@ -1,0 +1,165 @@
+table COST_CENTERS
+	lineageTag: 08b18566-68f9-444f-a885-58fde99852c6
+
+	column 'Cost Center'
+		dataType: string
+		lineageTag: 91d41c5d-9a77-44fa-90d1-f47dcf1ed6de
+		summarizeBy: none
+		sourceColumn: Cost Center
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profit Center'
+		dataType: string
+		lineageTag: c7d5a43c-c352-475f-8412-229aba31290b
+		summarizeBy: none
+		sourceColumn: Profit Center
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL0_TEXT
+		dataType: string
+		lineageTag: d52a7b6d-9556-47b4-bd55-d80add6ad58f
+		summarizeBy: none
+		sourceColumn: LEVEL0_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL1_TEXT
+		dataType: string
+		lineageTag: fdcaf354-72f9-49be-bdcb-29152820e9a6
+		summarizeBy: none
+		sourceColumn: LEVEL1_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL2_TEXT
+		dataType: string
+		lineageTag: 5472bbcf-6b92-4b62-b06c-d0399a1ab315
+		summarizeBy: none
+		sourceColumn: LEVEL2_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL3_TEXT
+		dataType: string
+		lineageTag: e40ad7e6-2c0e-4d47-b093-705be1ce84f6
+		summarizeBy: none
+		sourceColumn: LEVEL3_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL4_TEXT
+		dataType: string
+		lineageTag: 5d1b1a11-c0e8-4f86-a2a6-9c115c8e0b62
+		summarizeBy: none
+		sourceColumn: LEVEL4_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL5_TEXT
+		dataType: string
+		lineageTag: 8ce91342-bdea-41b8-9302-97b39154ae43
+		summarizeBy: none
+		sourceColumn: LEVEL5_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL6_TEXT
+		dataType: string
+		lineageTag: 4daf61f2-172e-4d48-9c67-aa23e316643b
+		summarizeBy: none
+		sourceColumn: LEVEL6_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL7_TEXT
+		dataType: string
+		lineageTag: 823b2623-401e-4e7e-bc70-6ae5041ab0fd
+		summarizeBy: none
+		sourceColumn: LEVEL7_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL8_TEXT
+		dataType: string
+		lineageTag: 6ec4f5dc-a9ab-4ec0-8ddb-3455bad2ae67
+		summarizeBy: none
+		sourceColumn: LEVEL8_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost Center Name'
+		dataType: string
+		lineageTag: 8f82f5b7-02ac-4b22-9d6b-2792f1f6e069
+		summarizeBy: none
+		sourceColumn: Cost Center Name
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Cost Center Hierarchy'
+		lineageTag: 6a325f98-5041-4a6c-8989-ab4dd0f71cce
+
+		level LEVEL0_TEXT
+			lineageTag: 4e0e77be-5f7e-4b17-9424-7d7f84c9a9c9
+			column: LEVEL0_TEXT
+
+		level LEVEL1_TEXT
+			lineageTag: e6aaf64d-ff85-45a2-aeb1-39c728e3b587
+			column: LEVEL1_TEXT
+
+		level LEVEL2_TEXT
+			lineageTag: e54d938a-ae4b-42ae-8b12-ce8abf9eb3ea
+			column: LEVEL2_TEXT
+
+		level LEVEL3_TEXT
+			lineageTag: 3d40e447-732c-4010-9b8f-90f0d1590771
+			column: LEVEL3_TEXT
+
+		level LEVEL4_TEXT
+			lineageTag: ccdd5ec6-6374-4c4b-be1c-d5909e99dc89
+			column: LEVEL4_TEXT
+
+		level LEVEL5_TEXT
+			lineageTag: 69b5fd05-4428-4fa0-8045-394fb5542cc7
+			column: LEVEL5_TEXT
+
+		level LEVEL6_TEXT
+			lineageTag: d4b385db-aa72-440e-95a4-36febf4bfab0
+			column: LEVEL6_TEXT
+
+		level LEVEL7_TEXT
+			lineageTag: be41e60c-f637-4a59-8a24-06119d42feac
+			column: LEVEL7_TEXT
+
+		level LEVEL8_TEXT
+			lineageTag: a9f9d456-d9a1-4088-b40d-935c4b5cd164
+			column: LEVEL8_TEXT
+
+	partition COST_CENTERS = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_CSKS_V_D_View = INS_Schema{[Name="Z_INS_CSKS_V_D",Kind="View"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Z_INS_CSKS_V_D_View,{{"DATBI", type date}, {"DATAB", type date}}),
+				    // Remove future changes
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [DATAB] < DateTime.Date(DateTime.LocalNow())),
+				    // Order table and force it to keep sorting
+				    #"Sorted Rows" = Table.Buffer(Table.Sort(#"Filtered Rows",{{"KOSTL", Order.Ascending}, {"DATBI", Order.Descending}})),
+				    // Keep the latest available row for each cost center
+				    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows", {"KOSTL"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Duplicates",{{"KOSTL", "Cost Center"}, {"PRCTR", "Profit Center"}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns",{"Cost Center", "Profit Center"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Other Columns", {"Cost Center"}, Z_INS_HIER_KOSTL_V_H, {"KOSTL"}, "Z_INS_HIER_KOSTL_V_H", JoinKind.LeftOuter),
+				    #"Expanded Z_INS_HIER_KOSTL_V_H" = Table.ExpandTableColumn(#"Merged Queries", "Z_INS_HIER_KOSTL_V_H", {"MCTXT", "LEVEL0_TEXT", "LEVEL1_TEXT", "LEVEL2_TEXT", "LEVEL3_TEXT", "LEVEL4_TEXT", "LEVEL5_TEXT", "LEVEL6_TEXT", "LEVEL7_TEXT", "LEVEL8_TEXT"}, {"Cost Center Name", "LEVEL0_TEXT", "LEVEL1_TEXT", "LEVEL2_TEXT", "LEVEL3_TEXT", "LEVEL4_TEXT", "LEVEL5_TEXT", "LEVEL6_TEXT", "LEVEL7_TEXT", "LEVEL8_TEXT"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Expanded Z_INS_HIER_KOSTL_V_H","",null,Replacer.ReplaceValue,{"Cost Center", "Profit Center", "Cost Center Name", "LEVEL0_TEXT", "LEVEL1_TEXT", "LEVEL2_TEXT", "LEVEL3_TEXT", "LEVEL4_TEXT", "LEVEL5_TEXT", "LEVEL6_TEXT", "LEVEL7_TEXT", "LEVEL8_TEXT"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

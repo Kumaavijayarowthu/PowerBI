@@ -1,0 +1,222 @@
+table GL_ACCOUNTS
+	lineageTag: cdaf5862-ab72-4a4f-b44c-c671ef483f2b
+
+	column 'G/L Account Number'
+		dataType: string
+		lineageTag: 0dd0c945-b84d-411d-b867-ee6a434f0030
+		summarizeBy: none
+		sourceColumn: G/L Account Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TXT50
+		dataType: string
+		lineageTag: fe7cb382-016d-4afc-b08d-3a8e284a0edd
+		summarizeBy: none
+		sourceColumn: TXT50
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL1_TEXT
+		dataType: string
+		lineageTag: bcbdf47e-4985-4966-8dfb-cb85fa82eee7
+		summarizeBy: none
+		sourceColumn: LEVEL1_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'G/L LEVEL2_TEXT'
+		dataType: string
+		lineageTag: 9429e2bc-0db5-4719-94e7-a145e010faa7
+		summarizeBy: none
+		sourceColumn: G/L LEVEL2_TEXT
+		sortByColumn: Index
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL3_TEXT
+		dataType: string
+		lineageTag: fb708f75-cd45-40bd-9ac3-2279b9d2bb83
+		summarizeBy: none
+		sourceColumn: LEVEL3_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL4_TEXT
+		dataType: string
+		lineageTag: 60649550-68de-4a14-b41f-8ff18af32a31
+		summarizeBy: none
+		sourceColumn: LEVEL4_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL5_TEXT
+		dataType: string
+		lineageTag: 3c10ce09-0673-4f16-88d3-67e62ab6c051
+		summarizeBy: none
+		sourceColumn: LEVEL5_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL6_TEXT
+		dataType: string
+		lineageTag: 3efe6778-8d3d-4218-9a6a-7c5501043a9e
+		summarizeBy: none
+		sourceColumn: LEVEL6_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL7_TEXT
+		dataType: string
+		lineageTag: 05918652-4243-4f38-946a-22506a3e696d
+		summarizeBy: none
+		sourceColumn: LEVEL7_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL0_TEXT
+		dataType: string
+		lineageTag: df72b47a-a371-45f7-be4c-0454dcf4fcfb
+		summarizeBy: none
+		sourceColumn: LEVEL0_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column G/L
+		dataType: string
+		lineageTag: b8a056ff-10fd-4e36-80d5-c0eb3f81a55f
+		summarizeBy: none
+		sourceColumn: G/L
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Operating Profit'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: be5aabf5-79fd-4934-87d0-8bfcf291ca7b
+		summarizeBy: none
+		sourceColumn: Operating Profit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL2
+		dataType: string
+		lineageTag: bb732c7b-20b9-4f64-8c21-6fc70a2403d4
+		summarizeBy: none
+		sourceColumn: LEVEL2
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL1
+		dataType: string
+		lineageTag: 19cb1ec9-29f9-447d-8523-e100644f2483
+		summarizeBy: none
+		sourceColumn: LEVEL1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 1833f8b3-387f-4af2-826e-de057e26c983
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chart of Accounts'
+		dataType: string
+		lineageTag: 382f9187-286d-46aa-9650-0e00ce034ffd
+		summarizeBy: none
+		sourceColumn: Chart of Accounts
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'GL Hierarchy'
+		lineageTag: 5b275376-5f15-4e58-ba11-8ad1bce614e6
+
+		level LEVEL0_TEXT
+			lineageTag: 1ddfe140-9fd1-481b-ae7b-977d0ca84bb2
+			column: LEVEL0_TEXT
+
+		level LEVEL1_TEXT
+			lineageTag: dbda13b5-dfe3-4e7e-9f90-378fa3858b5c
+			column: LEVEL1_TEXT
+
+		level 'G/L Account Number'
+			lineageTag: 9dd91040-6d10-42e4-906c-cbc9d3a262b1
+			column: 'G/L Account Number'
+
+		level 'G/L LEVEL2_TEXT'
+			lineageTag: 806917e9-3fe9-4e94-9234-f84fdc1e5a18
+			column: 'G/L LEVEL2_TEXT'
+
+		level LEVEL3_TEXT
+			lineageTag: fa4b0359-3187-4929-bbce-97600cc91a07
+			column: LEVEL3_TEXT
+
+		level LEVEL4_TEXT
+			lineageTag: 57fd9139-a883-4265-82e3-4b771dfed28e
+			column: LEVEL4_TEXT
+
+		level LEVEL5_TEXT
+			lineageTag: ca5dc1a4-32bf-412f-8893-9927336e293a
+			column: LEVEL5_TEXT
+
+		level LEVEL6_TEXT
+			lineageTag: 8ed8b220-aca3-4bae-94aa-9166ed3bcb2e
+			column: LEVEL6_TEXT
+
+	partition GL_ACCOUNTS = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_HIER_GL_ACCNT_V_H_View = INS_Schema{[Name="Z_INS_HIER_GL_ACCNT_V_H",Kind="View"]}[Data],
+				    #"Sorted Rows" = Table.Sort(Z_INS_HIER_GL_ACCNT_V_H_View,{{"SAKNR", Order.Ascending}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Sorted Rows",{"KTOPL", "SAKNR", "TXT50", "LEVEL1", "LEVEL1_TEXT", "LEVEL2", "LEVEL2_TEXT", "LEVEL3_TEXT", "LEVEL4_TEXT", "LEVEL5_TEXT", "LEVEL6_TEXT", "LEVEL7_TEXT", "LEVEL0_TEXT"}),
+				    #"Added G/L" = Table.AddColumn(#"Removed Other Columns", "G/L", each [SAKNR]&" - "&[TXT50]),
+				    #"Added Operating Profit" = Table.AddColumn(#"Added G/L", "Operating Profit", each if [LEVEL2] = "0101000" then true else if [LEVEL2] = "0102000" then true else if [LEVEL2] = "0201030" then true else if [LEVEL2] = "0203000" then true else if [LEVEL2] = "0204000" then true else if [LEVEL2] = "0205000" then true else if [LEVEL2] = "0206000" then true else if [LEVEL2] = "0207000" then true else if [LEVEL2] = "0208000" then true else if [LEVEL2] = "0209000" then true else if [LEVEL2] = "0209100" then true else if [LEVEL2] = "093" then true else false),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Operating Profit",{{"LEVEL2_TEXT", "G/L LEVEL2_TEXT"}, {"SAKNR", "G/L Account Number"}, {"KTOPL", "Chart of Accounts"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"G/L", type text}, {"Operating Profit", type logical}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"G/L Account Number"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Duplicates", {"G/L LEVEL2_TEXT"}, #"GL_ACCOUNTS Sorting", {"LEVEL2_TEXT"}, "GL_ACCOUNTS Sorting", JoinKind.LeftOuter),
+				    #"Expanded GL_ACCOUNTS Sorting" = Table.ExpandTableColumn(#"Merged Queries", "GL_ACCOUNTS Sorting", {"Index"}, {"Index"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Expanded GL_ACCOUNTS Sorting","",null,Replacer.ReplaceValue,{"Chart of Accounts", "G/L Account Number", "TXT50", "LEVEL1", "LEVEL1_TEXT", "LEVEL2", "G/L LEVEL2_TEXT", "LEVEL3_TEXT", "LEVEL4_TEXT", "LEVEL5_TEXT", "LEVEL6_TEXT", "LEVEL7_TEXT", "LEVEL0_TEXT", "G/L"})
+				in
+				    #"Replaced Value"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,51 @@
+table 'Z. Product Hierarchy'
+	lineageTag: c45bd712-4b03-4195-b812-b51b25681aec
+
+	column 'Z. Product Hierarchy'
+		lineageTag: 33b20865-1f62-425b-b028-87c75b4b7902
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Z. Product Hierarchy Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Z. Product Hierarchy Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Z. Product Hierarchy Fields'
+		isHidden
+		lineageTag: 59a58227-7219-4380-b270-8290b5541947
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Z. Product Hierarchy Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Z. Product Hierarchy Order'
+		isHidden
+		formatString: 0
+		lineageTag: c3271078-cf70-4449-ada6-b856125dd417
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Product Hierarchy' = calculated
+		mode: import
+		source =
+				{
+				    ("Prod. Hier. 1", NAMEOF('MATERIALS'[Prod. Hier. 1]), 0),
+				    ("Prod. Hier. 2", NAMEOF('MATERIALS'[Prod. Hier. 2]), 1),
+				    ("Prod. Hier. 3", NAMEOF('MATERIALS'[Prod. Hier. 3]), 2),
+				    ("Prod. Hier. 4", NAMEOF('MATERIALS'[Prod. Hier. 4]), 3),
+				    ("Prod. Hier. 5", NAMEOF('MATERIALS'[Prod. Hier. 5]), 4)
+				}
+
+	annotation PBI_Id = d3af5f39c95b4eda91897226bcc6fb81
+

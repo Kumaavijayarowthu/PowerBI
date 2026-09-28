@@ -1,0 +1,329 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "61890f8ac2790e7b7d88",
+  "position": {
+    "x": 639.61979122464561,
+    "y": 118.19061359585844,
+    "z": 16000,
+    "height": 482.03230643016775,
+    "width": 502.88947353531921,
+    "tabOrder": 16000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL0_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL0_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL0_TEXT",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL1_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL1_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL1_TEXT",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL2_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL2_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL2_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL3_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL3_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL3_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL4_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL4_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL4_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL5_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL5_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL5_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL6_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL6_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL6_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL7_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL7_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL7_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "COST_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Cost Center Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL8_TEXT"
+                }
+              },
+              "queryRef": "COST_CENTERS.Cost Center Hierarchy.LEVEL8_TEXT",
+              "nativeQueryRef": "Cost Center Hierarchy LEVEL8_TEXT",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "01. Key Figures"
+                    }
+                  },
+                  "Property": "Actuals"
+                }
+              },
+              "queryRef": "01. Key Figures.Actuals",
+              "nativeQueryRef": "Actuals"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL0_TEXT"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "COST_CENTERS"
+                    }
+                  },
+                  "Property": "LEVEL0_TEXT"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL1_TEXT"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "COST_CENTERS"
+                    }
+                  },
+                  "Property": "LEVEL1_TEXT"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL2_TEXT"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL3_TEXT"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL4_TEXT"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL5_TEXT"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL6_TEXT"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL7_TEXT"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "COST_CENTERS.Cost Center Hierarchy.LEVEL8_TEXT"
+            ],
+            "isCollapsed": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'HT GROUP COST CENTER STRUCTURE'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "drillFilterOtherVisuals": true
+  }
+}

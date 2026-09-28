@@ -1,0 +1,368 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "58f93ec008d213553178",
+  "position": {
+    "x": 374.59076381490576,
+    "y": 118.460327018389,
+    "z": 13000,
+    "height": 480.24456899346893,
+    "width": 616.84746861827784,
+    "tabOrder": 13000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "00. DateTable"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "00. DateTable.Date.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Date Year",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "GL_ACCOUNTS"
+                        }
+                      },
+                      "Hierarchy": "GL Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL0_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.GL Hierarchy.LEVEL0_TEXT",
+              "nativeQueryRef": "GL Hierarchy LEVEL0_TEXT",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "GL_ACCOUNTS"
+                        }
+                      },
+                      "Hierarchy": "GL Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL1_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.GL Hierarchy.LEVEL1_TEXT",
+              "nativeQueryRef": "GL Hierarchy LEVEL1_TEXT",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "GL_ACCOUNTS"
+                        }
+                      },
+                      "Hierarchy": "GL Hierarchy"
+                    }
+                  },
+                  "Level": "G/L LEVEL2_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.GL Hierarchy.G/L LEVEL2_TEXT",
+              "nativeQueryRef": "GL Hierarchy G/L LEVEL2_TEXT",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "GL_ACCOUNTS"
+                        }
+                      },
+                      "Hierarchy": "GL Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL3_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.GL Hierarchy.LEVEL3_TEXT",
+              "nativeQueryRef": "GL Hierarchy LEVEL3_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "GL_ACCOUNTS"
+                        }
+                      },
+                      "Hierarchy": "GL Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL4_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.GL Hierarchy.LEVEL4_TEXT",
+              "nativeQueryRef": "GL Hierarchy LEVEL4_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "GL_ACCOUNTS"
+                        }
+                      },
+                      "Hierarchy": "GL Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL5_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.GL Hierarchy.LEVEL5_TEXT",
+              "nativeQueryRef": "GL Hierarchy LEVEL5_TEXT",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "GL_ACCOUNTS"
+                        }
+                      },
+                      "Hierarchy": "GL Hierarchy"
+                    }
+                  },
+                  "Level": "LEVEL6_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.GL Hierarchy.LEVEL6_TEXT",
+              "nativeQueryRef": "GL Hierarchy LEVEL6_TEXT",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "05. Actuals"
+                    }
+                  },
+                  "Property": "YTD Actuals"
+                }
+              },
+              "queryRef": "05. Actuals.YTD Actuals",
+              "nativeQueryRef": "YTD Actuals"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "GL_ACCOUNTS.GL Hierarchy.LEVEL0_TEXT"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "LEVEL0_TEXT"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "GL_ACCOUNTS.GL Hierarchy.LEVEL1_TEXT"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "LEVEL1_TEXT"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "GL_ACCOUNTS.GL Hierarchy.G/L LEVEL2_TEXT"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "G/L LEVEL2_TEXT"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "GL_ACCOUNTS.GL Hierarchy.LEVEL3_TEXT"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "LEVEL3_TEXT"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "GL_ACCOUNTS.GL Hierarchy.LEVEL4_TEXT"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "GL_ACCOUNTS.GL Hierarchy.LEVEL5_TEXT"
+            ],
+            "isCollapsed": true
+          },
+          {
+            "queryRefs": [
+              "GL_ACCOUNTS.GL Hierarchy.LEVEL6_TEXT"
+            ],
+            "isCollapsed": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Global P&L 2023'"
+                  }
+                }
+              ],
+              "isToggled": true,
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Operating income/expenses'"
+                      }
+                    }
+                  ],
+                  "isToggled": true,
+                  "children": [
+                    {
+                      "identityValues": [
+                        {
+                          "Literal": {
+                            "Value": "'OPEX, Gross'"
+                          }
+                        }
+                      ],
+                      "children": [
+                        {
+                          "identityValues": [
+                            {
+                              "Literal": {
+                                "Value": "'Car expenses'"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

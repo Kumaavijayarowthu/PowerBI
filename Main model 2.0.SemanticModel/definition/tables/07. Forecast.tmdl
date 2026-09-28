@@ -1,0 +1,38 @@
+table '07. Forecast'
+	lineageTag: a11b27be-bac6-4457-b544-65a5072c7fdc
+
+	measure 'MTD Forecast' = TOTALMTD([Forecast],'00. DateTable'[Date])
+		formatString: #,0
+		lineageTag: 3a18a258-538b-4aab-be84-72c8f0210ec7
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'YTD Forecast' = TOTALYTD([Forecast],'00. DateTable'[Date])
+		formatString: 0
+		lineageTag: bbe1d986-c367-41f2-9ce9-ecda456b44ad
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'LY Forecast' = CALCULATE([Forecast],SAMEPERIODLASTYEAR('00. DateTable'[Date]))
+		lineageTag: f32c5649-6fb2-4c66-b780-5723a13d1403
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 9cf8459e-8f04-4faa-ab7e-63f31ffa5f78
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '07. Forecast' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 216911b4c9ae4d1fbe132a6e1caef901
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

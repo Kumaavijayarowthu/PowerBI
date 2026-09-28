@@ -1,0 +1,695 @@
+table ACCOUNTS_PAYABLE
+	lineageTag: 7e45d96c-e63c-4f83-910a-6e86ce0d66b0
+
+	column 'Accouting Doc. - Client'
+		dataType: string
+		lineageTag: f95ef495-06cf-47d9-baca-cfc6e1dc3ae8
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Document Number'
+		dataType: string
+		lineageTag: effb6aa5-b913-4c97-9621-6cbdafddca47
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Document Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Fiscal Year'
+		dataType: string
+		lineageTag: 7b70ced6-6b1f-400f-a7cc-558f6cc554a1
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Company Code'
+		dataType: string
+		lineageTag: f66c4733-e838-40eb-ab5e-875a3c8c6bf2
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Company Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Company Code Name'
+		dataType: string
+		lineageTag: 82e237e8-1cbd-4ba8-851c-188f18c735b4
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Company Code Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Document Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 32cbeacc-d6b7-4319-895e-fa50e8e3cbb0
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Document Date
+
+		variation Variation
+			isDefault
+			relationship: e33e86ce-f58e-4cde-96e5-a74b7b8c9bd5
+			defaultHierarchy: LocalDateTable_2ce8afa2-3b64-4f60-8335-5c31b1263223.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Accouting Doc. - Posting Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b7e1e413-d5ae-475b-967e-3e1bd04f6fcf
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Posting Date
+
+		variation Variation
+			isDefault
+			relationship: 902ec501-f034-499c-9b46-029da43a026a
+			defaultHierarchy: LocalDateTable_7e5cb3b9-933c-45fd-b971-ffe6b4e4fd97.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Accouting Doc. - Document Currency'
+		dataType: string
+		lineageTag: ed42f623-f7c7-4057-b44a-f8e147e63f40
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Document Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Account (Supplier)'
+		dataType: string
+		lineageTag: 932850d1-f4af-434f-a94c-9fd018850f12
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Account (Supplier)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Supplier Name'
+		dataType: string
+		lineageTag: 4627e075-9cf9-4299-b117-5824af849a0f
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Supplier Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Local Currency'
+		dataType: string
+		lineageTag: cb8a1c5c-22c0-4fd6-8c8b-907dc8eb9dd6
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Local Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Account Type'
+		dataType: string
+		lineageTag: 963f25c7-72bb-450f-81e4-03acdfb7a040
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Account Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Reference'
+		dataType: string
+		lineageTag: 67f343df-f0bd-45a1-afd1-6e2386931de9
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Reference Key'
+		dataType: string
+		lineageTag: 4104b1b5-237c-4ff8-acad-4721d768f452
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Reference Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Reference Procedure'
+		dataType: string
+		lineageTag: 5094814c-8b09-417c-8f9b-f3634aa81405
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Reference Procedure
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Clearing Document'
+		dataType: string
+		lineageTag: d2b41520-71de-40ab-b3e0-49d09cf6b8e3
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Clearing Document
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Document Type'
+		dataType: string
+		lineageTag: a9e04ef4-ac05-4edd-b21d-7dddef544003
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Document Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Invoice Document Number'
+		dataType: string
+		lineageTag: f85e72aa-b5cc-40ce-9a10-0d54e9594889
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Invoice Document Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Clearing Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 78e0cf77-736b-4e5a-ae96-b8e286a675a0
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Clearing Date
+
+		variation Variation
+			isDefault
+			relationship: cfd58002-c2ee-4e75-9e17-58aabb0b5b1c
+			defaultHierarchy: LocalDateTable_d0ca12cc-879f-49ee-874e-01fe2f3ff18f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Accouting Doc. - Baseline Payment Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4913a93e-97ae-4ce4-860e-eadbfb6b1ed2
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Baseline Payment Date
+
+		variation Variation
+			isDefault
+			relationship: 1f00aeaa-d21a-4e5b-a121-7ed1ae03dc3d
+			defaultHierarchy: LocalDateTable_e46b33ab-4d86-4f23-9545-1d69c13d712b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Accouting Doc. - Profit Center'
+		dataType: string
+		lineageTag: c122e19b-7939-43b1-bc39-de25ae1321b3
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Profit Center
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Profit Center Text'
+		dataType: string
+		lineageTag: 7651973e-5c39-4cde-a84b-94f4b9611bbf
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Profit Center Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Net Due Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d9ca8229-5b89-48ce-a83e-0b717345a83f
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Net Due Date
+
+		variation Variation
+			isDefault
+			relationship: 0ebf17ec-2718-494d-b0e8-f39a522d3347
+			defaultHierarchy: LocalDateTable_fb752534-241d-48bf-806a-e1ff965143cc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Accouting Doc. - Logical System'
+		dataType: string
+		lineageTag: eb207b91-fe4e-4238-b16d-102f3caf751b
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Logical System
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Document Number'
+		dataType: string
+		lineageTag: ddbe99ba-a351-44d2-8649-092c81b88108
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Document Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Fiscal Year'
+		dataType: string
+		lineageTag: 3db51146-d3bf-4f14-a304-88c3294febb6
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Document Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ec66d8f0-7c9f-4ec4-a41b-a11fa9b614d0
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Document Date
+
+		variation Variation
+			isDefault
+			relationship: 1af5d311-58e6-4e1f-8599-a81e95d60aa5
+			defaultHierarchy: LocalDateTable_8754b438-12a4-4e83-80ae-8b514ed5fcc1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Invoice Doc. - Posting Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c7fd7a90-08a8-43a3-81ef-b1566bf8fe38
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Posting Date
+
+		variation Variation
+			isDefault
+			relationship: f52b0f9c-50f9-4073-80a0-903fa5a45775
+			defaultHierarchy: LocalDateTable_d6607fa8-af53-4683-a83e-4a06de0ffbdf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Invoice Doc. - Reference'
+		dataType: string
+		lineageTag: ba8aab4f-19a3-4e06-8d43-6cfe1e930185
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Invoicing Party (Supplier)'
+		dataType: string
+		lineageTag: 993ef906-7858-4753-b09a-4f3b9ca24b7d
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Invoicing Party (Supplier)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Supplier Name'
+		dataType: string
+		lineageTag: 6477fb9b-594a-4dc8-b08a-ed468f352638
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Supplier Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Invoice Document Status'
+		dataType: string
+		lineageTag: 122b4b19-7d1c-4e01-97aa-0733baa684c0
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Invoice Document Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Document Type'
+		dataType: string
+		lineageTag: 43736c99-0b83-4957-9df0-c45591c183b2
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Document Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Payment Block'
+		dataType: string
+		lineageTag: a2cc2d1c-e0d3-4d87-beb4-acd5d4ea726d
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Payment Block
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Invoice Amount Currency'
+		dataType: string
+		lineageTag: f5a0070b-3e16-430b-ba02-f3a60efe07d3
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Invoice Amount Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Purchase Order Number'
+		dataType: string
+		lineageTag: 990c2c57-3d3d-4287-b189-957d30acf928
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Purchase Order Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Baseline Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e5fd4a9c-97c5-418f-b250-57a4448ca29b
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Baseline Date
+
+		variation Variation
+			isDefault
+			relationship: 0881debc-8c54-44dd-8b6d-79479f512da6
+			defaultHierarchy: LocalDateTable_a683f932-521f-4691-beae-98266863c2d9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Invoice Doc. - Invoice'
+		dataType: string
+		lineageTag: 523e57c3-bd4e-46f6-af26-339d30435f2d
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Invoice
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Text'
+		dataType: string
+		lineageTag: c1274c14-2a68-447a-a0a0-25c606ff7e55
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PO / Non-PO'
+		dataType: string
+		lineageTag: 0ee97f2f-32d8-4fd1-b4a6-26f8f5a31826
+		summarizeBy: none
+		sourceColumn: PO / Non-PO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'On-Time Payment'
+		dataType: string
+		lineageTag: ba4c6c99-aaa1-4b3b-b888-321595160ad0
+		summarizeBy: none
+		sourceColumn: On-Time Payment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Main Area'
+		dataType: string
+		lineageTag: 1776489d-f2a6-4d5d-9a2a-ace750e4ffaa
+		summarizeBy: none
+		sourceColumn: Main Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Object Key'
+		dataType: string
+		lineageTag: a24c1c06-faa4-4ecc-815c-d69abd1206b8
+		summarizeBy: none
+		sourceColumn: Workflow - Object Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Application'
+		dataType: string
+		lineageTag: 1b818f03-6d36-43b0-97bd-379fe0140359
+		summarizeBy: none
+		sourceColumn: Workflow - Application
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Overall Approval Status'
+		dataType: string
+		lineageTag: 75062122-290d-4d53-a7cb-9817ecf2a352
+		summarizeBy: none
+		sourceColumn: Workflow - Overall Approval Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Technical Status'
+		dataType: string
+		lineageTag: 3ed1626d-8bdb-4872-8966-a0905b19ff0a
+		summarizeBy: none
+		sourceColumn: Workflow - Technical Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Task Agent'
+		dataType: string
+		lineageTag: 05724fee-9f67-4819-b1be-bbc47cdc0c5e
+		summarizeBy: none
+		sourceColumn: Workflow - Task Agent
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Requestor'
+		dataType: string
+		lineageTag: a79f6649-ae47-464f-9b29-cb54930b48ab
+		summarizeBy: none
+		sourceColumn: Workflow - Requestor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Main Workflow'
+		dataType: string
+		lineageTag: ad349809-99ec-49f5-ac91-66e69b58a3df
+		summarizeBy: none
+		sourceColumn: Workflow - Main Workflow
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Main Workflow Status'
+		dataType: string
+		lineageTag: 0d07fc42-1327-4b9e-8c62-e8a84d98bf4f
+		summarizeBy: none
+		sourceColumn: Workflow - Main Workflow Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Task'
+		dataType: string
+		lineageTag: e3ca73ce-031b-42c0-8166-e7a373bb6146
+		summarizeBy: none
+		sourceColumn: Workflow - Task
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Task Text'
+		dataType: string
+		lineageTag: 2ca23f17-7190-456b-9f37-0fff44b82a42
+		summarizeBy: none
+		sourceColumn: Workflow - Task Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Work Item Id'
+		dataType: string
+		lineageTag: cf78ac49-712e-4bde-a8ab-1628d8c9a475
+		summarizeBy: none
+		sourceColumn: Workflow - Work Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Work Item Text'
+		dataType: string
+		lineageTag: 2a96a423-fd11-4cca-9c31-0e28dffa60cd
+		summarizeBy: none
+		sourceColumn: Workflow - Work Item Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. -  Amount in Document Currency'
+		dataType: double
+		lineageTag: c13ef75f-d6a8-4131-ad0b-cbe1a668fe3a
+		summarizeBy: sum
+		sourceColumn: Accouting Doc. -  Amount in Document Currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Accouting Doc. -  Amount in Local Currency'
+		dataType: double
+		lineageTag: 3f3d82a9-e0d3-4f7c-b336-aa114afc46b4
+		summarizeBy: sum
+		sourceColumn: Accouting Doc. -  Amount in Local Currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Payment Term (Main)'
+		dataType: string
+		lineageTag: fc870ae2-3d4f-42d1-87c4-37897b07bd29
+		summarizeBy: none
+		sourceColumn: Payment Term (Main)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Doc. - Value Added Tax Amount'
+		dataType: double
+		lineageTag: 8b266c25-7e55-4ea9-a71d-6fd4c6227550
+		summarizeBy: sum
+		sourceColumn: Invoice Doc. - Value Added Tax Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Invoice Doc. - Gross Invoice Amount'
+		dataType: double
+		lineageTag: d0453a25-4ac4-4575-be79-58db4f99fa4c
+		summarizeBy: sum
+		sourceColumn: Invoice Doc. - Gross Invoice Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Payment Term Text (Main)'
+		dataType: string
+		lineageTag: 17efd962-a9ce-4de8-8174-94ed80a41685
+		summarizeBy: none
+		sourceColumn: Payment Term Text (Main)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Special G/L Indicator'
+		dataType: string
+		lineageTag: cf61e274-d10d-4b31-b782-bf39f5409c80
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Special G/L Indicator
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Payment Terms'
+		dataType: string
+		lineageTag: ddd0989f-aba8-41c7-ae36-eb291ad00d97
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Payment Terms
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Payment Terms Text'
+		dataType: string
+		lineageTag: 000fc11d-0791-4f6c-a1cf-24f0c52152b1
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Payment Terms Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - G/L Account'
+		dataType: string
+		lineageTag: 9d13cc3b-5358-4520-bd4b-5f2cf011023a
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - G/L Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - G/L Account Text'
+		dataType: string
+		lineageTag: 5d1606d1-9f46-49ee-acf6-47981b0a6a89
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - G/L Account Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Posting Key'
+		dataType: string
+		lineageTag: 9eef98de-0897-41c9-9a99-ca809e3aad11
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Posting Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Posting Key Text'
+		dataType: string
+		lineageTag: 65607be6-df5c-4d4d-82dc-96d3b9a83acd
+		summarizeBy: none
+		sourceColumn: Accouting Doc. - Posting Key Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Accouting Doc. - Payment Days'
+		dataType: double
+		lineageTag: 3089cea9-5ae9-4b3b-940e-78c636c7bb9b
+		summarizeBy: sum
+		sourceColumn: Accouting Doc. - Payment Days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Invoice Doc. - Translation Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: af701240-9d34-4547-9fb1-3c18ace8c63a
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Translation Date
+
+		variation Variation
+			isDefault
+			relationship: 77ef3b36-c123-4241-9b45-3c754cc37923
+			defaultHierarchy: LocalDateTable_2061b52a-36d3-4f85-a5a0-52260dae6005.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Invoice Doc. - Entered On'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 09d6ec49-a138-4c95-91d1-0eee67e036d3
+		summarizeBy: none
+		sourceColumn: Invoice Doc. - Entered On
+
+		variation Variation
+			isDefault
+			relationship: 589b3357-badf-4200-a174-5d8e10e97b48
+			defaultHierarchy: LocalDateTable_fd79b252-8aaf-40cd-bf20-643ee61a48ed.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Business Area'
+		dataType: string
+		lineageTag: 5e0188b7-2bb1-4000-a2db-6ebefc2b25a6
+		summarizeBy: none
+		sourceColumn: Business Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Application Text'
+		dataType: string
+		lineageTag: 46cc17ef-4bd4-4754-bb10-8a2aa739838e
+		summarizeBy: none
+		sourceColumn: Workflow - Application Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workflow - Business Document Number'
+		dataType: string
+		lineageTag: 2ecd465a-c688-403f-9666-79cbae4d176f
+		summarizeBy: none
+		sourceColumn: Workflow - Business Document Number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ACCOUNTS_PAYABLE = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_ACCOUNTS_PAYABLE_F_V_View = INS_Schema{[Name="Z_INS_ACCOUNTS_PAYABLE_F_V",Kind="View"]}[Data],
+				    #"Replaced blank w null" = Table.ReplaceValue(Z_INS_ACCOUNTS_PAYABLE_F_V_View,"",null,Replacer.ReplaceValue,{"MANDT", "BELNR", "GJAHR", "BUKRS", "BUTXT", "BLDAT", "BUDAT", "WAERS", "LIFNR", "NAME1", "WAERS_T001", "KOART", "XBLNR", "AWKEY", "AWTYP", "Accouting_Doc__Clearing_Document", "BLART", "Accouting_Doc__Invoice_Document_Number", "Accouting_Doc__Clearing_Date", "UMSKZ", "ZFBDT", "PRCTR", "MCTXT", "NETDT", "AWSYS", "Invoice_Doc__Document_Number", "GJAHR_RBKP", "BLDAT_INV", "BUDAT_INV", "XBLNR_INV", "LIFNR_INV", "NAME1_RBKP", "RBSTAT", "BLART_RBKP", "ZLSPR", "WAERS_RBKP", "Invoice_Doc__Purchase_Order_Number", "ZFBDT_RBKP", "XRECH", "SGTXT", "PO_NonPO", "OnTime_Payment", "Main_Area", "OBJ_KEY", "Workflow__Application", "Workflow__Overall_Approval_Status", "Workflow__Technical_Status", "WI_AGENT_TASKS", "REQUESTER", "CURRENT_WF", "WI_STAT", "Workflow__Task", "Tast_Text", "Workflow__Work_Item_Id", "Workflow__Work_Item_Text", "WRBTR", "DMBTR", "Payment_Term_Main", "WMWST1", "RMWWR", "Payment_Term_Text_Main"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Replaced blank w null",{{"MANDT", "Accouting Doc. - Client"}, {"BELNR", "Accouting Doc. - Document Number"}, {"GJAHR", "Accouting Doc. - Fiscal Year"}, {"BUKRS", "Accouting Doc. - Company Code"}, {"BUTXT", "Accouting Doc. - Company Code Name"}, {"BLDAT", "Accouting Doc. - Document Date"}, {"BUDAT", "Accouting Doc. - Posting Date"}, {"WAERS", "Accouting Doc. - Document Currency"}, {"LIFNR", "Accouting Doc. - Account (Supplier)"}, {"NAME1", "Accouting Doc. - Supplier Name"}, {"WAERS_T001", "Accouting Doc. - Local Currency"}, {"KOART", "Accouting Doc. - Account Type"}, {"XBLNR", "Accouting Doc. - Reference"}, {"AWKEY", "Accouting Doc. - Reference Key"}, {"AWTYP", "Accouting Doc. - Reference Procedure"}, {"Accouting_Doc__Clearing_Document", "Accouting Doc. - Clearing Document"}, {"BLART", "Accouting Doc. - Document Type"}, {"Accouting_Doc__Invoice_Document_Number", "Accouting Doc. - Invoice Document Number"}, {"Accouting_Doc__Clearing_Date", "Accouting Doc. - Clearing Date"}, {"ZFBDT", "Accouting Doc. - Baseline Payment Date"}, {"PRCTR", "Accouting Doc. - Profit Center"}, {"MCTXT", "Accouting Doc. - Profit Center Text"}, {"NETDT", "Accouting Doc. - Net Due Date"}, {"AWSYS", "Accouting Doc. - Logical System"}, {"Invoice_Doc__Document_Number", "Invoice Doc. - Document Number"}, {"GJAHR_RBKP", "Invoice Doc. - Fiscal Year"}, {"BLDAT_INV", "Invoice Doc. - Document Date"}, {"BUDAT_INV", "Invoice Doc. - Posting Date"}, {"XBLNR_INV", "Invoice Doc. - Reference"}, {"LIFNR_INV", "Invoice Doc. - Invoicing Party (Supplier)"}, {"NAME1_RBKP", "Invoice Doc. - Supplier Name"}, {"RBSTAT", "Invoice Doc. - Invoice Document Status"}, {"BLART_RBKP", "Invoice Doc. - Document Type"}, {"ZLSPR", "Invoice Doc. - Payment Block"}, {"WAERS_RBKP", "Invoice Doc. - Invoice Amount Currency"}, {"Invoice_Doc__Purchase_Order_Number", "Invoice Doc. - Purchase Order Number"}, {"ZFBDT_RBKP", "Invoice Doc. - Baseline Date"}, {"XRECH", "Invoice Doc. - Invoice"}, {"SGTXT", "Invoice Doc. - Text"}, {"PO_NonPO", "PO / Non-PO"}, {"OnTime_Payment", "On-Time Payment"}, {"Main_Area", "Main Area"}, {"OBJ_KEY", "Workflow - Object Key"}, {"Workflow__Application", "Workflow - Application"}, {"Workflow__Overall_Approval_Status", "Workflow - Overall Approval Status"}, {"Workflow__Technical_Status", "Workflow - Technical Status"}, {"WI_AGENT_TASKS", "Workflow - Task Agent"}, {"REQUESTER", "Workflow - Requestor"}, {"CURRENT_WF", "Workflow - Main Workflow"}, {"WI_STAT", "Workflow - Main Workflow Status"}, {"Workflow__Work_Item_Id", "Workflow - Work Item Id"}, {"Workflow__Work_Item_Text", "Workflow - Work Item Text"}, {"WRBTR", "Accouting Doc. -  Amount in Document Currency"}, {"DMBTR", "Accouting Doc. -  Amount in Local Currency"}, {"Payment_Term_Main", "Payment Term (Main)"}, {"Payment_Term_Text_Main", "Payment Term Text (Main)"}, {"WMWST1", "Invoice Doc. - Value Added Tax Amount"}, {"RMWWR", "Invoice Doc. - Gross Invoice Amount"}, {"UMSKZ", "Accouting Doc. - Special G/L Indicator"}, {"ZTERM", "Accouting Doc. - Payment Terms"}, {"TEXT1", "Accouting Doc. - Payment Terms Text"}, {"HKONT", "Accouting Doc. - G/L Account"}, {"TXT50", "Accouting Doc. - G/L Account Text"}, {"BSCHL", "Accouting Doc. - Posting Key"}, {"LTEXT", "Accouting Doc. - Posting Key Text"}, {"ZBD1T", "Accouting Doc. - Payment Days"}, {"WWERT", "Invoice Doc. - Translation Date"}, {"CPUDT", "Invoice Doc. - Entered On"}, {"Workflow__Application_Text", "Workflow - Application Text"}, {"Workflow__Business_Document_Number", "Workflow - Business Document Number"}, {"Workflow__Task", "Workflow - Task"}, {"Tast_Text", "Workflow - Task Text"}, {"Business_Area", "Business Area"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Accouting Doc. - Document Date", type date}, {"Accouting Doc. - Posting Date", type date}, {"Accouting Doc. - Clearing Date", type date}, {"Accouting Doc. - Baseline Payment Date", type date}, {"Accouting Doc. - Net Due Date", type date}, {"Invoice Doc. - Document Date", type date}, {"Invoice Doc. - Posting Date", type date}, {"Invoice Doc. - Baseline Date", type date}, {"Invoice Doc. - Translation Date", type date}, {"Invoice Doc. - Entered On", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

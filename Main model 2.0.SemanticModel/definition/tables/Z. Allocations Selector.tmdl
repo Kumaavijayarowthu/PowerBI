@@ -1,0 +1,33 @@
+table 'Z. Allocations Selector'
+	lineageTag: 8af545f7-8e22-4a5d-a30f-6d6bf4843664
+
+	measure 'Allocations Value' = ```
+			
+			VAR SelectedMetric = SELECTEDVALUE('Z. Allocations Selector'[Allocations])
+			RETURN
+			    SWITCH(
+			        SelectedMetric,
+			        TRUE, 1,
+			        FALSE,0, 
+			        BLANK()
+			        )
+			    
+			```
+		formatString: 0
+		lineageTag: 0fd5cf00-5edf-494f-b207-b2234d05b9aa
+
+	column Allocations
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a10fff14-74a0-464b-8052-0dfc50b8f135
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Allocations]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Allocations Selector' = calculated
+		mode: import
+		source = DATATABLE("Allocations", BOOLEAN, {{TRUE}, {FALSE}})
+
+	annotation PBI_Id = 90653bab03ff492e87bd722be8062711
+

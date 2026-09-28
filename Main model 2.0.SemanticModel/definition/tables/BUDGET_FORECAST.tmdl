@@ -1,0 +1,162 @@
+table BUDGET_FORECAST
+	lineageTag: b80f377e-ee2c-43e1-8726-185cf3c98eec
+
+	column 'Profit Center'
+		dataType: string
+		lineageTag: 6aea0a5e-d01c-4ece-bb7d-d7ebb92b2dcd
+		summarizeBy: none
+		sourceColumn: Profit Center
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Version
+		dataType: string
+		lineageTag: 43762a7f-c7aa-4378-9468-3c591de3a192
+		summarizeBy: none
+		sourceColumn: Version
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'G/L Account Number'
+		dataType: string
+		lineageTag: e79a586d-8a82-417f-b5d4-288904ca4d19
+		summarizeBy: none
+		sourceColumn: G/L Account Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost Center'
+		dataType: string
+		isHidden
+		lineageTag: fbc48294-31d3-4506-932d-c02b59197d07
+		summarizeBy: none
+		sourceColumn: Cost Center
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Customer Number'
+		dataType: string
+		lineageTag: 42a561b0-cd7e-4eeb-9067-6c5d7e2f9b3c
+		summarizeBy: none
+		sourceColumn: Ship To Customer Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0d49de72-ee4e-439f-8e64-2b07c9bcc193
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Value
+		dataType: double
+		formatString: #,0
+		lineageTag: aee0a0d2-9908-42f1-9e14-1d88cb6c3b9b
+		summarizeBy: sum
+		sourceColumn: Value
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comments
+		dataType: string
+		lineageTag: 83cdc5c1-6866-41ee-967f-5eb23a39b035
+		summarizeBy: none
+		sourceColumn: Comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Version key'
+		dataType: string
+		lineageTag: ad6816f2-f386-425a-9dc3-ced5050f6d63
+		summarizeBy: none
+		sourceColumn: Version key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 09641be1-6abd-418e-95e2-2ebb6db82db0
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Definition'
+		dataType: string
+		lineageTag: 328b0791-b623-4658-80aa-375ba14e2ca9
+		summarizeBy: none
+		sourceColumn: Project Definition
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BUDGET_FORECAST = m
+		mode: import
+		queryGroup: Datasphere
+		source = ```
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_BUDG_FCST_VIEW_View = INS_Schema{[Name="Z_INS_BUDG_FCST_VIEW",Kind="View"]}[Data],
+				    // Corrects the format of Project Definition
+				    #"Transform Project Definition" = Table.TransformColumns(
+				        Z_INS_BUDG_FCST_VIEW_View,
+				        {
+				            {
+				                "Project Definition",
+				                (str) =>
+				                    if str = null then
+				                        null
+				                    else if Value.Is(str, type text)
+				                        and Text.StartsWith(str, "S")
+				                        and Text.Length(str) = 12 then
+				                        "S-" & Text.Range(str, 1, 5)
+				
+				                        
+				                    else
+				                        str,
+				                type text
+				            }
+				        }
+				    ),
+				    #"Filtered Rows: Fiscal Year =! 0" = Table.SelectRows(#"Transform Project Definition", each ([Fiscal year] <> "0")),
+				    #"Added DateKey" = Table.AddColumn(#"Filtered Rows: Fiscal Year =! 0", "DateKey", each #date(Number.FromText([Fiscal year]), Number.FromText([Fiscal period]), 1)),
+				    #"Replaced Value" = Table.ReplaceValue(#"Added DateKey",null,0,Replacer.ReplaceValue,{"Budget Revenue DKK", "Forecast Revenue DKK", "Forecast OPEX DKK", "Budget OPEX DKK", "Forecast_COGS_DKK", "Budget_COGS_DKK"}),
+				    #"Added Value" = Table.AddColumn(#"Replaced Value", "Value", each [Budget Revenue DKK]+[Budget_COGS_DKK]-[Budget OPEX DKK]+[Forecast Revenue DKK]+[Forecast_COGS_DKK]-[Forecast OPEX DKK]),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Added Value",{"Country", "Profit Center", "Project Definition", "Version", "G/L Account", "Cost Center", "KUNNR_SHIPTO", "Comments", "DateKey", "Value"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"G/L Account", "G/L Account Number"}, {"KUNNR_SHIPTO", "Ship To Customer Number"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Cost Center"}, COST_CENTERS, {"Cost Center"}, "COST_CENTERS", JoinKind.LeftOuter),
+				    #"Expanded COST_CENTERS" = Table.ExpandTableColumn(#"Merged Queries", "COST_CENTERS", {"Profit Center"}, {"COST_CENTERS.Profit Center"}),
+				    #"Replaced Profit Center" = Table.ReplaceValue(#"Expanded COST_CENTERS",null,each [COST_CENTERS.Profit Center],Replacer.ReplaceValue,{"Profit Center"}),
+				    #"Added Version key" = Table.AddColumn(#"Replaced Profit Center", "Version key", each [Version] & [Comments]),
+				    #"Replaced CustNumber w Country" = Table.ReplaceValue(#"Added Version key",null,each [Country],Replacer.ReplaceValue,{"Ship To Customer Number"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced CustNumber w Country",{{"Profit Center", type text}, {"Value", type number}, {"DateKey", type date}, {"Version key", type text}, {"Ship To Customer Number", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"COST_CENTERS.Profit Center"})
+				in
+				    #"Removed Columns"
+				```
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

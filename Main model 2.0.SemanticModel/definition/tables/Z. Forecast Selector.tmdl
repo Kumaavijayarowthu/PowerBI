@@ -1,0 +1,17 @@
+table 'Z. Forecast Selector'
+	lineageTag: 7df4e927-dde6-4d09-93b3-1526c915b76b
+
+	column 'Forecast Version'
+		lineageTag: 27506d0c-5405-493b-ae22-8e341bf5bd70
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Forecast Version]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Forecast Selector' = calculated
+		mode: import
+		source = DATATABLE("Forecast Version", STRING, {{"Forecast 1"}, {"Forecast 2"}})
+
+	annotation PBI_Id = 74732b19897a44d0b1a9f7dada5490b0
+

@@ -1,0 +1,49 @@
+table 'Z. Region hierarchy'
+	lineageTag: 91bc051f-4ab9-4139-b7df-841fed37ea9c
+
+	column 'Region hierarchy'
+		lineageTag: b4f61604-75b8-49be-8424-63018a03dbd5
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Region hierarchy Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Region hierarchy Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Region hierarchy Fields'
+		isHidden
+		lineageTag: b5f5ff88-ba1c-4b22-8dd1-35596904bfde
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Region hierarchy Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Region hierarchy Order'
+		isHidden
+		formatString: 0
+		lineageTag: 6596e114-f9d5-432a-be00-e3c350811a6c
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. Region hierarchy' = calculated
+		mode: import
+		source =
+				{
+				    ("Region", NAMEOF('REGIONS'[Region]), 0),
+				    ("Region lev. 2", NAMEOF('REGIONS'[Region lev. 2]), 1),
+				    ("Country", NAMEOF('REGIONS'[Country]), 2)
+				}
+
+	annotation PBI_Id = 26ee713276334426b6268091207d41b0
+

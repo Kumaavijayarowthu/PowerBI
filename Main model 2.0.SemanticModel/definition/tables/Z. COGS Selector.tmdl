@@ -1,0 +1,32 @@
+table 'Z. COGS Selector'
+	lineageTag: f462fe96-ad49-49a0-865a-da7222875b0b
+
+	measure 'Selected Value COGS' = ```
+			
+			VAR SelectedMetric = SELECTEDVALUE('Z. COGS Selector'[COGS Type])
+			RETURN
+			    SWITCH(
+			        SelectedMetric,
+			        "Financial COGS", SUM('MAIN'[DKKx])*-1,
+			        "Performance COGS", SUM('MAIN'[_Perf. COGS])*-1, 
+			         SUM('MAIN'[DKKx])*-1 // By default selects Financial COGS
+			        )
+			    
+			```
+		lineageTag: 9af535c7-95eb-42b4-bd3b-d67a93143c32
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'COGS Type'
+		lineageTag: 932fd1cd-947d-4c23-b889-96bf6e871a4b
+		summarizeBy: none
+		sourceColumn: [Metric]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Z. COGS Selector' = calculated
+		mode: import
+		source = DATATABLE("Metric", STRING, {{"Financial COGS"}, {"Performance COGS"}})
+
+	annotation PBI_Id = 5e8f14a76aaa469cbe27621d414e8084
+

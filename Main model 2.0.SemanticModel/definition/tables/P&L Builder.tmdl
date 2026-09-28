@@ -1,0 +1,215 @@
+table 'P&L Builder'
+	lineageTag: 3311106a-4e7d-4d2d-b3ed-b92c31c03474
+
+	measure 'PL BL Color' = ```
+			SWITCH(TRUE(),  
+			 MAX('P&L Builder'[Color]) =1, "#EDEDED"
+			 ,MAX('P&L Builder'[Color]) =2, "#CAD5d5"
+			)
+			```
+		lineageTag: e8fc197e-ddc0-4233-bf88-5d6179d6164c
+
+		changedProperty = IsHidden
+
+	measure 'PL Front Color' =
+			
+			SWITCH(
+			    TRUE(),
+			    MAX('P&L Builder'[Color]) = 1, "BLACK",
+			    MAX('P&L Builder'[Color]) = 2, "BLACK"
+			)
+		lineageTag: c821b953-4a2c-417d-826f-c5d99b6268e3
+
+		changedProperty = IsHidden
+
+	measure 'PL Front Style' =
+			
+			SWITCH(
+			    TRUE(),
+			    MAX('P&L Builder'[Color]) = 1, "Bold",
+			    "Normal"
+			)
+		lineageTag: 89ee8969-3c62-450d-ba39-e53a78e1c311
+
+		changedProperty = IsHidden
+
+	measure 'Header Color PL' = ```
+			SWITCH(TRUE(),  
+			 MAX('P&L Builder'[Color]) =1, "#7D9B9B"
+			)
+			```
+		lineageTag: 275036c0-6bf3-4cb6-b429-6d9ea5f85d8b
+
+		changedProperty = IsHidden
+
+	column Account_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: b6e72823-fbd2-4de1-b87f-f7518b00dd05
+		summarizeBy: none
+		sourceColumn: Account_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: 08f5e7eb-6bfe-44d3-8932-109881fe22e0
+		summarizeBy: none
+		sourceColumn: Account
+		sortByColumn: Order_ID
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account_ID Group'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1991d2bc-eaf9-40e7-8a8f-e427305ff009
+		summarizeBy: none
+		sourceColumn: Account_ID Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 34e78ad3-66d9-4142-924c-6cfb5791ec77
+		summarizeBy: none
+		sourceColumn: Order_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: int64
+		lineageTag: 17ae8642-4042-4349-90ad-17b3ec355af9
+		summarizeBy: none
+		sourceColumn: Color
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Gross Profit'
+		dataType: int64
+		formatString: 0
+		lineageTag: 42de860f-55eb-45f3-94e1-614069f5e6f0
+		summarizeBy: none
+		sourceColumn: Gross Profit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contribution Profit'
+		dataType: int64
+		formatString: 0
+		lineageTag: adf7ecdc-62df-4a3c-be6e-9fcb4944bed0
+		summarizeBy: none
+		sourceColumn: Contribution Profit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EBIT before Special Items'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2dee0f26-33cf-481b-9144-b70e9b02d7f2
+		summarizeBy: none
+		sourceColumn: EBIT before Special Items
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EBIT after Special Items'
+		dataType: int64
+		formatString: 0
+		lineageTag: b30b9906-ee7a-4b2e-b5c2-0a867d3082e9
+		summarizeBy: none
+		sourceColumn: EBIT after Special Items
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: int64
+		formatString: 0
+		lineageTag: 7763c7f2-0685-4857-b040-f03a46df082f
+		summarizeBy: none
+		sourceColumn: Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Earnings Before Tax'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e0211ba-2abd-4cb3-b322-72217fe9b433
+		summarizeBy: none
+		sourceColumn: Earnings Before Tax
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net Profit'
+		dataType: int64
+		formatString: 0
+		lineageTag: 66fea489-9cd9-49fd-93bc-cc9c84500c21
+		summarizeBy: none
+		sourceColumn: Net Profit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Operating Costs'
+		dataType: int64
+		formatString: 0
+		lineageTag: f84ec778-f92c-443b-a5a8-f0ce22197803
+		summarizeBy: none
+		sourceColumn: Operating Costs
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hide
+		dataType: string
+		lineageTag: 8fcab7f1-4a21-49d4-814a-7e157a11fe41
+		summarizeBy: none
+		sourceColumn: Hide
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'P&L Builder' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("lZRfb9owFMW/ipWnTUKIOCHQVxCrmNpStVHVivXBjAuzltnIdir67ed/KUmWZvFDIiuOf773+Bxvt1EcjaIHeANWgh7F/pnUxl2Pmb/j0etoGyV6uNxcP/qZxM/2EWqrUz1cL/331M+xsiiGLY8nE/PlWnAp0b3gB6r8D9Paz33PBYQ/QLdEHCnzP2RhILPvExGU7ApAj6QAiZZcmqoMf9Za9FmLLyAtzWyu29qPLQT9KHWZGdJ8z5sH8rDTa8mZEnRXKspZU7argd3WgLgNbMgXTwKJRqLN/erZ+yHuWtvXopFko36N0eYEYoxW51NFwoGkxImVc0UK5Euya5LAlq6sswhTsjpBWe4k3VM9752aBtam/WqqMD0SRdnR+kNWC6cDiosvnk1do6vFOkc7OHChnXuCn1S3vVbw5wObedcNjELqvPEptmWUWRjdGqtdpg1rOxRdetaPZ1prnxwUiO7uQ6MxrbXfgW12j0NjYnPxjTLCLBLOJ2AS5AgxMFm2YvbxuoSwCXkAWRYK8QOi7G2sX+j7k0SE7RGRkuvNlHWtERn3HVfXBplXmgimPSvRwrkiJ2f0ZbXIv1ZihAYsq6TOW6qmoaqanXU5kbsJ8f+C9I+CZsNbyrig6h2tmT51cLm0dsVZIG/mBLsD1bym8dCw1EC4AWoJNQ/kzR3vcv80ywvNyrx9nTWqS0LDoXHmIHynN0B+kyNUsHggzNwzr38B", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Account_ID = _t, Account = _t, #"Account_ID Group" = _t, Order_ID = _t, Color = _t, Revenue = _t, #"Gross Profit" = _t, #"Contribution Profit" = _t, #"EBIT before Special Items" = _t, #"EBIT after Special Items" = _t, #"Earnings Before Tax" = _t, #"Net Profit" = _t, #"Operating Costs" = _t, Hide = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Account_ID", Int64.Type}, {"Account_ID Group", Int64.Type}, {"Order_ID", Int64.Type}, {"Color", Int64.Type}, {"Revenue", Int64.Type}, {"Gross Profit", Int64.Type}, {"Contribution Profit", Int64.Type}, {"EBIT before Special Items", Int64.Type}, {"EBIT after Special Items", Int64.Type}, {"Earnings Before Tax", Int64.Type}, {"Net Profit", Int64.Type}, {"Operating Costs", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

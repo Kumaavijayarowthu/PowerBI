@@ -1,0 +1,540 @@
+table '10. Key Figures P&L'
+	lineageTag: 5ed9f483-9455-40c5-87c9-9572e87a4dd1
+
+	measure '% MTD Actuals vs. LY' = DIVIDE(([MTD Actuals P&L]-[LY MTD Actuals P&L]),[LY MTD Actuals P&L])
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 18539f9d-53bd-48da-bbc8-e0b1ecbc81c7
+
+	measure 'LY MTD Actuals P&L' = ```
+			SWITCH(TRUE(),  
+			
+			 MAX('P&L Builder'[Account_ID])=1001,CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			 MAX('P&L Builder'[Account_ID])=1002,FORMAT(IFERROR(CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) / CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(IFERROR(CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) / CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(IFERROR(CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) / CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(IFERROR(CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) / CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(IFERROR(CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) / CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(IFERROR(CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) / CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=8001,CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(IFERROR(CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) / CALCULATE([LY MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[LY MTD Actuals]
+			
+			)
+			```
+		formatString: 0
+		lineageTag: d99acec9-3244-40fc-b8e1-e46af4d438c7
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'MTD Actuals P&L' = ```
+			SWITCH(TRUE(),  
+			
+			 MAX('P&L Builder'[Account_ID])=1001,CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			 MAX('P&L Builder'[Account_ID])=1002,FORMAT(IFERROR(CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) / CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(IFERROR(CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) / CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(IFERROR(CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) / CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(IFERROR(CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) / CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(IFERROR(CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) / CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(IFERROR(CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) / CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=8001,CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(IFERROR(CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) / CALCULATE([MTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[MTD Actuals]
+			)
+			```
+		formatString: 0
+		lineageTag: 4d660878-f578-4f17-b875-e5dbdcf447f5
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '% YTD ACT vs. LY' = DIVIDE(([YTD Actuals P&L]-[LY YTD Actuals P&L] ), [LY YTD Actuals P&L])
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 37c66366-a5d0-4d94-bf72-bd18c005e7c5
+
+	measure 'LY YTD Actuals P&L' = ```
+			SWITCH(TRUE(),  
+			
+			 MAX('P&L Builder'[Account_ID])=1001,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			 MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			 MAX('P&L Builder'[Account_ID])=1003,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=8001,CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([LY YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[LY YTD Actuals] 
+			
+			 )
+			
+			```
+		formatString: #,0
+		lineageTag: 962805f4-354b-4a08-8cbf-ca51dae5a0a4
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'YTD Actuals P&L' = ```
+			SWITCH(TRUE(),  
+			
+			MAX('P&L Builder'[Account_ID])=1001,CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=1003,CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([YTD Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[YTD Actuals] 
+			
+			)
+			```
+		formatString: #,0
+		lineageTag: 88fad0d9-0e3d-4896-8321-fb4845ffdaee
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'MTD Budget P&L' = ```
+			SWITCH(TRUE(),  
+			
+			 MAX('P&L Builder'[Account_ID])=1001,CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			 MAX('P&L Builder'[Account_ID])=1002,FORMAT(IFERROR(CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) / CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(IFERROR(CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) / CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(IFERROR(CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) / CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(IFERROR(CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) / CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(IFERROR(CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) / CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(IFERROR(CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) / CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=8001,CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(IFERROR(CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) / CALCULATE([MTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[MTD Budget]
+			
+			 )
+			
+			```
+		formatString: #,0
+		lineageTag: c86a2016-f7e5-4f30-a2a0-4cfeb9bbad68
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'MTD Forecast P&L' = ```
+			SWITCH(TRUE(),  
+			
+			 MAX('P&L Builder'[Account_ID])=1001,CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			 MAX('P&L Builder'[Account_ID])=1002,FORMAT(IFERROR(CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) / CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(IFERROR(CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) / CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(IFERROR(CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) / CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(IFERROR(CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) / CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(IFERROR(CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) / CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(IFERROR(CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) / CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=8001,CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(IFERROR(CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) / CALCULATE([MTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[MTD Forecast]
+			
+			 )
+			
+			```
+		formatString: #,0
+		lineageTag: a50d82b9-0530-4c90-a7ed-d62f880af5e4
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'YTD Budget P&L' = ```
+			SWITCH(TRUE(),  
+			
+			 MAX('P&L Builder'[Account_ID])=1001,CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			 MAX('P&L Builder'[Account_ID])=1002,FORMAT(IFERROR(CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) / CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(IFERROR(CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) / CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(IFERROR(CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) / CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(IFERROR(CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) / CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(IFERROR(CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) / CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(IFERROR(CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) / CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=8001,CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(IFERROR(CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) / CALCULATE([YTD Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[YTD Budget] 
+			
+			 )
+			
+			```
+		formatString: #,0
+		lineageTag: b090bde0-5c87-47d4-b766-98951f6511b5
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'YTD Forecast P&L' = ```
+			SWITCH(TRUE(),  
+			
+			 MAX('P&L Builder'[Account_ID])=1001,CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			 MAX('P&L Builder'[Account_ID])=1002,FORMAT(IFERROR(CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) / CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(IFERROR(CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) / CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(IFERROR(CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) / CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(IFERROR(CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) / CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(IFERROR(CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) / CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(IFERROR(CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) / CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=8001,CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(IFERROR(CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) / CALCULATE([YTD Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[YTD Forecast] 
+			
+			 )
+			
+			```
+		formatString: #,0
+		lineageTag: 652418aa-e912-49a1-8383-44a954ab5459
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'LY Actuals P&L' = ```
+			SWITCH(TRUE(),  
+			
+			MAX('P&L Builder'[Account_ID])=1001,CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=1003,CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([LY Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[LY Actuals] 
+			
+			 )
+			
+			```
+		formatString: 0
+		lineageTag: 5dc97a60-98c0-41f7-bf85-59ecc2486174
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Actuals P&L' = ```
+			SWITCH(TRUE(),  
+			
+			MAX('P&L Builder'[Account_ID])=1001,CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=1003,CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([Actuals],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[Actuals] 
+			
+			)
+			```
+		formatString: 0
+		lineageTag: 9ee1f010-1108-4a22-a035-27eee3a0e763
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Budget P&L' = ```
+			SWITCH(TRUE(),  
+			
+			MAX('P&L Builder'[Account_ID])=1001,CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=1003,CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[Budget] 
+			
+			 )
+			
+			```
+		formatString: 0
+		lineageTag: b8f2e2e9-0342-4b8e-b923-f781720ebe22
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Forecast P&L' = ```
+			SWITCH(TRUE(),  
+			
+			MAX('P&L Builder'[Account_ID])=1001,CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=1003,CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[Forecast] 
+			
+			 )
+			
+			```
+		formatString: 0
+		lineageTag: f6983707-be8c-4735-9607-46618023094a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'LY Budget P&L' = ```
+			SWITCH(TRUE(),  
+			
+			MAX('P&L Builder'[Account_ID])=1001,CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=1003,CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([LY Budget],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[LY Budget] 
+			
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 2da9787e-cae7-45c7-813b-6d5af7b26e07
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'LY Forecast P&L' = ```
+			SWITCH(TRUE(),  
+			
+			MAX('P&L Builder'[Account_ID])=1001,CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=1002,FORMAT(DIVIDE(CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Gross Profit] =1)) , CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=1003,CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] = 1)),
+			
+			MAX('P&L Builder'[Account_ID])=2001,CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=2002,FORMAT(DIVIDE(CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Contribution Profit] =1)) , CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=4001,CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=4002,FORMAT(DIVIDE(CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT before Special Items] =1)) , CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=5001,CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] = 1)),
+			MAX('P&L Builder'[Account_ID])=5002,FORMAT(DIVIDE(CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[EBIT after Special Items] =1)) , CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=6001,CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] = 1)),
+			MAX('P&L Builder'[Account_ID])=6002,FORMAT(DIVIDE(CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Earnings Before Tax] =1)) , CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			MAX('P&L Builder'[Account_ID])=7001,CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] = 1)),
+			MAX('P&L Builder'[Account_ID])=7002,FORMAT(DIVIDE(CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Net Profit] =1)) , CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			
+			
+			
+			MAX('P&L Builder'[Account_ID])=8004,FORMAT(DIVIDE(CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Operating Costs] =1)) , CALCULATE([LY Forecast],FILTER(ALL('P&L Builder'),'P&L Builder'[Revenue] =1)),0),"0.0%"),
+			
+			[LY Forecast] 
+			
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 4789b659-46f6-439b-9473-6bdde707275a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Column
+		formatString: 0
+		lineageTag: 375bd84e-2bae-4cbb-8743-48c27dcb1783
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '10. Key Figures P&L' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = faef16796d55437497bfe61f5d3e6acc
+

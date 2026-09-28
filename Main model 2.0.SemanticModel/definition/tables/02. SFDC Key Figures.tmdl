@@ -1,0 +1,65 @@
+table '02. SFDC Key Figures'
+	lineageTag: bb2f5e00-e496-4041-ab39-786a76ad43d6
+
+	measure _Opportunities =
+			
+			DIVIDE(
+			    SWITCH(
+			    TRUE(),
+			    ISBLANK(SUM('OPPORTUNITY LI'[TotalPrice_DKK])), SUM(OPPORTUNITY[Amount_DKK]),
+			    SUM('OPPORTUNITY LI'[TotalPrice_DKK])
+			), [Rounding Value])
+		formatString: #,0
+		isHidden
+		lineageTag: 05849486-594b-4813-9a07-c5b9f67911d1
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Opp & Quotes' = DIVIDE(SUM(OPPORTUNITIES_QUOTES[Amount_DKK]), [Rounding Value])
+		lineageTag: c8e8e1b8-0acd-4ab1-88a7-e093a0b89236
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Opp & Quotes COGS' = DIVIDE(SUM(OPPORTUNITIES_QUOTES[COGS_DKK]), [Rounding Value])
+		lineageTag: c6d4f999-fe93-450a-a0da-e07dffa815a3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Opportunities = CALCULATE([Opp & Quotes], OPPORTUNITIES_QUOTES[Type] = "Opportunity")
+		lineageTag: bc6d992b-10de-45f5-aa80-86f6a9c99e5d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quotes = CALCULATE([Opp & Quotes], OPPORTUNITIES_QUOTES[Type] = "Quote")
+		lineageTag: e8df70f5-7fcd-46b6-b7e2-ca69366a479f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Opportunities COGS' = CALCULATE([Opp & Quotes COGS], OPPORTUNITIES_QUOTES[Type] = "Opportunity")
+		lineageTag: ab1704ce-07b3-4fe4-97a9-003d9c9996f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Quotes COGS' = CALCULATE([Opp & Quotes COGS], OPPORTUNITIES_QUOTES[Type] = "Quote")
+		lineageTag: d1bdedcf-f14c-4ce0-84c1-d6f7971eb861
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 10a33902-8e18-4aaa-870c-139c594e9c71
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '02. SFDC Key Figures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 51131e2ae57948b38c8e53d2c3235a1e
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

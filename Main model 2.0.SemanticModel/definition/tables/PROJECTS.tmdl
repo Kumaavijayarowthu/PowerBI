@@ -1,0 +1,96 @@
+table PROJECTS
+	lineageTag: 4c91157b-01b5-4ffc-8b53-21ad8f8bbdea
+
+	column 'Project Definition'
+		dataType: string
+		lineageTag: dfce3762-4a4a-488e-aa85-04a49bbf361c
+		summarizeBy: none
+		sourceColumn: Project Definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Network WBS'
+		dataType: string
+		lineageTag: 7982cffa-fb9e-4e91-a47c-9cc9b3fab295
+		summarizeBy: none
+		sourceColumn: Network WBS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Profile'
+		dataType: string
+		lineageTag: 1b2416db-8e8c-4558-b6fe-67517ef88032
+		summarizeBy: none
+		sourceColumn: Project Profile
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Type Name'
+		dataType: string
+		lineageTag: 4bf4b746-405f-4fca-bc66-cb34edb152b7
+		summarizeBy: none
+		sourceColumn: Project Type Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Type'
+		dataType: string
+		lineageTag: 60166f05-c200-45ee-b140-ba367410fac4
+		summarizeBy: none
+		sourceColumn: Project Type
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Project Hierarchy'
+		lineageTag: 0732aa3f-c31c-441a-b1c5-455bd0ada9ff
+
+		level 'Project Profile'
+			lineageTag: 9a75f2b3-51b2-4b19-9fe4-240592598081
+			column: 'Project Profile'
+
+		level 'Project Definition'
+			lineageTag: 0aced810-cd91-4666-b158-2f9261c36f35
+			column: 'Project Definition'
+
+		level 'Network WBS'
+			lineageTag: 2e758909-de6c-4edc-b0e2-3891096df816
+			column: 'Network WBS'
+
+	partition PROJECTS = m
+		mode: import
+		queryGroup: Datasphere
+		source = ```
+				let
+				    Source = Odbc.Query(dsn, "SELECT DISTINCT PROFIDPROJ, PRART, PRATX, PSPID, NETWORK_WBS#(lf)FROM INS.Z_INS_ACDOCA_MAIN_PERSIST #(lf)WHERE LEVEL2_TEXT NOT IN ('ASSETS', 'LIABILITIES')"),
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"PSPID", "Project Definition"}, {"NETWORK_WBS", "Network WBS"}, {"PRATX", "Project Type Name"}, {"PROFIDPROJ", "Project Profile"}, {"PRART", "Project Type"}}),
+				    //Corrects the format of Project Definition
+				    #"Transform Project Definition" =
+				    Table.TransformColumns(
+				        #"Renamed Columns",
+				        {
+				            {
+				                "Project Definition",
+				                (str) =>
+				                    if str = null then
+				                        null
+				                    else if Value.Is(str, type text)
+				                        and Text.StartsWith(str, "S")
+				                        and Text.Length(str) = 12 then
+				                        "S-" & Text.Range(str, 1, 5)
+				
+				                        
+				                    else
+				                        str,
+				                type text
+				            }
+				        }
+				    ),
+				    #"Replaced Value" = Table.ReplaceValue(#"Transform Project Definition","",null,Replacer.ReplaceValue,{"Project Type", "Project Type Name", "Project Definition", "Network WBS"})
+				in
+				    #"Replaced Value"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

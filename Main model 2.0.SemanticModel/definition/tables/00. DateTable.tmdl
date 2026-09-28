@@ -1,0 +1,354 @@
+table '00. DateTable'
+	lineageTag: a3bf11ae-b9dd-48cd-8468-144336544a3f
+
+	column Date
+		formatString: General Date
+		lineageTag: 12b7d7f1-75bb-4ee6-b4eb-d1eac0032131
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 84cf9e5d-6ac1-450b-b0b3-b68a00a1f0d6
+			defaultHierarchy: LocalDateTable_a4e27fac-5044-4e9d-8054-4740c21a6c71.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		isHidden
+		formatString: 0
+		lineageTag: 0410ae62-aa7f-4339-9b5c-a4ee974175b6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		lineageTag: 618ec1ad-493e-4941-8294-ccbab0776881
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		isHidden
+		formatString: 0
+		lineageTag: 0badaf6c-72b5-4c8d-8535-5a4a08569e3c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		lineageTag: 268371f1-a6b5-45ce-ba97-440105be28ec
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Month]
+		sortByColumn: 'Year Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Number'
+		isHidden
+		formatString: 0
+		lineageTag: 2555e235-c0ad-4269-aea2-9ed93c4afa5c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 70a7730a-9b04-4b11-a6e7-c7cd7ed8ad01
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		lineageTag: ba893950-9543-4650-97c9-6fab570afb3b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Quarter]
+		sortByColumn: 'Year Quarter Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter Number'
+		isHidden
+		formatString: 0
+		lineageTag: 43548443-d1b9-4a92-bc05-ac04458bf847
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year Quarter Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 2b64b8c8-34f1-4453-9c98-191266d35409
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+		sortByColumn: 'Quarter Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Number'
+		isHidden
+		formatString: 0
+		lineageTag: 8eade6ef-9f5b-4a39-bc7c-75465be0d41c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Quarter Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Number'
+		isHidden
+		formatString: 0
+		lineageTag: ac945d28-3354-4976-82b0-5fcc724b9d7f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day of Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		lineageTag: 254eac6c-82e0-4ab5-9ba6-00fe6ef86ea5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day of Week]
+		sortByColumn: 'Day of Week Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWorkingDay
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a9c7f1ce-c302-43a8-817e-e98d6581b745
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsWorkingDay]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		lineageTag: 87b1263d-e4b9-4d51-8c59-4d95e7fa3705
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Week]
+		sortByColumn: 'Week Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		isHidden
+		formatString: 0
+		lineageTag: 7fba83e2-cabd-4ee2-b8c7-078a8c7c34c7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Week'
+		lineageTag: 695a691e-5da0-48aa-823e-e91a4f5ce9ad
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Week]
+		sortByColumn: 'Year Week Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Week Number'
+		isHidden
+		formatString: 0
+		lineageTag: 5e4fa8b6-1eb1-4cfb-a0c6-bb91c45173fa
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Year'
+		lineageTag: cf266b2a-4e61-4781-92d7-2720dec880ca
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekly Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Quarter'
+		lineageTag: 4cef196b-e70b-49b1-a3db-c4f7eb87d5c7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekly Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Quarter Number'
+		isHidden
+		formatString: 0
+		lineageTag: 0753e4f2-4ac0-4d04-92ec-084db1e03696
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Weekly Quarter Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Year Quarter'
+		lineageTag: 46ae888c-b955-44e7-909c-78d67de44af6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekly Year Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Year Quarter Number'
+		isHidden
+		formatString: 0
+		lineageTag: cf4495d5-2582-4e97-9dc0-0e11633f0776
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Weekly Year Quarter Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Month Number'
+		isHidden
+		formatString: 0
+		lineageTag: 26146d4f-8722-45b6-94e0-b3109fcf11f9
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Weekly Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Month'
+		lineageTag: 3d541328-9103-4cd8-83da-1c096d42cb73
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekly Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Year Month Number'
+		isHidden
+		formatString: 0
+		lineageTag: 2c9b255a-7658-453d-ac05-1a94be0b18d9
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Weekly Year Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekly Year Month'
+		lineageTag: 9f9448f0-bff6-43b5-9cd5-3c0fb0ee26a0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekly Year Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '00. DateTable' = calculated
+		mode: import
+		source = ```
+				
+				VAR FirstFiscalMonth = 7
+				VAR WorkingDays = { 2, 3, 4, 5, 6 }
+				VAR FirstTransactionDate =
+				    MIN ( MIN ( MAIN[Posting Date] ), MIN ( MAIN[Posting Date] ) )
+				VAR LastTransactionDate =
+				    MAX ( MAX ( MAIN[Posting Date] ), MAX ( OPPORTUNITIES_QUOTES[Expected Delivery Date] ) )
+				VAR StartDate =
+				    DATE ( YEAR ( FirstTransactionDate ), 1, 1 )
+				VAR EndDate =
+				    DATE ( YEAR ( LastTransactionDate ) + ( FirstFiscalMonth > 1 ), 12, 31 )
+				VAR AllDates =
+				    CALENDAR ( StartDate, EndDate )
+				VAR GregorianCalendar =
+				    ADDCOLUMNS (
+				        AllDates,
+				        "Day", DAY ( [Date] ),
+				        "Month", FORMAT ( [Date], "mmm" ),
+				        "Month Number", MONTH ( [Date] ),
+				        "Year Month", FORMAT ( [Date], "mmm YYYY" ),
+				        "Year Month Number", 
+				                YEAR ( [Date] ) * 12 + MONTH ( [Date] ),
+				        "Year", YEAR ( [Date] ),
+				        "Year Quarter",
+				            YEAR ( [Date] ) & " Q" & QUARTER ( [Date] ),
+				        "Year Quarter Number",
+				            YEAR ( [Date] ) * 4 + QUARTER ( [Date] ),
+				        "Quarter", "Q" & QUARTER ( [Date] ),
+				        "Quarter Number", QUARTER ( [Date] ),
+				        "Day of Week Number", WEEKDAY ( [Date] ),
+				        "Day of Week", FORMAT ( [Date], "ddd" ),
+				        "IsWorkingDay", WEEKDAY ( [Date] ) IN WorkingDays
+				    )
+				VAR WeeklyCalendar =
+				    GENERATEALL (
+				        AllDates,
+				        VAR WeeksInM1 = 4
+				        VAR WeeksInM2 = 4
+				        VAR WeeksInM3 = 5
+				        VAR YearNumber = YEAR ( [Date] )
+				        VAR WeekNumber = 
+				            IF ( 
+				                WEEKNUM ( [Date] ) = 53,
+				                IF ( WEEKDAY ( DATE ( YearNumber, 12, 31 ) ) = 7, 53, 1 ),
+				                WEEKNUM ( [Date] )
+				            )
+				        VAR MonthNumber = MONTH ( [Date] )
+				        VAR WeeklyYear =
+				            IF ( WeekNumber = 1 && MonthNumber = 12, YearNumber + 1, YearNumber )
+				        VAR QuarterNumber =
+				            IF ( WeekNumber > 52, 4, INT ( ROUNDUP ( WeekNumber / 13, 0 ) ) )
+				        VAR WeekInQuarter =
+				            IF ( WeekNumber > 52, 14, WeekNumber - 13 * ( QuarterNumber - 1 ) )
+				        VAR WeeklyMonthNumber =
+				            ( QuarterNumber - 1 ) * 3
+				                + SWITCH (
+				                    TRUE,
+				                    WeekInQuarter <= WeeksInM1, 1,
+				                    WeekInQuarter <= WeeksInM1 + WeeksInM2, 2,
+				                    3
+				                )
+				        RETURN
+				            ROW (
+				                "Week", "W " & WeekNumber,
+				                "Week Number", WeekNumber,
+				                "Year Week",
+				                    "WY " & WeeklyYear & " W" & WeekNumber,
+				                "Year Week Number",
+				                    WeeklyYear * 100 + WeekNumber,
+				                "Weekly Year", "WY  " & WeeklyYear,
+				                "Weekly Quarter", "WQ" & QuarterNumber,
+				                "Weekly Quarter Number", QuarterNumber,
+				                "Weekly Year Quarter",
+				                    "WY " & WeeklyYear & " WQ" & QuarterNumber,
+				                "Weekly Year Quarter Number",
+				                    WeeklyYear * 100 + QuarterNumber,
+				                "Weekly Month Number", WeeklyMonthNumber,
+				                "Weekly Month", "WM " & WeeklyMonthNumber,
+				                "Weekly Year Month Number",
+				                    WeeklyYear * 100 + WeeklyMonthNumber,
+				                "Weekly Year Month",
+				                    "WY " & WeeklyYear & " WM" & WeeklyMonthNumber
+				            )
+				    )
+				RETURN
+				        NATURALLEFTOUTERJOIN (
+				            GregorianCalendar, 
+				            WeeklyCalendar
+				        )
+				```
+
+	annotation PBI_Id = 0cacd1b2abc04ef2a236a629ce599cbc
+
