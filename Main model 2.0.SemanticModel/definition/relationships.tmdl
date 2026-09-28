@@ -1,0 +1,277 @@
+relationship 2c7494bf-a091-d89e-8f1a-a14ab21feff6
+	fromColumn: GL_ACCOUNTS_P&L.Account_ID
+	toColumn: 'P&L Builder'.Account_ID
+
+relationship a8bfc32d-b5cd-2214-ca8c-35b11ea36e62
+	fromColumn: BUDGET_FORECAST.'Profit Center'
+	toColumn: PROFIT_CENTERS.'Profit Center'
+
+relationship 6575f755-a520-67ca-e168-8eb46d55c8c4
+	fromColumn: BUDGET_FORECAST.'G/L Account Number'
+	toColumn: GL_ACCOUNTS.'G/L Account Number'
+
+relationship AutoDetected_f80c6faa-3505-447a-8fa4-224f283e1bd8
+	fromColumn: SF_TIMESHEET.'G/L Account Number'
+	toColumn: GL_ACCOUNTS.'G/L Account Number'
+
+relationship 75a75b38-49bb-bd3d-f2d6-83aa228db8c0
+	fromColumn: SF_TIMESHEET.'Customer Number'
+	toColumn: CUSTOMERS.'Customer Number'
+
+relationship 96ed9596-3f53-42be-9a84-b078636c7881
+	joinOnDateBehavior: datePartOnly
+	fromColumn: P&L_Calculated.'Posting Month'
+	toColumn: LocalDateTable_210814f8-6802-4c47-9a7d-c6152b82a97d.Date
+
+relationship AutoDetected_c1bc2b3c-9a77-46c8-a6a9-0f7170f907b0
+	fromColumn: P&L_Calculated.'G/L Account Number'
+	toColumn: GL_ACCOUNTS.'G/L Account Number'
+
+relationship 429cc2e2-e4d3-4c72-af4c-c60a2d538906
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OPPORTUNITY.CreatedDate
+	toColumn: LocalDateTable_3ce547a0-eaf9-49ef-87b0-a808c1ad5b8c.Date
+
+relationship AutoDetected_e056f614-10c6-46d8-9d12-899aa1fe6cc1
+	fromColumn: MAIN.'G/L Account Number'
+	toColumn: GL_ACCOUNTS.'G/L Account Number'
+
+relationship 40451889-cabf-358a-3527-f969b8cba27d
+	fromColumn: MAIN.'Profit Center'
+	toColumn: PROFIT_CENTERS.'Profit Center'
+
+relationship 8b0ce267-4283-34b2-9e52-138856d366af
+	fromColumn: MAIN.'Customer Number'
+	toColumn: CUSTOMERS.'Customer Number'
+
+relationship AutoDetected_a5971a8b-7bfe-4ebb-a4f5-586451c17820
+	fromColumn: GL_ACCOUNTS.LEVEL2
+	toColumn: GL_ACCOUNTS_P&L.LEVEL2
+
+relationship d701d51f-987b-bb7a-63bb-d67f6490b6e1
+	fromColumn: MAIN.'Network WBS'
+	toColumn: PROJECTS.'Network WBS'
+
+relationship 0c7b9aac-1706-bd12-0175-f81c46ab32bb
+	fromColumn: MAIN.'Company key'
+	toColumn: COMPANY.'Company key'
+
+relationship 5a4ad3e8-3127-493f-8f2a-48ee5303e312
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Last Refresh'.'DSP Last Refresh UTC'
+	toColumn: LocalDateTable_20b77751-33e3-48be-961f-8090437420ec.Date
+
+relationship 9107e9a7-0f07-4028-8464-ec3e750bd4c3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Last Refresh'.'PBI Last refresh UTC'
+	toColumn: LocalDateTable_20228ea1-07fa-485e-8541-979863575f3d.Date
+
+relationship AutoDetected_518d617a-8d35-4e77-83ec-e97e5a2c1e89
+	fromColumn: SHIP-TO.'Country code'
+	toColumn: REGIONS.'Country code'
+
+relationship AutoDetected_57bd0112-85a0-4954-8db9-ca6c9aae0cec
+	fromColumn: BUDGET_FORECAST.'Ship To Customer Number'
+	toColumn: SHIP-TO.'Customer Number'
+
+relationship e0813a03-8bd4-2369-b73c-607be940e272
+	fromColumn: 'OPPORTUNITY LI'.'Opportunity ID'
+	toColumn: OPPORTUNITY.'Opportunity ID'
+
+relationship 18db7e2d-a834-2abe-fdf4-0de284ee730a
+	fromColumn: 'QUOTE LI'.'Quote ID'
+	toColumn: QUOTE.'Quote ID'
+
+relationship dcadf3a4-f8cb-49ed-8fcd-21bfd1a6e86a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: QUOTE.'Expected Delivery Date'
+	toColumn: LocalDateTable_2adbcdd0-32fa-484e-a33c-b819565edee2.Date
+
+relationship 4b625384-111b-4d56-ae48-3c1a592efe73
+	joinOnDateBehavior: datePartOnly
+	fromColumn: QUOTE.'Last Modified Date'
+	toColumn: LocalDateTable_eed9b9b8-cddb-4bc9-b76b-68625bba5a48.Date
+
+relationship 77f08e03-1825-459f-bd48-8dc158a1024a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: QUOTE.'Valid From Date'
+	toColumn: LocalDateTable_435ad8a6-3812-420f-aab8-568fb3d28f09.Date
+
+relationship c56e5a0f-b104-435e-b235-6c5c476155e8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: QUOTE.'Validity Date'
+	toColumn: LocalDateTable_4080fd59-9b74-43f9-a0cf-492d303e6dd3.Date
+
+relationship 7e47a8e7-1f2e-407d-a040-1782e5bbfab7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: QUOTE.'Created Date'
+	toColumn: LocalDateTable_38861753-9d2f-4e22-af62-60cdb7e75289.Date
+
+relationship b8fc79e4-dce9-00df-3c4f-27b9e99c6868
+	isActive: false
+	fromColumn: OPPORTUNITY.'Customer Number'
+	toColumn: CUSTOMERS.'Customer Number'
+
+relationship 3331aa94-3565-b3ff-0db7-56215453ac13
+	isActive: false
+	fromColumn: OPPORTUNITY.'Profit Center'
+	toColumn: PROFIT_CENTERS.'Profit Center'
+
+relationship 6cd42a74-1c4f-ebe5-74b3-9722ceb116db
+	isActive: false
+	fromColumn: OPPORTUNITY.'Ship To Customer Number'
+	toColumn: SHIP-TO.'Customer Number'
+
+relationship dc82e64d-4a80-e09f-9aa2-18f12e795a24
+	toCardinality: many
+	fromColumn: BUDGET_FORECAST.'Project Definition'
+	toColumn: PROJECTS.'Project Definition'
+
+relationship 6799fbb1-0441-6fc8-3ddd-3a45bf82f972
+	fromColumn: MAIN.'Material Number'
+	toColumn: MATERIALS.'Material Number'
+
+relationship f4ade4e9-8cb6-7df4-6c53-04dbe22fc8d4
+	fromColumn: 'QUOTE LI'.'Material Number'
+	toColumn: MATERIALS.'Material Number'
+
+relationship 919b77a1-86df-c2fa-e8e7-ca93d9c5c33c
+	fromColumn: 'OPPORTUNITY LI'.'Material Number'
+	toColumn: MATERIALS.'Material Number'
+
+relationship 655b9bd0-e94b-4d1b-a161-8364ddbea418
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MAIN.'Document Date'
+	toColumn: LocalDateTable_10732ef3-cbda-43f4-92ce-065581baa009.Date
+
+relationship e6027c8a-c8cc-4360-b8fd-ce933c1b025f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OPPORTUNITY.'Expected Delivery Date'
+	toColumn: LocalDateTable_b62d88e0-83ea-4a1f-9de6-578d3bf4a60a.Date
+
+relationship 9209cb4b-046f-056a-de60-688677eafe9b
+	fromColumn: OPPORTUNITIES_QUOTES.'Customer Number'
+	toColumn: CUSTOMERS.'Customer Number'
+
+relationship 2f18ed97-580b-724b-0394-dc0211125fa3
+	fromColumn: OPPORTUNITIES_QUOTES.'Profit Center'
+	toColumn: PROFIT_CENTERS.'Profit Center'
+
+relationship 64fff631-a29a-fd05-87df-651498a4c820
+	fromColumn: OPPORTUNITIES_QUOTES.'Customer Number'
+	toColumn: SHIP-TO.'Customer Number'
+
+relationship da9966b5-84bd-480e-b582-e141eadcbc35
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OPPORTUNITY.CloseDate
+	toColumn: LocalDateTable_b2ba8202-8346-40c7-b9fa-467ad79089c9.Date
+
+relationship b0673019-e5c9-f18d-543d-209d32fae138
+	fromColumn: 'OPPORTUNITY LI'.'Opportunity ID'
+	toColumn: OPPORTUNITIES_QUOTES.'Opportunity ID'
+
+relationship dd0dbfc8-57f9-4efe-9bca-589c46711d76
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OPPORTUNITIES_QUOTES.'Close Date'
+	toColumn: LocalDateTable_c8cb0d87-d362-442b-ab9c-55fa407f89e0.Date
+
+relationship ead88b33-18f8-4285-970d-0bdd46b9c0f5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OPPORTUNITIES_QUOTES.'Expected Delivery Date'
+	toColumn: LocalDateTable_cea055c8-a60a-4f22-a78b-3409e8da6c91.Date
+
+relationship c99049e1-488a-f229-f1ef-a2c300a02a99
+	fromColumn: MAIN.'Ship To Customer Number'
+	toColumn: SHIP-TO.'Customer Number'
+
+relationship f1c3cf99-189b-7619-e760-1a2cfd4b8b8f
+	fromColumn: MAIN.'Cost Center'
+	toColumn: COST_CENTERS.'Cost Center'
+
+relationship a4b52150-cc64-5922-6671-ce55bafe3717
+	isActive: false
+	fromColumn: COST_CENTERS.'Profit Center'
+	toColumn: PROFIT_CENTERS.'Profit Center'
+
+relationship 5c86d251-74ae-2e65-3dfb-a2f97c054e37
+	fromColumn: BUDGET_FORECAST.'Cost Center'
+	toColumn: COST_CENTERS.'Cost Center'
+
+relationship 5e52c97e-72a0-41f9-9bbf-47f4e68bfc20
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Accouting Doc. - Document Date'
+	toColumn: LocalDateTable_30e0dad3-fd17-4664-a3b4-96d6a90ddcde.Date
+
+relationship 42c10f01-7fc4-4f3e-8574-95161399b4c0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Accouting Doc. - Posting Date'
+	toColumn: LocalDateTable_62931774-2416-4eac-b136-ab625f42f4de.Date
+
+relationship 961863ec-f40d-4e86-865a-72f7c4c1467c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Accouting Doc. - Clearing Date'
+	toColumn: LocalDateTable_843044a2-1b9f-4b33-86d9-7717d00f1e94.Date
+
+relationship ae65432a-3b7b-4897-a485-2bb308312dc0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Accouting Doc. - Baseline Payment Date'
+	toColumn: LocalDateTable_eaf423ac-5b3b-4b9a-93e2-a0fff2d2ef96.Date
+
+relationship 4be9eec7-36ed-4eb3-bfbc-f9ce8ee064e6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Accouting Doc. - Net Due Date'
+	toColumn: LocalDateTable_3b3e7736-06c4-4dcc-8630-b666618f0125.Date
+
+relationship 78369289-7514-4990-9c43-0497be882750
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Invoice Doc. - Document Date'
+	toColumn: LocalDateTable_99e527f6-c486-4db4-b6d4-888c3d76905a.Date
+
+relationship aa1ca692-d4ab-4db5-b17c-78e0acbda6e7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Invoice Doc. - Posting Date'
+	toColumn: LocalDateTable_af51585b-7a3b-4bac-a13c-7623f04e6bdc.Date
+
+relationship 94d26229-80f3-4629-b726-91fcaa44bee5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Invoice Doc. - Baseline Date'
+	toColumn: LocalDateTable_fb762223-8396-43b8-bc28-0a55a1dd6322.Date
+
+relationship AutoDetected_ec3f0aea-31eb-4f69-ae75-6c191595f7e9
+	fromColumn: ACCOUNTS_PAYABLE.'Accouting Doc. - Company Code'
+	toColumn: COMPANY.'Company key'
+
+relationship AutoDetected_3baf3aa9-baaf-4781-bb08-acbb0de06a72
+	fromColumn: SALES_ORDERS.Company_code
+	toColumn: COMPANY.'Company key'
+
+relationship d821e351-5e95-4f79-a08c-bfde7f6cb026
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Invoice Doc. - Translation Date'
+	toColumn: LocalDateTable_123140cd-4f85-4670-9327-a581e72e2d82.Date
+
+relationship b6f307fd-af8a-4707-88dd-43b3d16b496d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ACCOUNTS_PAYABLE.'Invoice Doc. - Entered On'
+	toColumn: LocalDateTable_4a83439f-ebec-4ad9-9efa-990f66ee48a9.Date
+
+relationship 36a1f3b9-02fb-42ed-b721-275ee10a74bc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MAIN.'Posting Date'
+	toColumn: LocalDateTable_db7657e8-73b2-4908-8cd9-ede526d01a54.Date
+
+relationship 197b62e5-635c-4bd0-b7df-da12b20573ae
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SF_TIMESHEET.Week_Date__c
+	toColumn: LocalDateTable_e55f89f7-868d-490b-8eb5-7507dc6db4f0.Date
+
+relationship 0f9b76ba-7176-4bf4-9094-f91bf492fa30
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BUDGET_FORECAST.DateKey
+	toColumn: LocalDateTable_c6e5c0fc-0c28-486d-be9b-31f9253d7a1a.Date
+
+relationship a1c2890c-4f9a-4ff7-985f-a3dfccccc439
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OPPORTUNITIES_QUOTES.Date
+	toColumn: LocalDateTable_452a706b-4e04-4487-bf2a-2494e2f5aaf7.Date
+

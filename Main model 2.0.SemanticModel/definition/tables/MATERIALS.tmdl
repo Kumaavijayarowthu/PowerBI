@@ -1,0 +1,157 @@
+table MATERIALS
+	lineageTag: b33cbd20-4102-42ea-b78b-d5e397f5d5fb
+
+	column 'Material Number'
+		dataType: string
+		lineageTag: e7318819-75e9-4b60-9eeb-19d0c06ef26d
+		summarizeBy: none
+		sourceColumn: Material Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Material Type'
+		dataType: string
+		lineageTag: e7203369-f32e-4229-b29e-50f25c555023
+		summarizeBy: none
+		sourceColumn: Material Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Material Group'
+		dataType: string
+		lineageTag: 3a14abee-ef5c-42dc-a2a0-171beb05375f
+		summarizeBy: none
+		sourceColumn: Material Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Base UOM'
+		dataType: string
+		lineageTag: 6e95011c-40d3-480c-939a-06176d2c142b
+		summarizeBy: none
+		sourceColumn: Base UOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Line Manager'
+		dataType: string
+		lineageTag: 65a9ac13-d9da-4fdd-8629-1155b2ed9afa
+		summarizeBy: none
+		sourceColumn: Product Line Manager
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prod. Hier. 1'
+		dataType: string
+		lineageTag: cc48a677-fa7e-4f38-9643-0af401206c1d
+		summarizeBy: none
+		sourceColumn: Prod. Hier. 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prod. Hier. 2'
+		dataType: string
+		lineageTag: 49c13671-02ba-410d-b7b2-38a7df9f910e
+		summarizeBy: none
+		sourceColumn: Prod. Hier. 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prod. Hier. 3'
+		dataType: string
+		lineageTag: b74f2123-0df2-485d-aece-6f400a48bef1
+		summarizeBy: none
+		sourceColumn: Prod. Hier. 3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prod. Hier. 4'
+		dataType: string
+		lineageTag: 682572e3-f5bd-46a0-b525-9e12859b0404
+		summarizeBy: none
+		sourceColumn: Prod. Hier. 4
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prod. Hier. 5'
+		dataType: string
+		lineageTag: 380a4b6b-d2ab-4ce4-b86e-a0f02489206e
+		summarizeBy: none
+		sourceColumn: Prod. Hier. 5
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Product Hierarchy'
+		lineageTag: 0cd0453c-f0a7-4831-9792-a2694dc8c505
+
+		level 'Prod. Hier. 1'
+			lineageTag: 4d68c291-7e08-4a88-b320-8a4d97fc5f28
+			column: 'Prod. Hier. 1'
+
+		level 'Prod. Hier. 2'
+			lineageTag: 9b0db039-cf5e-4214-9d5b-04ca2dc1c676
+			column: 'Prod. Hier. 2'
+
+		level 'Prod. Hier. 3'
+			lineageTag: 7ec8568e-b275-422e-8afb-849939681676
+			column: 'Prod. Hier. 3'
+
+		level 'Prod. Hier. 4'
+			lineageTag: 3562ef57-c2d3-45fc-b80b-24e1624c6886
+			column: 'Prod. Hier. 4'
+
+		level 'Prod. Hier. 5'
+			lineageTag: ebf64d77-6c12-4156-a4ca-40a3da8fbaff
+			column: 'Prod. Hier. 5'
+
+	partition MATERIALS = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    //Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    //INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    //Z_INS_MARA_S4_V_D_View = INS_Schema{[Name="Z_INS_MARA_S4_V_D",Kind="View"]}[Data],
+				    Source = Odbc.Query(dsn, "SELECT MATNR, MTART, MEINS, MATKL, PRODLMAN, PRDHA_LVL1, PRDHA_LVL2, PRDHA_LVL3, PRDHA_LVL4, PRDHA_LVL5#(lf)FROM INS.Z_INS_MARA_S4_V_D"),
+				    #"Merged Queries" = Table.NestedJoin(Source, {"PRDHA_LVL1"}, Z_INS_T179T_S4_V_T, {"PRODH"}, "Z_INS_T179T_S4_V_T", JoinKind.LeftOuter),
+				    #"Expanded Z_INS_T179T_S4_V_T" = Table.ExpandTableColumn(#"Merged Queries", "Z_INS_T179T_S4_V_T", {"VTEXT"}, {"Prod. Hier. 1"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded Z_INS_T179T_S4_V_T", {"PRDHA_LVL2"}, Z_INS_T179T_S4_V_T, {"PRODH"}, "Z_INS_T179T_S4_V_T", JoinKind.LeftOuter),
+				    #"Expanded Z_INS_T179T_S4_V_T1" = Table.ExpandTableColumn(#"Merged Queries1", "Z_INS_T179T_S4_V_T", {"VTEXT"}, {"Prod. Hier. 2"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Expanded Z_INS_T179T_S4_V_T1", {"PRDHA_LVL3"}, Z_INS_T179T_S4_V_T, {"PRODH"}, "Z_INS_T179T_S4_V_T", JoinKind.LeftOuter),
+				    #"Expanded Z_INS_T179T_S4_V_T2" = Table.ExpandTableColumn(#"Merged Queries2", "Z_INS_T179T_S4_V_T", {"VTEXT"}, {"Prod. Hier. 3"}),
+				    #"Merged Queries3" = Table.NestedJoin(#"Expanded Z_INS_T179T_S4_V_T2", {"PRDHA_LVL4"}, Z_INS_T179T_S4_V_T, {"PRODH"}, "Z_INS_T179T_S4_V_T", JoinKind.LeftOuter),
+				    #"Expanded Z_INS_T179T_S4_V_T3" = Table.ExpandTableColumn(#"Merged Queries3", "Z_INS_T179T_S4_V_T", {"VTEXT"}, {"Prod. Hier. 4"}),
+				    #"Merged Queries4" = Table.NestedJoin(#"Expanded Z_INS_T179T_S4_V_T3", {"PRDHA_LVL5"}, Z_INS_T179T_S4_V_T, {"PRODH"}, "Z_INS_T179T_S4_V_T", JoinKind.LeftOuter),
+				    #"Expanded Z_INS_T179T_S4_V_T4" = Table.ExpandTableColumn(#"Merged Queries4", "Z_INS_T179T_S4_V_T", {"VTEXT"}, {"Prod. Hier. 5"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded Z_INS_T179T_S4_V_T4",{{"MATNR", "Material Number"}, {"MTART", "Material Type"}, {"MEINS", "Base UOM"}, {"MATKL", "Material Group"}, {"PRODLMAN", "Product Line Manager"}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns",{"Material Number", "Material Type", "Base UOM", "Material Group", "Product Line Manager", "Prod. Hier. 1", "Prod. Hier. 2", "Prod. Hier. 3", "Prod. Hier. 4", "Prod. Hier. 5"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Other Columns","",null,Replacer.ReplaceValue,{"Product Line Manager", "Prod. Hier. 1", "Prod. Hier. 2", "Prod. Hier. 3", "Prod. Hier. 4", "Prod. Hier. 5"})
+				in
+				    #"Replaced Value"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

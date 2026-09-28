@@ -1,0 +1,367 @@
+table SALES_ORDERS
+	lineageTag: bce0ccad-85e8-41dc-a563-70385110c342
+
+	column MANDT
+		dataType: string
+		lineageTag: a2650bbf-1530-4c6d-a8e9-b77fa856b4a8
+		summarizeBy: none
+		sourceColumn: MANDT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Item_Type
+		dataType: string
+		lineageTag: 287de3f6-4760-4589-b99b-b89daa2eb603
+		summarizeBy: none
+		sourceColumn: Item_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal_year_variant
+		dataType: string
+		lineageTag: 8ea28e1b-317b-4233-93be-e51f5b0bb089
+		summarizeBy: none
+		sourceColumn: Fiscal_year_variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ship_to_Party
+		dataType: string
+		lineageTag: 70cb3e0d-3885-4ac5-8a21-0f83fe748cdc
+		summarizeBy: none
+		sourceColumn: Ship_to_Party
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit_Center
+		dataType: string
+		lineageTag: 0c92351c-1d2d-4941-9ca8-cd04e5fb70a9
+		summarizeBy: none
+		sourceColumn: Profit_Center
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_Doc_Type
+		dataType: string
+		lineageTag: 4bfe7a68-d0d5-4d26-b5ae-60c2558a3ee1
+		summarizeBy: none
+		sourceColumn: Sales_Doc_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Createdon_Date
+		dataType: string
+		lineageTag: 6b1d2ba8-c328-4884-add6-6b65f8d294bc
+		summarizeBy: none
+		sourceColumn: Createdon_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_Rel_Bill_Status_Item
+		dataType: string
+		lineageTag: a0a18416-3a9b-4d54-90f8-a1e4d5fae6af
+		summarizeBy: none
+		sourceColumn: Order_Rel_Bill_Status_Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column Energy_Transition_Categ
+		dataType: string
+		lineageTag: fdd0b345-0b82-445c-bd7b-c06335d31b34
+		summarizeBy: none
+		sourceColumn: Energy_Transition_Categ
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_Probability
+		dataType: string
+		lineageTag: 31f8cc33-233b-43d2-baef-50c7d5bd75c4
+		summarizeBy: none
+		sourceColumn: Order_Probability
+
+		annotation SummarizationSetBy = Automatic
+
+	column Plant
+		dataType: string
+		lineageTag: bbf81a51-fe0f-4111-b77c-4c46667e397d
+		summarizeBy: none
+		sourceColumn: Plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column SD_Doc_Currcy
+		dataType: string
+		lineageTag: 6cb5e5ee-ae2f-4438-939c-2cb62b9b3916
+		summarizeBy: none
+		sourceColumn: SD_Doc_Currcy
+
+		annotation SummarizationSetBy = Automatic
+
+	column Base_UOM
+		dataType: string
+		lineageTag: feddd3ba-7c94-4704-a985-ee58eacf1112
+		summarizeBy: none
+		sourceColumn: Base_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Net_Value_Doc_Currcy
+		dataType: double
+		lineageTag: f775067f-4d65-4b39-b57f-b17a1e119af6
+		summarizeBy: sum
+		sourceColumn: Net_Value_Doc_Currcy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Confirmed_Qty_Base_Unit
+		dataType: double
+		lineageTag: e50d5c79-c95f-4ac1-ad2f-0d553f489132
+		summarizeBy: sum
+		sourceColumn: Confirmed_Qty_Base_Unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Performance_COGS_DKK
+		dataType: double
+		lineageTag: 3cc1765f-3499-457a-ac27-a35d4e811ebb
+		summarizeBy: sum
+		sourceColumn: Performance_COGS_DKK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Confirmed_Qty_Sales_Unit
+		dataType: double
+		lineageTag: 5c3bc25c-d3e2-4ce9-ad23-04eb0a2d8739
+		summarizeBy: sum
+		sourceColumn: Confirmed_Qty_Sales_Unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Contr_Area
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e5a9c6f-7eb5-4bb7-9587-d38638c32435
+		summarizeBy: sum
+		sourceColumn: Contr_Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company_code
+		dataType: string
+		lineageTag: 8bbd5ec1-d2fe-4d36-b248-b56c006f0d44
+		summarizeBy: none
+		sourceColumn: Company_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Incoterms_part_1
+		dataType: string
+		lineageTag: 772bf13d-d898-4b24-b25d-ecfe3f3c90cb
+		summarizeBy: none
+		sourceColumn: Incoterms_part_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price_Date
+		dataType: string
+		lineageTag: fa63b3a4-30a7-44dc-a6b4-b7b7f5cfa826
+		summarizeBy: none
+		sourceColumn: Price_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_Document
+		dataType: string
+		lineageTag: c5fb8561-1552-46ee-9cf8-d13f824aec07
+		summarizeBy: none
+		sourceColumn: Sales_Document
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_Doc_Itm_Categ
+		dataType: string
+		lineageTag: 7d2e072a-5d4d-4bda-9c31-de2603aed19c
+		summarizeBy: none
+		sourceColumn: Sales_Doc_Itm_Categ
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_Document_Item
+		dataType: string
+		lineageTag: 8aeef557-e18d-471e-8950-c234781bee0e
+		summarizeBy: none
+		sourceColumn: Sales_Document_Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column ZREPUOM
+		dataType: string
+		lineageTag: 512ea0d2-9338-4b01-a8a9-9787e9c6630e
+		summarizeBy: none
+		sourceColumn: ZREPUOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bill_date_final
+		dataType: string
+		lineageTag: 9eb446dc-8cd2-4ed6-8928-58b8b96b6552
+		summarizeBy: none
+		sourceColumn: Bill_date_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column MEINH
+		dataType: string
+		lineageTag: df7c3750-8849-4a20-bf3c-b99b76432a58
+		summarizeBy: none
+		sourceColumn: MEINH
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEL_REL_BILL_STATUS
+		dataType: string
+		lineageTag: e993a042-3d8e-4137-9aab-3273e6c30a36
+		summarizeBy: none
+		sourceColumn: DEL_REL_BILL_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column Material_Number
+		dataType: string
+		lineageTag: 6f859e20-a521-48c9-aa57-73f5a4eab86c
+		summarizeBy: none
+		sourceColumn: Material_Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal_YearPeriod
+		dataType: string
+		lineageTag: 462c573a-50be-4665-b60f-f8b09e41a521
+		summarizeBy: none
+		sourceColumn: Fiscal_YearPeriod
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal_Year
+		dataType: string
+		lineageTag: 9e00c0ae-bac9-497d-b6e2-6dad97a79d55
+		summarizeBy: none
+		sourceColumn: Fiscal_Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity_RepUoM
+		dataType: double
+		lineageTag: 594cc2bd-f0e1-49c9-9353-53efd73ebd01
+		summarizeBy: sum
+		sourceColumn: Quantity_RepUoM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Created_On_FISCPER
+		dataType: string
+		lineageTag: 29e5f524-2bfc-4afe-a447-47cb503f2d7e
+		summarizeBy: none
+		sourceColumn: Created_On_FISCPER
+
+		annotation SummarizationSetBy = Automatic
+
+	column Schedule_Line_Category
+		dataType: string
+		lineageTag: b6109047-4d72-468c-9325-96cf20803f56
+		summarizeBy: none
+		sourceColumn: Schedule_Line_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last_Changed_On
+		dataType: string
+		lineageTag: 96d14c57-225a-40e7-87c8-3838256c9a71
+		summarizeBy: none
+		sourceColumn: Last_Changed_On
+
+		annotation SummarizationSetBy = Automatic
+
+	column Overall_Processing_Status_Item
+		dataType: string
+		lineageTag: 69186e18-2b00-4842-9ac5-3d18b65fa072
+		summarizeBy: none
+		sourceColumn: Overall_Processing_Status_Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date_Flag
+		dataType: string
+		lineageTag: 7d43fe3e-3182-43b4-a132-3efc5b10e98b
+		summarizeBy: none
+		sourceColumn: Date_Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: c9e796a1-d52a-4104-b1bc-072fc08cf2ee
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason_Reject
+		dataType: string
+		lineageTag: e58a3df7-7d41-42d2-884d-f38d90b61002
+		summarizeBy: none
+		sourceColumn: Reason_Reject
+
+		annotation SummarizationSetBy = Automatic
+
+	column Net_Value_DKK
+		dataType: double
+		lineageTag: f661b413-7f80-42f9-b19a-2bf325449dfe
+		summarizeBy: sum
+		sourceColumn: Net_Value_DKK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OwnerId_Alias_Capital
+		dataType: string
+		lineageTag: d00eca65-75dc-4a30-bdb3-8964ecca32ca
+		summarizeBy: none
+		sourceColumn: OwnerId_Alias_Capital
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country_Region
+		dataType: string
+		lineageTag: fe2020a9-3bbf-48dd-9875-348757d23195
+		summarizeBy: none
+		sourceColumn: Country_Region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SALES_ORDERS = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_ACCOUNTS_PAYABLE_F_V_View = INS_Schema{[Name="Z_INS_SALES_ORDERS_F_V",Kind="View"]}[Data]
+				in
+				    Z_INS_ACCOUNTS_PAYABLE_F_V_View
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

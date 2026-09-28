@@ -1,0 +1,98 @@
+table CUSTOMERS
+	lineageTag: 279cbda6-b5bb-4742-84d3-9f7e1dfe7d1a
+
+	column 'Customer Number'
+		dataType: string
+		lineageTag: a016d1a4-e6d5-4b7c-8dd3-5f106cdff17c
+		summarizeBy: none
+		sourceColumn: Customer Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: dab249fa-812e-49d8-b35b-4438600a0876
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Classification'
+		dataType: string
+		lineageTag: 45786153-cc0a-4ea1-8d75-4735f471d17f
+		summarizeBy: none
+		sourceColumn: Customer Classification
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parent Name'
+		dataType: string
+		lineageTag: 82c42e9c-7a5e-48b8-81c2-0edcbe16dd5a
+		summarizeBy: none
+		sourceColumn: Parent Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parent Account Number'
+		dataType: string
+		lineageTag: 0ee604ef-2ffd-43da-82c8-997d9d1d5b0c
+		summarizeBy: none
+		sourceColumn: Parent Account Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country code'
+		dataType: string
+		lineageTag: a71a71fa-023d-4cdd-93b4-4973ea0c8a80
+		summarizeBy: none
+		sourceColumn: Country code
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Customer Hierarchy'
+		lineageTag: bebb8360-91a0-4323-8fa4-a9d9f3532140
+
+		level 'Parent Name'
+			lineageTag: b6afcbef-061a-4845-998f-7ecac6688ab8
+			column: 'Parent Name'
+
+		level 'Customer Name'
+			lineageTag: 4d2186eb-33d6-45e5-81d2-263db37702f5
+			column: 'Customer Name'
+
+	partition CUSTOMERS = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_CUSTOMER_V_D_View = INS_Schema{[Name="Z_INS_CUSTOMER_V_D",Kind="View"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Z_INS_CUSTOMER_V_D_View,{{"PARENT_NAME1", "Parent Name"}, {"NAME1", "Customer Name"}, {"Customer_Classification__c", "Customer Classification"}, {"KUNNR", "Customer Number"}, {"Parent_Account_Number__c", "Parent Account Number"}, {"LAND1", "Country code"}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns",{"Parent Account Number", "Parent Name", "Customer Classification", "Customer Name", "Customer Number", "Country code"}),
+				    // Use customer name if parent name not available
+				    // #"Replaced Parent Name" = Table.ReplaceValue(#"Removed Other Columns",null,each [Customer Name],Replacer.ReplaceValue,{"Parent Name"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"Parent Name", type text}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"Customer Number"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Duplicates","",null,Replacer.ReplaceValue,{"Parent Account Number", "Parent Name", "Customer Classification", "Customer Name", "Customer Number", "Country code"}),
+				    #"Appended Query" = Table.Combine({#"Replaced Value", country_as_customer}),
+				    #"Sorted Rows" = Table.Sort(#"Appended Query",{{"Customer Number", Order.Descending}})
+				in
+				    #"Sorted Rows"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

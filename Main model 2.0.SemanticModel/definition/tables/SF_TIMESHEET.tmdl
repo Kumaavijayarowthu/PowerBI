@@ -1,0 +1,215 @@
+table SF_TIMESHEET
+	lineageTag: a8ec9a6a-e1c2-4a3d-bb6f-b41a37e6bc2f
+
+	column Timesheet_Name
+		dataType: string
+		lineageTag: 5ac7e3c2-e7db-49aa-9dd0-4a976519b374
+		summarizeBy: none
+		sourceColumn: Timesheet_Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Hours__c
+		dataType: double
+		lineageTag: 518696b5-935c-412b-b270-5afd6d1fb3c8
+		summarizeBy: sum
+		sourceColumn: Total_Hours__c
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Week_Date__c
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 05ace82c-1c26-4ee3-aff4-6c14a0eecb0b
+		summarizeBy: none
+		sourceColumn: Week_Date__c
+
+		variation Variation
+			isDefault
+			relationship: 197b62e5-635c-4bd0-b7df-da12b20573ae
+			defaultHierarchy: LocalDateTable_e55f89f7-868d-490b-8eb5-7507dc6db4f0.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'G/L Account Number'
+		dataType: string
+		lineageTag: 0a7226c0-9063-4303-bca2-e5683067bd9c
+		summarizeBy: none
+		sourceColumn: G/L Account Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column User_Name
+		dataType: string
+		lineageTag: e1ae8ba6-e5e0-4bfe-a3e1-5b8d5e1ad900
+		summarizeBy: none
+		sourceColumn: User_Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_Service_Office__c
+		dataType: string
+		lineageTag: 18c8a97f-7c61-4644-a061-09c10e8b37cc
+		summarizeBy: none
+		sourceColumn: Sales_Service_Office__c
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account_Id
+		dataType: string
+		lineageTag: fae0a5a7-2de1-420c-bffd-055b0046854b
+		summarizeBy: none
+		sourceColumn: Account_Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Number'
+		dataType: string
+		lineageTag: 8002a982-e260-4b6b-b2af-5170ee3ad7bd
+		summarizeBy: none
+		sourceColumn: Customer Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_Office_Hourly_Rate
+		dataType: double
+		formatString: 0
+		lineageTag: 06c5d729-aebc-4c2e-9b5d-d9721639db0a
+		summarizeBy: sum
+		sourceColumn: Sales_Office_Hourly_Rate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Cost
+		dataType: double
+		lineageTag: b09d4fe2-0267-4969-aa5f-341993cfe381
+		summarizeBy: sum
+		sourceColumn: Total_Cost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_NAME1
+		dataType: string
+		lineageTag: a14851ee-b469-4256-aac6-3e90058d19d8
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NAME1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column KTOKD
+		dataType: string
+		lineageTag: dd78a3f1-b286-4013-9160-5ccf08f26d7f
+		summarizeBy: none
+		sourceColumn: KTOKD
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAND1
+		dataType: string
+		lineageTag: 3a2195fe-1dce-4406-bb0c-5c246f7e1d3d
+		summarizeBy: none
+		sourceColumn: LAND1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VBUND
+		dataType: string
+		lineageTag: c58a9e30-6526-43d1-8f59-ecfa79903c3e
+		summarizeBy: none
+		sourceColumn: VBUND
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OwnerId_Alias
+		dataType: string
+		lineageTag: fbb170ee-880b-4840-a6e7-fface64396d2
+		summarizeBy: none
+		sourceColumn: OwnerId_Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Classification__c
+		dataType: string
+		lineageTag: d02e6d98-52a2-486f-8d76-ade543f4de50
+		summarizeBy: none
+		sourceColumn: Customer_Classification__c
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PARENT_NAME1
+		dataType: string
+		lineageTag: 21786b58-6a71-46ea-9f9d-5fcfec826333
+		summarizeBy: none
+		sourceColumn: PARENT_NAME1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Parent_Account_Number__c
+		dataType: string
+		lineageTag: e2b2baf9-f4ca-4c68-9dff-2c6cf70fe883
+		summarizeBy: none
+		sourceColumn: Parent_Account_Number__c
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SF_TIMESHEET = m
+		mode: import
+		queryGroup: Salesforce
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_SFDC_Time_Sheet_F_V_View = INS_Schema{[Name="Z_INS_SFDC_Time_Sheet_F_V",Kind="View"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Z_INS_SFDC_Time_Sheet_F_V_View,{{"Total_Cost", type number}, {"Sales_Office_Hourly_Rate", type number}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"GL_account", "G/L Account Number"}, {"AccountNumber_10", "Customer Number"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

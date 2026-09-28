@@ -1,0 +1,45 @@
+table 'Last Refresh'
+	lineageTag: c9b41786-1dcf-4ed4-8463-1c86e9ad4074
+
+	column 'PBI Last refresh UTC'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4f4aa899-7fde-46d5-9dfc-2e7abce31336
+		summarizeBy: none
+		sourceColumn: PBI Last refresh UTC
+
+		variation Variation
+			isDefault
+			relationship: 9107e9a7-0f07-4028-8464-ec3e750bd4c3
+			defaultHierarchy: LocalDateTable_20228ea1-07fa-485e-8541-979863575f3d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DSP Last Refresh UTC'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 217512ec-dbb4-42d7-bade-612a3201e8ae
+		summarizeBy: none
+		sourceColumn: DSP Last Refresh UTC
+
+		variation Variation
+			isDefault
+			relationship: 5a4ad3e8-3127-493f-8f2a-48ee5303e312
+			defaultHierarchy: LocalDateTable_20b77751-33e3-48be-961f-8090437420ec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Last Refresh' = m
+		mode: import
+		source =
+				let
+				    Source = Odbc.Query(dsn, "SELECT MAX(DISTINCT ""Timestamp_DSP"") AS ""DSP Last Refresh UTC""#(lf)FROM INS.Z_INS_ACDOCA_MAIN_PERSIST #(lf)WHERE LEVEL2_TEXT NOT IN ('ASSETS', 'LIABILITIES')"),
+				    #"Added PBI last refresh" = Table.AddColumn(Source, "PBI Last refresh UTC", each DateTimeZone.RemoveZone(DateTimeZone.FixedUtcNow())),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added PBI last refresh",{{"PBI Last refresh UTC", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

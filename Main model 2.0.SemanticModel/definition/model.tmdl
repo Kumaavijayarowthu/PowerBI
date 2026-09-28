@@ -1,0 +1,81 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Datasphere
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup Salesforce
+
+	annotation PBI_QueryGroupOrder = 2
+
+annotation PBI_QueryOrder = ["MAIN","BUDGET_FORECAST","ASSET","OPPORTUNITY","OPPORTUNITY LI","QUOTE","QUOTE LI","SF_TIMESHEET","OPPORTUNITIES_QUOTES","GL_ACCOUNTS","GL_ACCOUNTS_P&L","PROFIT_CENTERS","COST_CENTERS","REGIONS","country_as_customer","REGIONS_lev2","REGIONS_lev1","GL_ACCOUNTS Sorting","Z_INS_HIER_KOSTL_V_H","P&L_Calculated","P&L Builder","CUSTOMERS","SHIP-TO","dsn","PC Short names","Last Refresh","PROJECTS","COMPANY","Z_INS_T179T_S4_V_T","MATERIALS","Opportunities wo quote","Opportunities wo sap quote","Synced quotes w sap quote","Quotes data","Opportunity data","Record Type mapping","ACCOUNTS_PAYABLE","SALES_ORDERS"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","WebModelingEdit"]
+
+ref table DateTableTemplate_2962ba5e-d595-40f9-94be-9a0987fb5861
+ref table GL_ACCOUNTS
+ref table PROFIT_CENTERS
+ref table REGIONS
+ref table GL_ACCOUNTS_P&L
+ref table 'P&L Builder'
+ref table BUDGET_FORECAST
+ref table SF_TIMESHEET
+ref table CUSTOMERS
+ref table QUOTE
+ref table P&L_Calculated
+ref table LocalDateTable_210814f8-6802-4c47-9a7d-c6152b82a97d
+ref table OPPORTUNITY
+ref table LocalDateTable_3ce547a0-eaf9-49ef-87b0-a808c1ad5b8c
+ref table COST_CENTERS
+ref table MAIN
+ref table PROJECTS
+ref table COMPANY
+ref table 'Last Refresh'
+ref table LocalDateTable_20b77751-33e3-48be-961f-8090437420ec
+ref table LocalDateTable_20228ea1-07fa-485e-8541-979863575f3d
+ref table SHIP-TO
+ref table 'OPPORTUNITY LI'
+ref table 'QUOTE LI'
+ref table LocalDateTable_2adbcdd0-32fa-484e-a33c-b819565edee2
+ref table LocalDateTable_eed9b9b8-cddb-4bc9-b76b-68625bba5a48
+ref table LocalDateTable_435ad8a6-3812-420f-aab8-568fb3d28f09
+ref table LocalDateTable_4080fd59-9b74-43f9-a0cf-492d303e6dd3
+ref table LocalDateTable_38861753-9d2f-4e22-af62-60cdb7e75289
+ref table MATERIALS
+ref table LocalDateTable_10732ef3-cbda-43f4-92ce-065581baa009
+ref table LocalDateTable_b62d88e0-83ea-4a1f-9de6-578d3bf4a60a
+ref table OPPORTUNITIES_QUOTES
+ref table LocalDateTable_b2ba8202-8346-40c7-b9fa-467ad79089c9
+ref table LocalDateTable_c8cb0d87-d362-442b-ab9c-55fa407f89e0
+ref table LocalDateTable_cea055c8-a60a-4f22-a78b-3409e8da6c91
+ref table ACCOUNTS_PAYABLE
+ref table LocalDateTable_30e0dad3-fd17-4664-a3b4-96d6a90ddcde
+ref table LocalDateTable_62931774-2416-4eac-b136-ab625f42f4de
+ref table LocalDateTable_843044a2-1b9f-4b33-86d9-7717d00f1e94
+ref table LocalDateTable_eaf423ac-5b3b-4b9a-93e2-a0fff2d2ef96
+ref table LocalDateTable_3b3e7736-06c4-4dcc-8630-b666618f0125
+ref table LocalDateTable_99e527f6-c486-4db4-b6d4-888c3d76905a
+ref table LocalDateTable_af51585b-7a3b-4bac-a13c-7623f04e6bdc
+ref table LocalDateTable_fb762223-8396-43b8-bc28-0a55a1dd6322
+ref table SALES_ORDERS
+ref table LocalDateTable_123140cd-4f85-4670-9327-a581e72e2d82
+ref table LocalDateTable_4a83439f-ebec-4ad9-9efa-990f66ee48a9
+ref table LocalDateTable_db7657e8-73b2-4908-8cd9-ede526d01a54
+ref table LocalDateTable_e55f89f7-868d-490b-8eb5-7507dc6db4f0
+ref table LocalDateTable_c6e5c0fc-0c28-486d-be9b-31f9253d7a1a
+ref table LocalDateTable_452a706b-4e04-4487-bf2a-2494e2f5aaf7
+
+ref cultureInfo en-US
+

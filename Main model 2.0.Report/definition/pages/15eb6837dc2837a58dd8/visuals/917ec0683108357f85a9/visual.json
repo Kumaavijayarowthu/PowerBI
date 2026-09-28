@@ -1,0 +1,180 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "917ec0683108357f85a9",
+  "position": {
+    "x": 220.12077512392969,
+    "y": 132.90310950878774,
+    "z": 10000,
+    "height": 231.74979720594862,
+    "width": 971.85398828301038,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "G/L LEVEL2_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.G/L LEVEL2_TEXT",
+              "nativeQueryRef": "G/L LEVEL2_TEXT",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "00. DateTable"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "00. DateTable.Date.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Date Year",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "01. Key Figures"
+                    }
+                  },
+                  "Property": "Actuals"
+                }
+              },
+              "queryRef": "01. Key Figures.Actuals",
+              "nativeQueryRef": "Actuals"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "05. Actuals"
+                    }
+                  },
+                  "Property": "MTD Actuals"
+                }
+              },
+              "queryRef": "05. Actuals.MTD Actuals",
+              "nativeQueryRef": "MTD Actuals"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "05. Actuals"
+                    }
+                  },
+                  "Property": "YTD Actuals"
+                }
+              },
+              "queryRef": "05. Actuals.YTD Actuals",
+              "nativeQueryRef": "YTD Actuals"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "00. DateTable.Date.Variation.Date Hierarchy.Year"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LocalDateTable_bbf70898-ea34-491a-8b1b-1e33e68e3c74"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              }
+            ],
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "2026L"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a5489bf0780a0ddb2176",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "00. DateTable"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      }
+    ]
+  }
+}

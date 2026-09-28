@@ -1,0 +1,81 @@
+table REGIONS
+	lineageTag: 8fca70f8-69b2-4fba-af11-4fa9dddc4e04
+
+	column Region
+		dataType: string
+		lineageTag: 0d60ad63-4e8b-4ba2-916e-cdd76acdca3c
+		summarizeBy: none
+		sourceColumn: Region
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Region lev. 2'
+		dataType: string
+		lineageTag: e8499ec9-9017-4b23-8026-c8e0b9e5ed9f
+		summarizeBy: none
+		sourceColumn: Region lev. 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 581603f0-1223-47d9-8d8b-7406943bc253
+		summarizeBy: none
+		sourceColumn: Country
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country code'
+		dataType: string
+		lineageTag: 4c5d66a9-96d9-485a-83e8-2b6cd9dd4f6d
+		summarizeBy: none
+		sourceColumn: Country code
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Region Hierarchy'
+		lineageTag: b654afd4-9792-43bc-bad9-2e0068b7d483
+
+		level Region
+			lineageTag: 93a132ca-f21d-4c21-982b-0e2532b72dd4
+			column: Region
+
+		level 'Region lev. 2'
+			lineageTag: 394e39e1-a75b-4a2e-a8e0-fabdd79502be
+			column: 'Region lev. 2'
+
+		level Country
+			lineageTag: 2b62b6ef-b8d9-4dad-bc1e-69757497c19d
+			column: Country
+
+	partition REGIONS = m
+		mode: import
+		queryGroup: Datasphere
+		source = ```
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_TKCHW_V_H_View = INS_Schema{[Name="Z_INS_TKCHW_V_H",Kind="View"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Z_INS_TKCHW_V_H_View,{{"TXT40_L1", "Region"}, {"TXT40_L2", "Region lev. 2"}, {"LANDX50", "Country"}, {"WERT1_L3", "Country code"}}),
+				    // Middle east Country codes come from WERT1_L4 instead of WERT1_L3 
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","510",each [WERT1_L4],Replacer.ReplaceText,{"Country code"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Replaced Value",{"Country", "Country code", "Region lev. 2", "Region"}),
+				    #"Appended Query" = Table.Combine({#"Removed Other Columns"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Appended Query", {"Country code"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each ([Country code] <> null))
+				in
+				    #"Filtered Rows"
+				```
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

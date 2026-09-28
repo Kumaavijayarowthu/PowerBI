@@ -1,0 +1,161 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "ccb0f08487421cbe86cd",
+  "position": {
+    "x": 220.12077512392969,
+    "y": 381.26579540333483,
+    "z": 11000,
+    "height": 308.9997296079315,
+    "width": 897.92663361874713,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "G/L LEVEL2_TEXT"
+                }
+              },
+              "queryRef": "GL_ACCOUNTS.G/L LEVEL2_TEXT",
+              "nativeQueryRef": "G/L LEVEL2_TEXT",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "00. DateTable"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "00. DateTable.Date.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Date Year",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "01. Key Figures"
+                    }
+                  },
+                  "Property": "Budget"
+                }
+              },
+              "queryRef": "01. Key Figures.Budget",
+              "nativeQueryRef": "Budget"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "06. Budget"
+                    }
+                  },
+                  "Property": "YTD Budget"
+                }
+              },
+              "queryRef": "06. Budget.YTD Budget",
+              "nativeQueryRef": "YTD Budget"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "06. Budget"
+                    }
+                  },
+                  "Property": "MTD Budget"
+                }
+              },
+              "queryRef": "06. Budget.MTD Budget",
+              "nativeQueryRef": "MTD Budget"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "00. DateTable.Date.Variation.Date Hierarchy.Year"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LocalDateTable_bbf70898-ea34-491a-8b1b-1e33e68e3c74"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              }
+            ],
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "2026L"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,177 @@
+table OPPORTUNITIES_QUOTES
+	lineageTag: e071a139-817d-4c86-b8f8-6298e456bd54
+
+	column 'Opportunity ID'
+		dataType: string
+		lineageTag: 71840cc9-1f9d-4246-b5d2-db508ae1e2db
+		summarizeBy: none
+		sourceColumn: Opportunity ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quote ID'
+		dataType: string
+		lineageTag: eeb037a0-fafc-4611-a3f8-65cce8db58bb
+		summarizeBy: none
+		sourceColumn: Quote ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 33ca1c78-fc0c-4863-83ac-3f3329b4bb8e
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Number'
+		dataType: string
+		lineageTag: 04524816-9702-4417-bed5-bd683b73db28
+		summarizeBy: none
+		sourceColumn: Customer Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Customer Number'
+		dataType: string
+		lineageTag: 7780c9ce-3405-4339-9bde-507c8c95a1fc
+		summarizeBy: none
+		sourceColumn: Ship To Customer Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'S Number'
+		dataType: string
+		lineageTag: cee6fe0c-cca4-4627-8e49-97bead4cca7a
+		summarizeBy: none
+		sourceColumn: S Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profit Center'
+		dataType: string
+		lineageTag: 147bea30-9aaf-4450-a2f7-c3e7e017428f
+		summarizeBy: none
+		sourceColumn: Profit Center
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expected Delivery Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 05c2d3bd-5123-41e1-aad1-b2faa8296c1d
+		summarizeBy: none
+		sourceColumn: Expected Delivery Date
+
+		variation Variation
+			isDefault
+			relationship: ead88b33-18f8-4285-970d-0bdd46b9c0f5
+			defaultHierarchy: LocalDateTable_cea055c8-a60a-4f22-a78b-3409e8da6c91.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Probability
+		dataType: double
+		formatString: 0
+		lineageTag: f2c17e3c-3687-4cd5-8e0d-2694bb06fb32
+		summarizeBy: sum
+		sourceColumn: Probability
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 68210ed1-f21f-4b80-ac2e-ac4726359402
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount_DKK
+		dataType: double
+		lineageTag: 57751a16-be4c-43b0-8288-20b7107ed415
+		summarizeBy: sum
+		sourceColumn: Amount_DKK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COGS_DKK
+		dataType: double
+		lineageTag: 5a1df03a-00ba-4dab-8919-80dccc96c8c0
+		summarizeBy: sum
+		sourceColumn: COGS_DKK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Type
+		dataType: string
+		lineageTag: b30e5387-675f-4e91-afcf-6ee8770f3123
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Record Type'
+		dataType: string
+		lineageTag: 32494086-d3c8-4c7b-816f-2aa8f50d73e7
+		summarizeBy: none
+		sourceColumn: Record Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Close Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bc681ecd-dc4e-4d4d-80f3-ac41fcebe805
+		summarizeBy: none
+		sourceColumn: Close Date
+
+		variation Variation
+			isDefault
+			relationship: dd0dbfc8-57f9-4efe-9bca-589c46711d76
+			defaultHierarchy: LocalDateTable_c8cb0d87-d362-442b-ab9c-55fa407f89e0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: baaecc69-8b0a-41a1-86d5-5d9f3506a7f8
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: a1c2890c-4f9a-4ff7-985f-a3dfccccc439
+			defaultHierarchy: LocalDateTable_452a706b-4e04-4487-bf2a-2494e2f5aaf7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition OPPORTUNITIES_QUOTES = m
+		mode: import
+		queryGroup: Salesforce
+		source =
+				let
+				    Source = Table.Combine({#"Opportunities wo quote", #"Synced quotes w sap quote", #"Opportunities wo sap quote"}),
+				    #"Filtered Rows" = Table.SelectRows(Source, each [Date] <> null and [Date] >= DateTime.Date(DateTime.LocalNow())),
+				    #"Merged Queries" = Table.NestedJoin(#"Filtered Rows", {"RecordTypeId"}, #"Record Type mapping", {"RecordTypeId"}, "Record Type mapping", JoinKind.LeftOuter),
+				    #"Expanded Record Type mapping" = Table.ExpandTableColumn(#"Merged Queries", "Record Type mapping", {"Record Type"}, {"Record Type"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Expanded Record Type mapping",{"RecordTypeId"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

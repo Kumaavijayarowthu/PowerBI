@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "e25ae673cd426d24c312",
+  "position": {
+    "x": 795.75736818386656,
+    "y": 145.3627760252366,
+    "z": 9000,
+    "height": 445.22541685443889,
+    "width": 328.10455159981973,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "00. DateTable"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "00. DateTable.Date.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Date Year"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "02. SFDC Key Figures"
+                    }
+                  },
+                  "Property": "Opportunities"
+                }
+              },
+              "queryRef": "02. SFDC Key Figures.Opportunities",
+              "nativeQueryRef": "Opportunities"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "02. SFDC Key Figures"
+                    }
+                  },
+                  "Property": "Quotes"
+                }
+              },
+              "queryRef": "02. SFDC Key Figures.Quotes",
+              "nativeQueryRef": "Quotes"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

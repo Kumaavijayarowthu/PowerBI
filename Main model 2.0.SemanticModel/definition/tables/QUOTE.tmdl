@@ -1,0 +1,225 @@
+table QUOTE
+	lineageTag: e1d3e702-5d61-4d2f-ae90-4d909c9aab9c
+
+	column 'Quote ID'
+		dataType: string
+		lineageTag: d0a8ebec-a015-4370-ad5d-7e155296132f
+		summarizeBy: none
+		sourceColumn: Quote ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity ID'
+		dataType: string
+		lineageTag: 659dc661-b3db-4bc6-addb-0632208ed5fe
+		summarizeBy: none
+		sourceColumn: Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: b008ff81-864d-4c43-a7af-f78b15dea246
+		summarizeBy: none
+		sourceColumn: Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 6099256e-6fd2-40fd-8ff8-5a630b547476
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Agent ID'
+		dataType: string
+		lineageTag: 313c1086-5f2c-4e7e-bc46-cae93df2602b
+		summarizeBy: none
+		sourceColumn: Agent ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'End User ID'
+		dataType: string
+		lineageTag: fad7564e-a11b-42e1-a2f2-7334216ea89f
+		summarizeBy: none
+		sourceColumn: End User ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 3e701500-676e-4e90-aa96-19c30d09def6
+		summarizeBy: none
+		sourceColumn: Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expected Delivery Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 53135be9-92b5-47ae-b7d0-e7dcb2c8b3cc
+		summarizeBy: none
+		sourceColumn: Expected Delivery Date
+
+		variation Variation
+			isDefault
+			relationship: dcadf3a4-f8cb-49ed-8fcd-21bfd1a6e86a
+			defaultHierarchy: LocalDateTable_2adbcdd0-32fa-484e-a33c-b819565edee2.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Last Modified Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 137d0467-c877-4a42-b790-f6a40df2b344
+		summarizeBy: none
+		sourceColumn: Last Modified Date
+
+		variation Variation
+			isDefault
+			relationship: 4b625384-111b-4d56-ae48-3c1a592efe73
+			defaultHierarchy: LocalDateTable_eed9b9b8-cddb-4bc9-b76b-68625bba5a48.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Valid From Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2ad5fbd6-ff68-464f-9822-9584bffd59fa
+		summarizeBy: none
+		sourceColumn: Valid From Date
+
+		variation Variation
+			isDefault
+			relationship: 77f08e03-1825-459f-bd48-8dc158a1024a
+			defaultHierarchy: LocalDateTable_435ad8a6-3812-420f-aab8-568fb3d28f09.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Validity Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6d877ac4-5448-449e-9b2a-98549100c483
+		summarizeBy: none
+		sourceColumn: Validity Date
+
+		variation Variation
+			isDefault
+			relationship: c56e5a0f-b104-435e-b235-6c5c476155e8
+			defaultHierarchy: LocalDateTable_4080fd59-9b74-43f9-a0cf-492d303e6dd3.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Incoterms
+		dataType: string
+		lineageTag: c39cac9d-9fee-4035-9864-bb9305622393
+		summarizeBy: none
+		sourceColumn: Incoterms
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Probability
+		dataType: int64
+		formatString: 0
+		lineageTag: a339f5b8-0425-4de8-a1c6-c8c15edb0fd7
+		summarizeBy: sum
+		sourceColumn: Probability
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SFDC Quote ID'
+		dataType: string
+		lineageTag: 3c17f25c-b203-4905-931e-19843ebc3570
+		summarizeBy: none
+		sourceColumn: SFDC Quote ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'S Number'
+		dataType: string
+		lineageTag: a29c1683-e290-419e-9cf7-7ce797c423ac
+		summarizeBy: none
+		sourceColumn: S Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0b171c4a-4746-4d82-a533-94ac59f5933e
+		summarizeBy: none
+		sourceColumn: Created Date
+
+		variation Variation
+			isDefault
+			relationship: 7e47a8e7-1f2e-407d-a040-1782e5bbfab7
+			defaultHierarchy: LocalDateTable_38861753-9d2f-4e22-af62-60cdb7e75289.'Date Hierarchy'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition QUOTE = m
+		mode: import
+		queryGroup: Salesforce
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_SFDC_Quote_F_V_View = INS_Schema{[Name="Z_INS_SFDC_Quote_F_V",Kind="View"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Z_INS_SFDC_Quote_F_V_View,{{"LastModifiedDate", type date}, {"Quote_valid_from__c", type date}, {"Quote_validity__c", type date}, {"CreatedDate", type date}, {"Probability__c", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"AccountId", "Agent__c", "End_User__c", "Expected_Delivery_Date__c", "Id", "Incoterms_Part_1__c", "LastModifiedDate", "Name", "OpportunityId", "Probability__c", "Quotation_No__c", "Quote_valid_from__c", "Quote_validity__c", "S_number__c", "Status", "CreatedDate"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"AccountId", "Customer ID"}, {"Agent__c", "Agent ID"}, {"End_User__c", "End User ID"}, {"Expected_Delivery_Date__c", "Expected Delivery Date"}, {"Id", "Quote ID"}, {"Incoterms_Part_1__c", "Incoterms"}, {"LastModifiedDate", "Last Modified Date"}, {"OpportunityId", "Opportunity ID"}, {"Probability__c", "Probability"}, {"Quotation_No__c", "SFDC Quote ID"}, {"Quote_valid_from__c", "Valid From Date"}, {"Quote_validity__c", "Validity Date"}, {"S_number__c", "S Number"}, {"CreatedDate", "Created Date"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"Quote ID", "Name", "Customer ID", "Agent ID", "End User ID", "Status", "Expected Delivery Date", "Last Modified Date", "Valid From Date", "Validity Date", "Incoterms", "Opportunity ID", "Probability", "SFDC Quote ID", "S Number", "Created Date"})
+				in
+				    #"Reordered Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

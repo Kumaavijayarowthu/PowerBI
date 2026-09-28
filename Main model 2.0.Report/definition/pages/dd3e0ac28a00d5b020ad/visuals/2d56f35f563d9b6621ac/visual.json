@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "2d56f35f563d9b6621ac",
+  "position": {
+    "x": 162.50980392156862,
+    "y": 88.470588235294116,
+    "z": 0,
+    "height": 579.76470588235293,
+    "width": 1111.8431372549019,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "G/L LEVEL2_TEXT"
+                }
+              },
+              "queryRef": "GL ACCOUNTS.G/L LEVEL2_TEXT",
+              "nativeQueryRef": "G/L LEVEL2_TEXT",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "GL_ACCOUNTS"
+                    }
+                  },
+                  "Property": "G/L"
+                }
+              },
+              "queryRef": "GL ACCOUNTS.G/L",
+              "nativeQueryRef": "G/L",
+              "active": false
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "GL ACCOUNTS.G/L LEVEL2_TEXT"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "GL ACCOUNTS.G/L"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

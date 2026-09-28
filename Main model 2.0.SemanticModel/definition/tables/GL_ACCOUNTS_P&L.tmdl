@@ -1,0 +1,123 @@
+table GL_ACCOUNTS_P&L
+	lineageTag: 67a33808-0f9b-44b1-bab4-9dbf0b5b7bec
+
+	column LEVEL2
+		dataType: string
+		lineageTag: 935bc9c2-ffa5-4477-9fd9-7f814576e169
+		summarizeBy: none
+		sourceColumn: LEVEL2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL2_TEXT
+		dataType: string
+		lineageTag: 4562a13d-c079-4c04-a024-854840466a9d
+		summarizeBy: none
+		sourceColumn: LEVEL2_TEXT
+		sortByColumn: 'LEVEL2 - Sort'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LEVEL2 - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 19313a24-d9cd-45de-bbac-c6714400bde4
+		summarizeBy: sum
+		sourceColumn: LEVEL2 - Sort
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column P&L
+		dataType: string
+		lineageTag: 2a65f056-7ac4-4377-9728-13354b2691f4
+		summarizeBy: none
+		sourceColumn: P&L
+		sortByColumn: 'LEVEL2 - Sort'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'P&L Lev2'
+		dataType: string
+		lineageTag: 4d737c63-e7aa-4c83-b0e3-33005a555a85
+		summarizeBy: none
+		sourceColumn: P&L Lev2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account_ID
+		dataType: string
+		lineageTag: bfa5c433-97fa-4d8c-b9db-7732ae155602
+		summarizeBy: none
+		sourceColumn: Account_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GL_ACCOUNTS_P&L = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_HIER_GL_ACCNT_V_H_View = INS_Schema{[Name="Z_INS_HIER_GL_ACCNT_V_H",Kind="View"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(Z_INS_HIER_GL_ACCNT_V_H_View,{"LEVEL2", "LEVEL2_TEXT"}),
+				    #"Sorted Rows" = Table.Sort(#"Removed Other Columns",{{"LEVEL2", Order.Ascending}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows"),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each [LEVEL2] <> null and [LEVEL2] <> ""),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Filtered Rows", "LEVEL2", "LEVEL2 - Copy"),
+				    #"Replaced Value" = Table.ReplaceValue(#"Duplicated Column","0101000","1",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","0102000","2",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","0203000","3",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","0204000","4",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","0205000","5",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","0206000","6",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","0207000","7",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Replaced Value6","0208000","8",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value8" = Table.ReplaceValue(#"Replaced Value7","0209000","9",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value9" = Table.ReplaceValue(#"Replaced Value8","0209100","10",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value10" = Table.ReplaceValue(#"Replaced Value9","0201010","11",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value11" = Table.ReplaceValue(#"Replaced Value10","0201020","12",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value12" = Table.ReplaceValue(#"Replaced Value11","0201030","13",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value13" = Table.ReplaceValue(#"Replaced Value12","030110010","14",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value14" = Table.ReplaceValue(#"Replaced Value13","030110020","15",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value15" = Table.ReplaceValue(#"Replaced Value14","030120010","16",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value16" = Table.ReplaceValue(#"Replaced Value15","030120020","17",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value17" = Table.ReplaceValue(#"Replaced Value16","030120030","18",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value18" = Table.ReplaceValue(#"Replaced Value17","030130010","19",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value19" = Table.ReplaceValue(#"Replaced Value18","030140010","20",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value20" = Table.ReplaceValue(#"Replaced Value19","06","30",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value21" = Table.ReplaceValue(#"Replaced Value20","05","40",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value22" = Table.ReplaceValue(#"Replaced Value21","092","50",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Replaced Value23" = Table.ReplaceValue(#"Replaced Value22","093","60",Replacer.ReplaceText,{"LEVEL2 - Copy"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value23",{{"LEVEL2 - Copy", Int64.Type}}),
+				    #"Sorted Rows1" = Table.Sort(#"Changed Type",{{"LEVEL2 - Copy", Order.Ascending}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Sorted Rows1", "P&L", each if [#"LEVEL2 - Copy"] = 1 then "Revenue" else if [#"LEVEL2 - Copy"] = 2 then "Int. Revenue" else if [#"LEVEL2 - Copy"] = 3 then "COGS" else if [#"LEVEL2 - Copy"] = 4 then "Int. COGS" else if [#"LEVEL2 - Copy"] = 5 then "Prod. Cost & Variances" else if [#"LEVEL2 - Copy"] = 6 then "Variable Sales Cost" else if [#"LEVEL2 - Copy"] = 7 then "OPEX" else if [#"LEVEL2 - Copy"] = 8 then "IC. OPEX" else if [#"LEVEL2 - Copy"] = 9 then "Oth. Oper. Exp." else if [#"LEVEL2 - Copy"] = 10 then "Grants & Subsidies" else if [#"LEVEL2 - Copy"] = 11 then "Special Items Staff" else if [#"LEVEL2 - Copy"] = 12 then "Special Items Impair." else if [#"LEVEL2 - Copy"] = 13 then "Special Items Other." else if [#"LEVEL2 - Copy"] = 14 then "Financial Inc." else if [#"LEVEL2 - Copy"] = 15 then "Financial Exp." else if [#"LEVEL2 - Copy"] = 16 then "Group Ent." else if [#"LEVEL2 - Copy"] = 17 then "Joint Vent." else if [#"LEVEL2 - Copy"] = 18 then "Associated Ent." else if [#"LEVEL2 - Copy"] = 19 then "Extraordinary Exp." else if [#"LEVEL2 - Copy"] = 20 then "Tax" else if [#"LEVEL2 - Copy"] = 30 then "Assets" else if [#"LEVEL2 - Copy"] = 40 then "Liabilities" else if [#"LEVEL2 - Copy"] = 50 then [LEVEL2_TEXT] else if [#"LEVEL2 - Copy"] = 60 then [LEVEL2_TEXT] else "N/A"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Conditional Column",{{"LEVEL2 - Copy", "LEVEL2 - Sort"}}),
+				    #"Added Conditional Column1" = Table.AddColumn(#"Renamed Columns", "Custom", each if [#"LEVEL2 - Sort"] <= 13 then "Operating Profit" else [#"P&L"]),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added Conditional Column1",{{"Custom", "P&L Lev2"}}),
+				    #"Added Conditional Column2" = Table.AddColumn(#"Renamed Columns1", "Account_ID", each if [#"LEVEL2 - Sort"] = 1 then 1 else if [#"LEVEL2 - Sort"] = 2 then 3 else if [#"LEVEL2 - Sort"] = 3 then 3 else if [#"LEVEL2 - Sort"] = 4 then 3 else if [#"LEVEL2 - Sort"] = 5 then 6 else if [#"LEVEL2 - Sort"] = 6 then 5 else if [#"LEVEL2 - Sort"] = 7 then 7 else if [#"LEVEL2 - Sort"] = 8 then 7 else if [#"LEVEL2 - Sort"] = 9 then 8 else if [#"LEVEL2 - Sort"] = 10 then 9 else if [#"LEVEL2 - Sort"] = 11 then 10 else if [#"LEVEL2 - Sort"] = 12 then 10 else if [#"LEVEL2 - Sort"] = 13 then 10 else if [#"LEVEL2 - Sort"] = 14 then 11 else if [#"LEVEL2 - Sort"] = 15 then 11 else if [#"LEVEL2 - Sort"] = 16 then 12 else if [#"LEVEL2 - Sort"] = 17 then 12 else if [#"LEVEL2 - Sort"] = 18 then 12 else if [#"LEVEL2 - Sort"] = 19 then 12 else if [#"LEVEL2 - Sort"] = 20 then 13 else if [#"LEVEL2 - Sort"] = 60 then 7 else if [#"LEVEL2 - Sort"] = 50 then 7 else "n/a")
+				in
+				    #"Added Conditional Column2"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

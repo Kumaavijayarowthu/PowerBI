@@ -1,0 +1,187 @@
+table PROFIT_CENTERS
+	lineageTag: 10b80ab3-36b3-4d33-8534-4ec970984d34
+
+	column 'Profit Center'
+		dataType: string
+		lineageTag: d5dbf8a7-402b-4f63-a16d-b866a1bfe2c5
+		summarizeBy: none
+		sourceColumn: Profit Center
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 0'
+		dataType: string
+		lineageTag: f7fcd585-99d2-4438-a76b-08fe9f18c2c6
+		summarizeBy: none
+		sourceColumn: Segment lev. 0
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 1'
+		dataType: string
+		lineageTag: 10bbc0cd-1ca7-4414-bd61-d97677549088
+		summarizeBy: none
+		sourceColumn: Segment lev. 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 2'
+		dataType: string
+		lineageTag: f7e70fbd-2b79-4a04-99cb-bfa982a96b74
+		summarizeBy: none
+		sourceColumn: Segment lev. 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 3'
+		dataType: string
+		lineageTag: d21bbcc6-c843-4c7f-b9a4-7a3ac1e750ef
+		summarizeBy: none
+		sourceColumn: Segment lev. 3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 4'
+		dataType: string
+		lineageTag: c6549cd7-2d72-4e91-8874-36a9ad5d2b08
+		summarizeBy: none
+		sourceColumn: Segment lev. 4
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 5'
+		dataType: string
+		lineageTag: 11b9c469-778b-489f-9542-37a41844296f
+		summarizeBy: none
+		sourceColumn: Segment lev. 5
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 6'
+		dataType: string
+		lineageTag: f07ed8b1-fe31-4051-af0e-dc73af9e12cd
+		summarizeBy: none
+		sourceColumn: Segment lev. 6
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 7'
+		dataType: string
+		lineageTag: a2ca50d0-22b9-4d63-ac2d-1d0fa86c5d00
+		summarizeBy: none
+		sourceColumn: Segment lev. 7
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 8'
+		dataType: string
+		lineageTag: 6fcd1a31-d371-4259-b682-c64166e4c963
+		summarizeBy: none
+		sourceColumn: Segment lev. 8
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 9'
+		dataType: string
+		lineageTag: bc4cde14-46c1-41a8-b7c3-6571baf1a08e
+		summarizeBy: none
+		sourceColumn: Segment lev. 9
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Segment lev. 4 short'
+		dataType: string
+		lineageTag: 9c174368-f9c3-4c8a-9138-f4bd678de7f1
+		summarizeBy: none
+		sourceColumn: Segment lev. 4 short
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profit Center Name'
+		dataType: string
+		lineageTag: c42947f8-520c-4735-87d2-62a874fa00ff
+		summarizeBy: none
+		sourceColumn: Profit Center Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Controlling Area'
+		dataType: string
+		lineageTag: d7eeb312-3759-4a8e-b1ef-7d0a848cda6f
+		summarizeBy: none
+		sourceColumn: Controlling Area
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Segment Hierarchy'
+		lineageTag: 4d48f191-88e3-4a0f-a0ab-32c40255881b
+
+		level 'Segment lev. 1'
+			lineageTag: 1567288f-aaf6-4898-9846-a0bf2d4ee22e
+			column: 'Segment lev. 1'
+
+		level 'Segment lev. 2'
+			lineageTag: b4522e3d-b6d7-4f3a-845e-09ae7e9d70d8
+			column: 'Segment lev. 2'
+
+		level 'Segment lev. 3'
+			lineageTag: 3098bbc8-56e4-4b38-ad4b-b9fd8be477ea
+			column: 'Segment lev. 3'
+
+		level 'Segment lev. 4'
+			lineageTag: 3f19a717-d18d-42dc-b7fd-0c58566b2d2a
+			column: 'Segment lev. 4'
+
+		level 'Segment lev. 5'
+			lineageTag: 6d95795f-2c5f-410c-ba7f-1aed25c228c1
+			column: 'Segment lev. 5'
+
+		level 'Segment lev. 6'
+			lineageTag: 0948e4b4-8346-49bd-b716-ffb6b7e9c924
+			column: 'Segment lev. 6'
+
+	partition PROFIT_CENTERS = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.DataSource(dsn, [HierarchicalNavigation=true]),
+				    INS_Schema = Source{[Name="INS",Kind="Schema"]}[Data],
+				    Z_INS_HIER_PRFT_CTR_V_H_View = INS_Schema{[Name="Z_INS_HIER_PRFT_CTR_V_H",Kind="View"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Z_INS_HIER_PRFT_CTR_V_H_View,{{"LEVEL2_TEXT", "Segment lev. 2"}, {"LEVEL3_TEXT", "Segment lev. 3"}, {"LEVEL1_TEXT", "Segment lev. 1"}, {"LEVEL0_TEXT", "Segment lev. 0"}, {"PRCTR", "Profit Center"}, {"LEVEL4_TEXT", "Segment lev. 4"}, {"LEVEL5_TEXT", "Segment lev. 5"}, {"LEVEL6_TEXT", "Segment lev. 6"}, {"LEVEL7_TEXT", "Segment lev. 7"}, {"LEVEL8_TEXT", "Segment lev. 8"}, {"LEVEL9_TEXT", "Segment lev. 9"}, {"KOKRS", "Controlling Area"}, {"MCTXT", "Profit Center Name"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"LEVEL4"}, #"PC Short names", {"LEVEL4"}, "PC Short names", JoinKind.LeftOuter),
+				    #"Expanded PC Short names" = Table.ExpandTableColumn(#"Merged Queries", "PC Short names", {"Segment lev. 4 short"}, {"Segment lev. 4 short"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Expanded PC Short names",{"Controlling Area", "Profit Center", "Profit Center Name", "Segment lev. 0", "Segment lev. 1", "Segment lev. 2", "Segment lev. 3", "Segment lev. 4", "Segment lev. 5", "Segment lev. 6", "Segment lev. 7", "Segment lev. 8", "Segment lev. 9", "Segment lev. 4 short"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns", {"Profit Center"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Duplicates","",null,Replacer.ReplaceValue,{"Controlling Area", "Profit Center", "Profit Center Name", "Segment lev. 0", "Segment lev. 1", "Segment lev. 2", "Segment lev. 3", "Segment lev. 4", "Segment lev. 5", "Segment lev. 6", "Segment lev. 7", "Segment lev. 8", "Segment lev. 9", "Segment lev. 4 short"})
+				in
+				    #"Replaced Value"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

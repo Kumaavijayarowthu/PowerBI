@@ -1,0 +1,56 @@
+table COMPANY
+	lineageTag: ec808df3-ad43-46ed-a320-d524c8e90227
+
+	column 'Company Code'
+		dataType: string
+		lineageTag: 9bb23aba-07d9-400b-8cd0-a9891b3e0ea7
+		summarizeBy: none
+		sourceColumn: Company Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 1fd4787a-1673-40d6-8381-4e5ef920dab5
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Company Name'
+		dataType: string
+		lineageTag: 49350974-dc5a-403c-a603-8b2e66d22230
+		summarizeBy: none
+		sourceColumn: Company Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Company key'
+		dataType: string
+		isHidden
+		lineageTag: c98e07f5-8a88-4532-b5e0-a5d30af45ccb
+		summarizeBy: none
+		sourceColumn: Company key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition COMPANY = m
+		mode: import
+		queryGroup: Datasphere
+		source =
+				let
+				    Source = Odbc.Query(dsn, "SELECT DISTINCT RBUKRS, RCOMP, BUTXT#(lf)FROM INS.Z_INS_ACDOCA_MAIN_PERSIST #(lf)WHERE LEVEL2_TEXT NOT IN ('ASSETS', 'LIABILITIES')"),
+				    #"Replaced Value" = Table.ReplaceValue(Source,null,"",Replacer.ReplaceValue,{"RCOMP"}),
+				    #"Added Custom" = Table.AddColumn(#"Replaced Value", "Company key", each [RBUKRS] & [RCOMP]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Company key", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"RBUKRS", "Company Code"}, {"RCOMP", "Company"}, {"BUTXT", "Company Name"}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Renamed Columns","",null,Replacer.ReplaceValue,{"Company Code", "Company", "Company Name", "Company key"})
+				in
+				    #"Replaced Value1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,354 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "c074f14ac64b75359ad0",
+  "position": {
+    "x": 229.25786390265884,
+    "y": 451.87057232987831,
+    "z": 0,
+    "height": 268.29815232086526,
+    "width": 779.975123929698,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "00. DateTable"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "00. DateTable.Date.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "Date Year",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 2"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 2",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 2",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 3"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 3",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 3",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "SHIP-TO"
+                    }
+                  },
+                  "Property": "Customer Name"
+                }
+              },
+              "queryRef": "SHIP-TO.Customer Name",
+              "nativeQueryRef": "Customer Name",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "OPPORTUNITIES_QUOTES"
+                    }
+                  },
+                  "Property": "Name"
+                }
+              },
+              "queryRef": "OPPORTUNITIES_QUOTES.Name",
+              "nativeQueryRef": "Name",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "02. SFDC Key Figures"
+                    }
+                  },
+                  "Property": "Opp & Quotes"
+                }
+              },
+              "queryRef": "02. SFDC Key Figures.Opp & Quotes",
+              "nativeQueryRef": "Opp & Quotes"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "HierarchyLevel": {
+                "Expression": {
+                  "Hierarchy": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "PROFIT_CENTERS"
+                      }
+                    },
+                    "Hierarchy": "Segment Hierarchy"
+                  }
+                },
+                "Level": "Segment lev. 2"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 2"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PROFIT_CENTERS"
+                    }
+                  },
+                  "Property": "Segment lev. 2"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 3"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PROFIT_CENTERS"
+                    }
+                  },
+                  "Property": "Segment lev. 3"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "SHIP-TO.Customer Name"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "SHIP-TO"
+                    }
+                  },
+                  "Property": "Customer Name"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "OPPORTUNITIES_QUOTES.Name"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Technology Business'"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Chemicals Technology'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                }
+              ]
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Catalyst Business'"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Clean Fuels Catalyst'"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Chemicals Catalyst'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                }
+              ]
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "null"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "null"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "207.8268382668222D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 2"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "938d55f6d0e81d29495a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "00. DateTable"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "e683b5f06ce8ddc5b9ba",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "00. DateTable"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      }
+    ]
+  }
+}

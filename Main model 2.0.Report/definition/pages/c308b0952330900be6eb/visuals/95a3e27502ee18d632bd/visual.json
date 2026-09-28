@@ -1,0 +1,320 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "95a3e27502ee18d632bd",
+  "position": {
+    "x": 0,
+    "y": 222.47644912161587,
+    "z": 6000,
+    "height": 67.20642733882147,
+    "width": 206.25420803983138,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 1"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 1",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 1",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 2"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 2",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 2",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 3"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 3",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 3",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 4"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 4",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 4",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 5"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 5",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 5",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "PROFIT_CENTERS"
+                        }
+                      },
+                      "Hierarchy": "Segment Hierarchy"
+                    }
+                  },
+                  "Level": "Segment lev. 6"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 6",
+              "nativeQueryRef": "Segment Hierarchy Segment lev. 6",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PROFIT_CENTERS"
+                    }
+                  },
+                  "Property": "Segment lev. 4"
+                }
+              },
+              "queryRef": "PROFIT_CENTERS.Segment lev. 4",
+              "nativeQueryRef": "Segment lev. 4",
+              "active": false
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Values"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 1"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PROFIT_CENTERS"
+                    }
+                  },
+                  "Property": "Segment lev. 1"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 2"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PROFIT_CENTERS"
+                    }
+                  },
+                  "Property": "Segment lev. 2"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 3"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "PROFIT_CENTERS"
+                    }
+                  },
+                  "Property": "Segment lev. 3"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 4"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 5"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment Hierarchy.Segment lev. 6"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "PROFIT_CENTERS.Segment lev. 4"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Global Commercial'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "selection": [
+        {
+          "properties": {
+            "strictSingleSelect": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "selectAllCheckboxEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segment'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
